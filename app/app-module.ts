@@ -10,7 +10,16 @@ module interactiveLectureWebFrontend {
   var app = angular
     .module('interactiveLectureWebFrontend', [
       'ngNewRouter',
-      'home'
+      'home',
+      'login',
+      'profile',
+      'moduleOverview',
+      'topicOverview',
+      'topicDetails',
+      'tutorialText',
+      'tutorialVideo',
+      'exerciseOverview',
+      'exerciseWorksheet'
     ]);
 
     app.config(['$componentLoaderProvider', ($componentLoaderProvider) => {

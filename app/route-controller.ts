@@ -11,18 +11,26 @@ module RouteCtrl {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject = [
-      '$router',
-      '$componentLoader'
+      '$router'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(private $router: any, private $componentLoader: any) {
+    constructor(private $router: any) {
       var vm = this;
       vm.ctrlName = 'RouteCtrl';
 
       $router.config([
-        { path: '/', redirectTo: '/home' },
-        { path: '/home', component: 'home' }
+        { path: '/', redirectTo: '/login' },
+        { path: '/home', component: 'home' },
+        { path: '/login', component: 'login' },
+        { path: '/profile', component: 'profile' },
+        {path: '/topics', component: 'topicOverview' },
+        {path: '/topics/:id', component: 'topicDetails' },
+        {path: '/topics/:id/module', component: 'moduleOverview' },
+        {path: '/module/:id/tutorial/text', component: 'tutorialText' },
+        {path: '/module/:id/tutorial/video', component: 'tutorialVideo' },
+        {path: '/module/:id/exercise', component: 'exerciseOverview' },
+        {path: '/module/:id/exercise/:eId', component: 'exerciseWorksheet' },
       ]);
 
 
