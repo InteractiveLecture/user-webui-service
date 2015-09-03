@@ -7,9 +7,23 @@ module interactiveLectureWebFrontend {
    * @description
    *
    */
-  angular
+  var app = angular
     .module('interactiveLectureWebFrontend', [
-      'ngRoute',
+      'ngNewRouter',
       'home'
     ]);
+
+    app.config(['$componentLoaderProvider', ($componentLoaderProvider) => {
+      // Die generierten Controller nutzen
+      $componentLoaderProvider.setCtrlNameMapping((name) => {
+        // name is component name
+        return name[0].toUpperCase() + name.substr(1) + 'Ctrl';
+      });
+      // Die generierten Templates nutzen
+      $componentLoaderProvider.setTemplateMapping((name) => {
+        // name is component name
+        return name +'/'+ name + '.tpl.html';
+      });
+    }]);
+
 }

@@ -9,6 +9,6 @@ module home {
   */
   angular
     .module('home', [
-      'ngRoute'
+        'ngNewRouter'
     ]);
 }
