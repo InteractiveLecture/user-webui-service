@@ -7,3 +7,11 @@
 /// <reference path="karma-jasmine/karma-jasmine.d.ts" />
 /// <reference path="lodash/lodash.d.ts" />
 /// <reference path="sinon/sinon.d.ts" />
+
+// Own Models and Classes
+
+/// <reference path="../app/lectureDefinitions/models.ts" />
+/// <reference path="../app/lectureDefinitions/interfaces.ts" />
+
+import models = lectureDefinitions.models;
+import interfaces = lectureDefinitions.interfaces;

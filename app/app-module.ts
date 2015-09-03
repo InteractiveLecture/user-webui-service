@@ -22,14 +22,14 @@ module interactiveLectureWebFrontend {
       'exerciseWorksheet'
     ]);
 
-    app.config(['$componentLoaderProvider', ($componentLoaderProvider) => {
+    app.config(['$componentLoaderProvider', ($componentLoaderProvider: any) => {
       // Die generierten Controller nutzen
-      $componentLoaderProvider.setCtrlNameMapping((name) => {
+      $componentLoaderProvider.setCtrlNameMapping((name: string) => {
         // name is component name
         return name[0].toUpperCase() + name.substr(1) + 'Ctrl';
       });
       // Die generierten Templates nutzen
-      $componentLoaderProvider.setTemplateMapping((name) => {
+      $componentLoaderProvider.setTemplateMapping((name: string) => {
         // name is component name
         return name +'/'+ name + '.tpl.html';
       });
