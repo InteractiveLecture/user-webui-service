@@ -15,5 +15,6 @@ describe('HomeCtrl', function () {
   it('should have ctrlName as HomeCtrl', function () {
     expect(ctrl.ctrlName).toEqual('HomeCtrl');
   });
+  
 
 });

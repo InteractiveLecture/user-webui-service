@@ -7,7 +7,7 @@
         "out": "../../built/local/tsc.js",
         "sourceMap": true
     },
-	"formatCodeOptions": {
+    "formatCodeOptions": {
         "indentSize": 4,
         "tabSize": 4,
         "newLineCharacter": "\r\n",
@@ -38,6 +38,7 @@
         "./app/home/home-module.ts",
         "./app/lectureDefinitions/interfaces.ts",
         "./app/lectureDefinitions/models.ts",
+        "./app/lectureDefinitions/models_test.ts",
         "./app/login/login-controller.ts",
         "./app/login/login-controller_test.ts",
         "./app/login/login-module.ts",

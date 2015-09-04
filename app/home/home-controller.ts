@@ -5,6 +5,7 @@ module HomeCtrl {
   class HomeCtrl {
 
     ctrlName: string;
+    
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
