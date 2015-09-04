@@ -2,7 +2,7 @@
 module TopicOverview {
   'use strict';
 
-  class TopicOverviewMockService implements lectureDefinitions.interfaces.ModelService {
+  export class TopicOverviewMockService implements lectureDefinitions.interfaces.ModelService {
 
     public static IID: string = 'TopicOverviewMockService';
 
