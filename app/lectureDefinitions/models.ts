@@ -42,15 +42,12 @@ module lectureDefinitions.models {
   }
 
   export class Module extends models.BaseModel {
-    id: number;
-    name: string;
     description: string;
   }
 
   export class Exercise extends models.BaseModel {
-    id: number;
-    name: string;
-    description: string;
+    task: string;
+    points: number;
   }
 
   export class Tutorial extends models.BaseModel {
@@ -60,8 +57,10 @@ module lectureDefinitions.models {
   }
 
   export class Profile extends models.BaseModel {
-    id: number;
-    name: string;
+    email: string;
+  }
+
+  export class Hint {
     description: string;
   }
 

@@ -12,5 +12,3 @@
 /// <reference path="../app/lectureDefinitions/models.ts" />
 /// <reference path="../app/lectureDefinitions/interfaces.ts" />
 
-import models = lectureDefinitions.models;
-import interfaces = lectureDefinitions.interfaces;
