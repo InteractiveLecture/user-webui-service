@@ -27,6 +27,8 @@
     ],
     "files": [
         "./app/app-module.ts",
+        "./app/call-backend-service.ts",
+        "./app/call-backend-service_test.ts",
         "./app/exerciseOverview/exercise-overview-controller.ts",
         "./app/exerciseOverview/exercise-overview-controller_test.ts",
         "./app/exerciseOverview/exercise-overview-module.ts",

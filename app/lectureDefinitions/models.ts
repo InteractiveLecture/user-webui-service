@@ -7,6 +7,9 @@ module lectureDefinitions.models {
 
     constructor(object: any) {
       this.links = object.links;
+      for (var prop in object) {
+        this[prop] = object[prop];
+      }
     }
 
     getUrlFor(name: string): string {

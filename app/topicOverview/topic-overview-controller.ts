@@ -19,7 +19,7 @@ module TopicOverviewCtrl {
     constructor(private topicOverviewMockService: TopicOverview.TopicOverviewMockService) {
       var vm = this;
       vm.ctrlName = 'TopicOverviewCtrl';
-      topicOverviewMockService.loadModel('hugo', (topics) => {
+      topicOverviewMockService.loadModel('hugo', (topics: lectureDefinitions.models.Topic[]) => {
         vm.topics = topics;
       });
 
