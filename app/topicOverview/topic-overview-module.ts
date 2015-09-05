@@ -9,6 +9,7 @@ module topicOverview {
   */
   angular
     .module('topicOverview', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'interactiveLectureWebFrontend'
     ]);
 }

@@ -1,4 +1,5 @@
 ///<reference path='../../typings/tsd.d.ts' />
+/// <reference path="../call-backend-service.ts"/>
 module TopicOverviewCtrl {
   'use strict';
 
@@ -12,14 +13,14 @@ module TopicOverviewCtrl {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
-      TopicOverview.TopicOverviewMockService.IID
+      "CallBackendService"
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(private topicOverviewMockService: TopicOverview.TopicOverviewMockService) {
+    constructor(private CallBackend: lectureDefinitions.interfaces.ModelService) {
       var vm = this;
       vm.ctrlName = 'TopicOverviewCtrl';
-      topicOverviewMockService.loadModel('hugo', (topics: lectureDefinitions.models.Topic[]) => {
+      CallBackend.loadModel('hugo', (topics: lectureDefinitions.models.Topic[]) => {
         vm.topics = topics;
       });
 
