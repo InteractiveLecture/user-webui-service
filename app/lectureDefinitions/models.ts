@@ -4,7 +4,8 @@ module lectureDefinitions.models {
 
   export class BaseModel implements interfaces.Linkable {
     links: models.Link[];
-
+    cacheIndex: string;
+    id: number;
     constructor(object: any) {
       this.links = object.links;
       for (var prop in object) {
@@ -32,52 +33,34 @@ module lectureDefinitions.models {
       return result + '&sort=' + sort;
     }
 
-    extractId(name: string, idName: string): number {
-
-      var href = this.getUrlFor(name);
-
-      if(href === null) {
-        return null;
-      }
-
-      var elements: string[] = href.split("/");
-
-      for(var i = 0; i < elements.length; i++) {
-        if (elements[i] === idName) {
-          if(i < elements.length) {
-            if(!isNaN(parseInt(elements[i+1]))) {
-              return parseInt(elements[i+1]);
-            }
-          }
-        }
-      }
-      return null;
-    }
-
-
   }
 
   export class Topic extends models.BaseModel {
+    cacheIndex: string = 'topics';
     topicName: string;
     topicDescription: string;
   }
 
   export class Module extends models.BaseModel {
+    cacheIndex: string = 'module';
     description: string;
   }
 
   export class Exercise extends models.BaseModel {
+    cacheIndex: string = 'exercise';
     task: string;
     points: number;
   }
 
   export class Tutorial extends models.BaseModel {
+    cacheIndex: string = 'tutorial';
     id: number;
     name: string;
     description: string;
   }
 
   export class Profile extends models.BaseModel {
+    cacheIndex: string = 'profile';
     email: string;
   }
 
@@ -89,4 +72,6 @@ module lectureDefinitions.models {
     rel: string;
     href: string;
   }
+
+
 }

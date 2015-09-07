@@ -15,16 +15,19 @@ module Caching {
       return 'Caching';
     }
 
-    save(index: string,value: lectureDefinitions.models.BaseModel) {
-      this.cacheArray[index] = value;
+    save(url: string, value: lectureDefinitions.models.BaseModel) {
+      this.cacheArray[url] = value;
       console.log('gespeichert wurde ' + value);
     }
 
-    load(index: string) {
-      console.log('zurück kommt '+ this.cacheArray[index]);
-      return this.cacheArray[index];
+    load(url: string): lectureDefinitions.models.BaseModel {
+      console.log('zurück kommt ' + this.cacheArray[url]);
+      return this.cacheArray[url];
 
     }
+
+
+
   }
 
   /**
