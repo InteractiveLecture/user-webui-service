@@ -31,17 +31,35 @@ module lectureDefinitions.models {
       }
       return result + '&sort=' + sort;
     }
+
+    extractId(name: string, idName: string): number {
+
+      var href = this.getUrlFor(name);
+
+      if(href === null) {
+        return null;
+      }
+
+      var elements: string[] = href.split("/");
+
+      for(var i = 0; i < elements.length; i++) {
+        if (elements[i] === idName) {
+          if(i < elements.length) {
+            if(!isNaN(parseInt(elements[i+1]))) {
+              return parseInt(elements[i+1]);
+            }
+          }
+        }
+      }
+      return null;
+    }
+
+
   }
 
   export class Topic extends models.BaseModel {
     topicName: string;
     topicDescription: string;
-
-    constructor(object: any) {
-      super(object);
-      this.topicName = object.topicName;
-      this.topicDescription = object.topicDescription;
-    }
   }
 
   export class Module extends models.BaseModel {

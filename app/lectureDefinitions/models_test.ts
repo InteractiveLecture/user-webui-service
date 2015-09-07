@@ -23,6 +23,11 @@ describe('models.BaseModel', function () {
       expect(topic.getPageFor('self', 1, 20, 'id')).toBe('http://localhost:8080/topics/1?page=1&size=20&sort=id');
   });
 
+  it('should return an id', function () {
+      expect(topic.extractId('self', 'topics')).toEqual(1);
+      expect(topic.extractId('hugo', '12')).toEqual(null);
+      expect(topic.extractId('modules', 'modules')).toEqual(null);
+  })
 
 
 });

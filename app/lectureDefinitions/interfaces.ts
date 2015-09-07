@@ -8,6 +8,7 @@ module lectureDefinitions.interfaces {
 
   export interface Linkable {
     links: models.Link[];
+    extractId(rel: string, idName: string): number;
     getUrlFor(name: string): string;
     getPageFor(name: string, page: number, size: number, sort: string): string;
   }
