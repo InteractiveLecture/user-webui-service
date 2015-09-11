@@ -1,26 +1,48 @@
 <!DOCTYPE html>
 <html lang='en' data-ng-app='interactiveLectureWebFrontend'>
-  <head>
-    <title>interactive-lecture-web-frontend</title>
-    <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
-    <!-- inject:head:js -->
-    <!-- endinject -->
-    <!-- inject:html -->
-    <!-- endinject -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- inject:css -->
-    <!-- endinject -->
-  </head>
-  <body ng-controller="RouteCtrl as route" class="container">
 
-    <div ng-viewport>
+<head>
+  <title>interactive-lecture-web-frontend</title>
+  <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
+  <!-- inject:head:js -->
+  <!-- endinject -->
+  <!-- inject:html -->
+  <!-- endinject -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- inject:css -->
+  <!-- endinject -->
+</head>
 
+<body ng-controller="RouteCtrl as route">
+
+  <!-- header -->
+  <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+    <!-- container -->
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Lecture Service</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#">Kurs Name</a></li>
+        </ul>
+      </div>
     </div>
+    <!-- /container -->
+  </div>
+  <!-- /Header -->
 
-    <!-- bower:js -->
-    <!-- endbower -->
-    <!-- inject:js -->
-    <!-- endinject -->
-  </body>
+  <!-- Main -->
+  <div ng-viewport>
+
+  </div>
+  <!-- /Main -->
+
+  <!-- bower:js -->
+  <!-- endbower -->
+  <!-- inject:js -->
+  <!-- endinject -->
+</body>
+
 </html>
