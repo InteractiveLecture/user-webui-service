@@ -9,6 +9,7 @@ module exerciseWorksheet {
   */
   angular
     .module('exerciseWorksheet', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'ui.ace'
     ]);
 }
