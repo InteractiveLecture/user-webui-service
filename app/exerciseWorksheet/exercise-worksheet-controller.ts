@@ -4,7 +4,8 @@ module ExerciseWorksheetCtrl {
 
   class ExerciseWorksheetCtrl {
 
-    ctrlName: string
+    ctrlName: string;
+
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -18,6 +19,7 @@ module ExerciseWorksheetCtrl {
     constructor() {
       var vm = this;
       vm.ctrlName = 'ExerciseWorksheetCtrl';
+
     }
   }
 

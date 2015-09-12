@@ -5,7 +5,6 @@
     "ace-builds": "~1.2.0",
     "angular": "~1.4.*",
     "angular-new-router": "~0.5.3",
-    "angular-ui-ace": "bower",
     "bootstrap": "3.3.4",
     "jquery": "~2.1.4"
   },

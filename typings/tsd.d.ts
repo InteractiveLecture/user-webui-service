@@ -1,3 +1,4 @@
+/// <reference path="ace/ace.d.ts" />
 /// <reference path="angularjs/angular-mocks.d.ts" />
 /// <reference path="angularjs/angular-new-router.d.ts" />
 /// <reference path="angularjs/angular.d.ts" />

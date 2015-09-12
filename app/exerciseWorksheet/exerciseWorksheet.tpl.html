@@ -1,7 +1,17 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-9">
-      <div ui-ace></div>
+      <div id="editor"></div>
+
+      <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/chrome");
+        editor.getSession().setMode("ace/mode/javascript");
+        editor.setOptions({
+          fontSize: "16pt"
+        });
+      </script>
+
     </div>
     <div class="col-sm-3">
       <div class="row">
