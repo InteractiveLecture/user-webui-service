@@ -5,7 +5,7 @@ module moduleOverview {
   /* @ngdoc object
   * @name moduleOverview
   * @description
-  *
+  * Moduleübersicht eines Topics in baumform
   */
   angular
     .module('moduleOverview', [

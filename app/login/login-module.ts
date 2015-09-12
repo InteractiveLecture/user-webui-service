@@ -5,7 +5,7 @@ module login {
   /* @ngdoc object
   * @name login
   * @description
-  *
+  * Login in den Lecture Service
   */
   angular
     .module('login', [

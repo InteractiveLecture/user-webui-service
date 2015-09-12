@@ -9,12 +9,12 @@ describe('Caching', function () {
 
   beforeEach(module('interactiveLectureWebFrontend'));
 
-  beforeEach(inject(function (Caching: any) {
-    this.service = Caching;
+  beforeEach(inject(function (CachingService: any) {
+    this.service = CachingService;
   }));
 
   it('should equal Caching', function () {
-    expect(this.service.get()).toEqual('Caching');
+    expect(this.service.get()).toEqual('CachingService');
   });
 
   it('should save and load the lectureDefinitions Object', function () {

@@ -5,7 +5,8 @@ module exerciseWorksheet {
   /* @ngdoc object
   * @name exerciseWorksheet
   * @description
-  *
+  * Die Aufgaben der einzelnen Module werden
+  * hier dargestellt
   */
   angular
     .module('exerciseWorksheet', [

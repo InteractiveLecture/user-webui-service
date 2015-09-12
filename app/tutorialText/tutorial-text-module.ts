@@ -5,7 +5,7 @@ module tutorialText {
   /* @ngdoc object
   * @name tutorialText
   * @description
-  *
+  * Text Tutorials 
   */
   angular
     .module('tutorialText', [

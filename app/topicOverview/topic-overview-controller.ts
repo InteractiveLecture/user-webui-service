@@ -1,5 +1,4 @@
 ///<reference path='../../typings/tsd.d.ts' />
-/// <reference path="../call-backend-service.ts"/>
 module TopicOverviewCtrl {
   'use strict';
 
@@ -33,7 +32,7 @@ module TopicOverviewCtrl {
   * @name topicOverview.controller:TopicOverviewCtrl
   *
   * @description
-  *
+  * Darstellung der einzelnen Topics verwalten.
   */
   angular
     .module('topicOverview')

@@ -1,10 +1,6 @@
 ///<reference path='../../typings/tsd.d.ts' />
-
+// Selbstdefinierte Interfaces des Lecture Service.
 module lectureDefinitions.interfaces {
-
-  export interface Injectable {
-    IID: string;
-  }
 
   export interface Linkable {
     links: models.Link[];

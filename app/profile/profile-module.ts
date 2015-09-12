@@ -5,7 +5,7 @@ module profile {
   /* @ngdoc object
   * @name profile
   * @description
-  *
+  * Die Profile der einzelnen Nutzer
   */
   angular
     .module('profile', [

@@ -18,7 +18,8 @@ module RouteCtrl {
     constructor(private $router: any) {
       var vm = this;
       vm.ctrlName = 'RouteCtrl';
-
+      // New Router: Routen definiert anhand von Komponenten
+      // Eine Komponente besteht immer aus Template, Controller und eventuell Router
       $router.config([
         { path: '/', redirectTo: '/login' },
         { path: '/home', component: 'home' },
@@ -41,7 +42,7 @@ module RouteCtrl {
   * @name interactiveLectureWebFrontend.controller:RouteCtrl
   *
   * @description
-  *
+  * Verwaltung der Routen des Lecture Service
   */
   angular
     .module('interactiveLectureWebFrontend')

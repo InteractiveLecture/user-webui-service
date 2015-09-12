@@ -5,7 +5,7 @@ module topicOverview {
   /* @ngdoc object
   * @name topicOverview
   * @description
-  *
+  * Module zur Übersicht der verschiedenen Themen
   */
   angular
     .module('topicOverview', [

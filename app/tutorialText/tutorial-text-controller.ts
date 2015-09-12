@@ -26,7 +26,7 @@ module TutorialTextCtrl {
   * @name tutorialText.controller:TutorialTextCtrl
   *
   * @description
-  *
+  * 
   */
   angular
     .module('tutorialText')

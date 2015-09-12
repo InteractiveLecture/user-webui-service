@@ -5,7 +5,7 @@ module tutorialVideo {
   /* @ngdoc object
   * @name tutorialVideo
   * @description
-  *
+  * Video Tutorials
   */
   angular
     .module('tutorialVideo', [

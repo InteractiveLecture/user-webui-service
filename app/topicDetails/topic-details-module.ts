@@ -5,7 +5,7 @@ module topicDetails {
   /* @ngdoc object
   * @name topicDetails
   * @description
-  *
+  * Detailansicht der Topics
   */
   angular
     .module('topicDetails', [

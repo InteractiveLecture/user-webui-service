@@ -2,7 +2,9 @@
 module Caching {
   'use strict';
 
-  export class Caching {
+  export class CachingService {
+
+    // Array welches als Speicher der Cachedaten dient.
     private cacheArray: lectureDefinitions.models.BaseModel[] = [];
 
     public static $inject: string[] = [
@@ -12,18 +14,18 @@ module Caching {
     }
 
     get(): string {
-      return 'Caching';
+      return 'CachingService';
     }
 
+    // Save Function zum einspeichern in den Cache. Aufruf ist dem Servicenutzer
+    // überlassen
     save(url: string, value: lectureDefinitions.models.BaseModel) {
       this.cacheArray[url] = value;
-      console.log('gespeichert wurde ' + value);
     }
 
+    // loadFunction zum auslesen aus dem Cache.
     load(url: string): lectureDefinitions.models.BaseModel {
-      console.log('zurück kommt ' + this.cacheArray[url]);
       return this.cacheArray[url];
-
     }
 
 
@@ -32,12 +34,12 @@ module Caching {
 
   /**
    * @ngdoc service
-   * @name interactiveLectureWebFrontend.service:Caching
+   * @name interactiveLectureWebFrontend.service:CachingService
    *
    * @description
-   *
+   * Cache zum Speichern häufig genutzer Daten.
    */
   angular
     .module('interactiveLectureWebFrontend')
-    .service('Caching', Caching);
+    .service('CachingService', CachingService);
 }

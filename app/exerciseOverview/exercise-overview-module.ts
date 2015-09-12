@@ -5,7 +5,7 @@ module exerciseOverview {
   /* @ngdoc object
   * @name exerciseOverview
   * @description
-  *
+  * Übersicht der Aufgaben eines Modules
   */
   angular
     .module('exerciseOverview', [
