@@ -47,10 +47,10 @@
 
 <!-- column 2 -->
 
-        <div class="col-md-3">
+        <div class="col-md-3" ng-repeat="topic in topicOverview.topics">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4>Test</h4>
+              <h4>{{topic.topicName}}</h4>
             </div>
             <div class="panel-body">
               <div class="list-group">
