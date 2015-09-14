@@ -62,6 +62,8 @@ module lectureDefinitions.models {
   export class Profile extends models.BaseModel {
     cacheIndex: string = 'profile';
     email: string;
+    kennung: string;
+    passwort: string;
   }
 
   export class Hint {

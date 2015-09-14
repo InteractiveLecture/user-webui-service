@@ -6,6 +6,7 @@ module Caching {
 
     // Array welches als Speicher der Cachedaten dient.
     private cacheArray: lectureDefinitions.models.BaseModel[] = [];
+    private cacheProfile: any;
 
     public static $inject: string[] = [
     ];

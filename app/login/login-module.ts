@@ -9,6 +9,8 @@ module login {
   */
   angular
     .module('login', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'ngCookies',
+      'interactiveLectureWebFrontend'
     ]);
 }

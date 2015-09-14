@@ -51,6 +51,14 @@ module CallBackend {
       return null;
     }
 
+    // Gibt die eingetippten Daten ans Backend weiter. resultat wird im Cache gespeichert und zurückgegeben
+    postUserData(userData: any) {
+      if (userData.kennung == 'cremerm' && userData.passwort == 1234) {
+        var dummyProfile: any = new lectureDefinitions.models.BaseModel({ 'id': 90,'kennung': 'cremerm', 'passwort': '1234', 'email': 'cremerm@hochschule-trier.de', 'links': null, 'cacheIndex': 'profile' });
+        this.cache.save('profile', dummyProfile);
+        return dummyProfile;
+      }
+    }
 
   }
 
