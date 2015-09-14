@@ -27,6 +27,7 @@ The docker-image cannot (and should not) handle anything other than static conte
 ### Development Setup
 
 First, you need to install Docker (https://docs.docker.com/installation/).
+
 Next, you need to compile all assets:
 ```bash
 cd /path/to/app
@@ -42,9 +43,17 @@ Do note that you may need to specify a different ip-adress if you are using dock
 
 ### Links
 
-#### Docker
-https://www.docker.com/
-https://hub.docker.com/\_/nginx/
+Here is a collection of links that might be helpfull.
 
-#### Nginx
-http://nginx.org/en/docs/beginners\_guide.html
+#### Learning Docker
+
+- https://www.docker.com/userguide/
+- http://docs.docker.com/reference/commandline/cli/
+
+#### Learning Nginx
+
+- http://nginx.org/en/docs/beginners\_guide.html
+
+#### Nginx Base Image
+
+- https://hub.docker.com/\_/nginx/
