@@ -1,7 +1,5 @@
 # interactive-lecture-web-frontend
 
-*Generated with [ng-poly](https://github.com/dustinspecker/generator-ng-poly/tree/v0.10.11) version 0.10.11*
-
 ## Setup
 1. Install [Node.js](http://nodejs.org/)
  - This will also install npm.
@@ -18,3 +16,35 @@
 - Run `gulp webdriverUpdate` to download Selenium server standalone and Chrome driver for e2e testing
 - Run `gulp e2eTest` to run e2e tests via Protractor
  - **A localhost must be running** - `gulp dev`
+
+## Docker
+
+Docker is the primary distribution channel for this app. While the built-in server from gulp is sufficient for development
+purposes, it is not suited for heavy load. Under production circumstances, nginx is the server of choice.
+The docker-image cannot (and should not) handle anything other than static content. It's sole purpose is to serve the final product.
+
+
+### Development Setup
+
+First, you need to install Docker (https://docs.docker.com/installation/).
+Next, you need to compile all assets:
+```bash
+cd /path/to/app
+gulp build
+```
+You can now build the docker-image and run a container:
+```bash 
+sudo docker build -t user-web-ui-service .
+sudo docker run --rm -p 8080:80 --name web-test user-web-ui-service
+```
+Now open your browser and navigate to `localhost:8080`.
+Do note that you may need to specify a different ip-adress if you are using docker-machine.
+
+### Links
+
+#### Docker
+https://www.docker.com/
+https://hub.docker.com/\_/nginx/
+
+#### Nginx
+http://nginx.org/en/docs/beginners\_guide.html
