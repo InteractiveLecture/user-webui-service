@@ -32,14 +32,12 @@ module LoginCtrl {
       // Bei erfolgreichem LogIn Cookie setzen
       if (cookieData == undefined) {
         if (cookieData == null) {
-          console.log('failed');
           this.$cookies.put('kennung', 'unbekannt');
           this.$cookies.put('authenticated', 'false');
           return false;
         }
       }
       else {
-        console.log('success');
         this.$cookies.put('kennung', cookieData.kennung);
         this.$cookies.put('authenticated', 'true');
         return true;
@@ -53,7 +51,7 @@ module LoginCtrl {
   * @name login.controller:LoginCtrl
   *
   * @description
-  *
+  * Login verwalten. Hält dafür die zu versenden Daten und eine Methode fürs einloggen
   */
   angular
     .module('login')

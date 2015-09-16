@@ -9,6 +9,7 @@ module profile {
   */
   angular
     .module('profile', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'interactiveLectureWebFrontend'
     ]);
 }
