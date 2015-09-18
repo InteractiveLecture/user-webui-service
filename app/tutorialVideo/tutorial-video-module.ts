@@ -9,6 +9,7 @@ module tutorialVideo {
   */
   angular
     .module('tutorialVideo', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'uiComponents'
     ]);
 }

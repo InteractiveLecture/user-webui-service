@@ -65,6 +65,14 @@
         "./app/tutorialText/tutorial-text-module.ts",
         "./app/tutorialVideo/tutorial-video-controller.ts",
         "./app/tutorialVideo/tutorial-video-controller_test.ts",
-        "./app/tutorialVideo/tutorial-video-module.ts"
+        "./app/tutorialVideo/tutorial-video-module.ts",
+        "./app/uiComponents/dash-bar-directive.ts",
+        "./app/uiComponents/dash-bar-directive_test.ts",
+        "./app/uiComponents/nav-bar-directive.ts",
+        "./app/uiComponents/nav-bar-directive_test.ts",
+        "./app/uiComponents/ui-components-controller.ts",
+        "./app/uiComponents/ui-components-controller_test.ts",
+        "./app/uiComponents/ui-components-module.ts",
+        "./app/uiComponents/ui-components-routes.ts"
     ]
 }

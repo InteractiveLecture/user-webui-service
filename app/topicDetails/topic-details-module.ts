@@ -9,6 +9,7 @@ module topicDetails {
   */
   angular
     .module('topicDetails', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'uiComponents'
     ]);
 }

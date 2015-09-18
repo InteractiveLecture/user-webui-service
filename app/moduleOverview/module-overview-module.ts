@@ -9,6 +9,7 @@ module moduleOverview {
   */
   angular
     .module('moduleOverview', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'uiComponents'
     ]);
 }

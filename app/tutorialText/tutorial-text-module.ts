@@ -5,10 +5,11 @@ module tutorialText {
   /* @ngdoc object
   * @name tutorialText
   * @description
-  * Text Tutorials 
+  * Text Tutorials
   */
   angular
     .module('tutorialText', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'uiComponents'
     ]);
 }

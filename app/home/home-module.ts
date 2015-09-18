@@ -10,6 +10,7 @@ module home {
   angular
     .module('home', [
         'ngNewRouter',
-        'ngCookies'
+        'ngCookies',
+        'uiComponents'
     ]);
 }

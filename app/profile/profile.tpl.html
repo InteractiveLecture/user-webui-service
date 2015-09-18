@@ -1,41 +1,14 @@
 <!-- Main -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3">
 <!-- Left column -->
-      <a href="#">
-        <strong>
-          Dashboard
-        </strong>
-      </a>
-
-      <hr>
-
-      <ul class="nav nav-stacked">
-        <li class="nav-header">
-          <a data-target="#userMenu" data-toggle="collapse" href="#">Kursübersicht</a>
-          <ul class="nav nav-stacked collapse in" id="userMenu">
-            <li class="active">
-              <a href="#">
-                Home</a>
-            </li>
-            <li>
-              <a href="#">
-                Profil
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                Logout</a>
-            </li>
-          </ul>
-        </li>
-
+      <div class="col-sm-3">
+<!-- Siehe uiComponents dash-bar-directive -->
+        <dash-bar></dash-bar>
       </div>
-<!-- /col-3 -->
+<!-- /Left -->
+<!-- Right column -->
       <div class="col-sm-9">
-
-<!-- column 2 -->
         <strong>
           Dein Profil
         </strong>
@@ -56,9 +29,9 @@
                 <span class="text-muted">Email:</span>
                 {{profile.profileData.email}}<br>
                 <span class="text-muted">Birth date:</span>
-                  {{profile.profileData.birth}}<br>
+                {{profile.profileData.birth}}<br>
                 <span class="text-muted">Gender:</span>
-                  {{profile.profileData.gender}}<br><br>
+                {{profile.profileData.gender}}<br><br>
               </div>
             </div>
           </div>
@@ -76,3 +49,4 @@
       <div class="row">
         <footer class="text-center"></footer>
       </div>
+<!-- Right column -->

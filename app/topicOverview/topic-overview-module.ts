@@ -10,6 +10,7 @@ module topicOverview {
   angular
     .module('topicOverview', [
       'ngNewRouter',
+      'uiComponents',
       'interactiveLectureWebFrontend'
     ]);
 }
