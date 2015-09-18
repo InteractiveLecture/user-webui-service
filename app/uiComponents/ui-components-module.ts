@@ -9,6 +9,8 @@ module uiComponents {
   */
   angular
     .module('uiComponents', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'ngCookies',
+      'interactiveLectureWebFrontend'
     ]);
 }

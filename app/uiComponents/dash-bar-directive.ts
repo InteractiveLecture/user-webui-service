@@ -22,17 +22,22 @@ module DashBar {
     .module('uiComponents')
     .directive('dashBar', dashBar);
 
-  function dashBar(): ng.IDirective {
+  function dashBar($cookies: ng.cookies.ICookiesService, CachingService: any): ng.IDirective {
     return {
       scope: {},
       templateUrl: './uiComponents/dash-bar-directive.tpl.html',
       replace: false,
       controllerAs: 'dashBar',
-      controller: function () {
+      controller: function() {
         var vm = this;
         vm.name = 'dashBar';
+        vm.logout = () => {
+          $cookies.remove('kennung');
+          $cookies.remove('authenticated');
+          CachingService.save('profile', null);
+        };
       },
-      link: function (scope: ng.IScope, element: JQuery, attrs: any) {
+      link: function(scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */
         /*eslint "no-unused-vars": [2, {"args": "none"}]*/
       }
