@@ -1,22 +1,17 @@
+<!-- Siehe uiComponents nav-bar-directive -->
 <nav-bar></nav-bar>
+<!-- Main -->
 <div class="container-fluid">
   <div class="row">
+<!-- Ace Editor siehe uiComponents-->
     <div class="col-sm-9">
-      <div id="editor"></div>
-
-      <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/chrome");
-        editor.getSession().setMode("ace/mode/javascript");
-        editor.setOptions({
-          fontSize: "16pt"
-        });
-      </script>
-
+      <ace-editor></ace-editor>
     </div>
+<!-- /Ace Editor-->
     <div class="col-sm-3">
+<!-- Aufgabenstellung + Hints + Output + Navigation -->
       <div class="row">
-        <button class=" btn btn-primary " name="zurück" type="button">
+        <button class=" btn btn-primary " name="weiter" type="button">
           weiter
         </button>
         <button class="btn pull-right" name="zurück" type="button">
@@ -28,17 +23,25 @@
         <h4>
           Aufgabenstellung</h4>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {{exerciseWorksheet.exerciseDescription}}
         </p>
       </div>
       <hr>
       <div class="row">
-        hints
+        <h4>Hints</h4>
+        <p>
+          {{exerciseWorksheet.hints}}
+        </p>
       </div>
       <hr>
       <div class="row">
-        output
+        <h4>Output</h4>
+        <p>
+          {{exerciseWorksheet.output}}
+        </p>
       </div>
     </div>
   </div>
 </div>
+<!-- /Aufgabenstellung + Hints + Output + Navigation -->
+<!-- /Main -->
