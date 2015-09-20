@@ -72,7 +72,6 @@
         "./app/uiComponents/nav-bar-directive_test.ts",
         "./app/uiComponents/ui-components-controller.ts",
         "./app/uiComponents/ui-components-controller_test.ts",
-        "./app/uiComponents/ui-components-module.ts",
-        "./app/uiComponents/ui-components-routes.ts"
+        "./app/uiComponents/ui-components-module.ts"
     ]
 }

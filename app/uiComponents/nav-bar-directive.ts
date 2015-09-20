@@ -22,18 +22,19 @@ module NavBar {
     .module('uiComponents')
     .directive('navBar', navBar);
 
-  function navBar(): ng.IDirective {
+  function navBar(CachingService: any): ng.IDirective {
     return {
       restrict: 'EA',
       scope: {},
       templateUrl: 'uiComponents/nav-bar-directive.tpl.html',
       replace: false,
       controllerAs: 'navBar',
-      controller: function () {
+      controller: function() {
         var vm = this;
         vm.name = 'navBar';
+        vm.profileData = CachingService.load('profile');
       },
-      link: function (scope: ng.IScope, element: JQuery, attrs: any) {
+      link: function(scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */
         /*eslint "no-unused-vars": [2, {"args": "none"}]*/
       }
