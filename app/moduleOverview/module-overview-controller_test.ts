@@ -3,17 +3,22 @@
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
-describe('ModuleOverviewCtrl', function () {
+describe('ModuleOverviewCtrl', function() {
   var ctrl;
 
   beforeEach(module('moduleOverview'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
-    ctrl = $controller('ModuleOverviewCtrl');
+  beforeEach(inject(function($rootScope: any, $controller: any, $routeParams: any) {
+    ctrl = $controller('ModuleOverviewCtrl', {
+      $routeParams: {id: 12}
+    });
   }));
 
-  it('should have ctrlName as ModuleOverviewCtrl', function () {
+  it('should have ctrlName as ModuleOverviewCtrl', function() {
     expect(ctrl.ctrlName).toEqual('ModuleOverviewCtrl');
   });
 
+  it('should read the RouteParams', function() {
+    expect(ctrl.topicsId).toEqual(12);
+  });
 });
