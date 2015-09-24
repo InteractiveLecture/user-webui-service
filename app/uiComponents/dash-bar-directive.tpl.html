@@ -5,22 +5,23 @@
 <hr>
 <ul class="nav nav-stacked">
   <li class="nav-header">
-    <a data-target="#userMenu" data-toggle="collapse" href="/topics">Kursübersicht</a>
-    <ul class="nav nav-stacked collapse in" id="userMenu">
-      <li class="active">
-        <a href="/home">
-          Home</a>
-      </li>
-      <li>
-        <a href="/profile">
-          Profil
-        </a>
-      </li>
-    </ul>
+    <a ng-link="topicOverview">
+      Kursübersicht
+    </a>
+  <li>
+    <a ng-link="home">
+      Home
+    </a>
   </li>
-  <hr>
-  <a href="/login" ng-click="dashBar.logout()">
-    <button class="btn btn-warnig">Logout</button>
-  </a>
-
-</div>
+  <li>
+    <a ng-link="profile">
+      Profil
+    </a>
+  </li>
+</ul>
+<hr>
+<a ng-link="login">
+  <button class="btn btn-warnig" ng-click="dashBar.logout()">
+    Logout
+  </button>
+</a>

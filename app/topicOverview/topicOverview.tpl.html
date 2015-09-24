@@ -19,9 +19,10 @@
           </div>
           <div class="panel-body">
             <div class="list-group">
-              <a class="list-group-item" href="#">Mehr Informationen</a>
-              <a class="list-group-item" href="#">Modulübersicht</a>
-              <a class="list-group-item" href="#">Start</a>
+              <a class="list-group-item" ng-link="topicDetails({id:{{topic.id}}})">Mehr Informationen</a>
+              <a class="list-group-item" ng-link="moduleOverview({id: {{topic.id}}})">Modulübersicht</a>
+              <!-- Welches Module hier gezeigt wird muss ermittelt werden aus den JSON Daten -->
+              <a class="list-group-item" ng-link="tutorialText({id:1})">Start</a>
             </div>
           </div>
         </div>

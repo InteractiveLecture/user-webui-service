@@ -6,6 +6,7 @@ module ExerciseOverviewCtrl {
 
     ctrlName: string;
     moduleId: number;
+    exercises: any;
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -20,6 +21,9 @@ module ExerciseOverviewCtrl {
       var vm = this;
       vm.moduleId = $routeParams.id;
       vm.ctrlName = 'ExerciseOverviewCtrl';
+      vm.exercises = [{"title": "Variablen","description": "Der Umgang mit Variablen in Java"},
+                      {"title": "Vererbung","description": "Der Umgang mit Vererbung in Java"},
+                      {"title": "Klassen","description": "Was ist eine Klasse in Java"}];
     }
   }
 

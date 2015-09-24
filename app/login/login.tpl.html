@@ -8,7 +8,7 @@
     <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-body">
-          <div class="page-header">
+          <div class="page-header text-center">
             <h3>Login</h3>
           </div>
           <form role="form">
@@ -31,13 +31,11 @@
               </div>
             </div>
             <hr/>
-            <button class="btn btn-success" ng-click="login.attemptLogin(login.userData)" type="submit">
-              <span class="glyphicon glyphicon-lock"></span>
-              login</button>
-            <button class="btn btn-warning" type="button">
-              <span class="glyphicon glyphicon-arrow-left"></span>
-              zurücksetzen</button>
-
+            <div class="text-center">
+              <a ng-link="home" ><button class="btn btn-success " ng-click="login.attemptLogin(login.userData)" type="submit">
+                <span class="glyphicon glyphicon-lock"></span>
+                login</button></a>
+            </div>
             <p><br/></p>
           </form>
         </div>
