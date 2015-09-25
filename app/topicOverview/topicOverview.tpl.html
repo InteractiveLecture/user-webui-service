@@ -4,29 +4,37 @@
 <div class="container-fluid">
   <div class="row">
 <!-- Left column -->
-    <div class="col-sm-3">
+    <aside class="col-sm-3">
 <!-- Siehe uiComponents dash-bar-directive -->
       <dash-bar></dash-bar>
-    </div>
+    </aside>
 <!-- /Left -->
 <!-- Right column -->
-    <div class="col-sm-9">
-
+    <section class="col-sm-9">
       <div class="col-md-3" ng-repeat="topic in topicOverview.topics">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4>{{topic.topicName}}</h4>
           </div>
-          <div class="panel-body">
+          <article class="panel-body">
             <div class="list-group">
-              <a class="list-group-item" ng-link="topicDetails({id:{{topic.id}}})">Mehr Informationen</a>
-              <a class="list-group-item" ng-link="moduleOverview({id: {{topic.id}}})">Modulübersicht</a>
-              <!-- Welches Module hier gezeigt wird muss ermittelt werden aus den JSON Daten -->
-              <a class="list-group-item" ng-link="tutorialText({id:1})">Start</a>
+              <a class="list-group-item" ng-link="topicDetails({id:{{topic.id}}})">
+                Mehr Informationen
+              </a>
+              <a class="list-group-item" ng-link="moduleOverview({id: {{topic.id}}})">
+                Modulübersicht
+              </a>
+<!-- Welches Module hier gezeigt wird muss ermittelt werden aus den JSON Daten -->
+              <a class="list-group-item" ng-link="tutorialText({id:1})">
+                Start
+              </a>
             </div>
-          </div>
+          </article>
         </div>
       </div>
+    </section>
+  </div>
+</div>
 
 <!-- /Right column -->
 <!-- /Main -->

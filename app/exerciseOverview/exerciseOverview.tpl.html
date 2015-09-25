@@ -4,22 +4,26 @@
 <div class="container-fluid">
   <div class="row">
 <!-- Left column -->
-    <div class="col-sm-3">
+    <aside class="col-sm-3">
 <!-- Siehe uiComponents dash-bar-directive -->
       <dash-bar></dash-bar>
-    </div>
+    </aside>
 <!-- /Left -->
 <!-- Right column -->
     <div class="col-sm-9">
-      <div class="panel panel-default" ng-repeat= "exercise in exerciseOverview.exercises">
+      <div class="panel panel-default" ng-repeat="exercise in exerciseOverview.exercises">
         <div class="panel-body">
           {{exercise.title}}
         </div>
         <div class="panel-footer">
           {{exercise.description}}
-          <a ng-link="exerciseWorksheet({eId:1})"><button class="btn-xs btn-primary pull-right"
-          >Start</button></a>
+          <a ng-link="exerciseWorksheet({eId:1})">
+            <button class="btn-xs btn-primary pull-right">Start</button>
+          </a>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 <!-- /Right column -->
 <!-- /Main -->

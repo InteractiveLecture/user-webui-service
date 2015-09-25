@@ -4,43 +4,43 @@
 <div class="container-fluid">
   <div class="row">
 <!-- Ace Editor siehe uiComponents-->
-    <div class="col-sm-9">
+    <section class="col-sm-9">
       <ace-editor></ace-editor>
-    </div>
+    </section>
 <!-- /Ace Editor-->
-    <div class="col-sm-3">
+    <aside class="col-sm-3">
 <!-- Aufgabenstellung + Hints + Output + Navigation -->
-      <div class="row">
+      <nav class="row">
         <button class=" btn btn-primary " name="weiter" type="button">
           weiter
         </button>
         <button class="btn pull-right" name="zurück" type="button">
           zurück
         </button>
-      </div>
+      </nav>
       <hr>
-      <div class="row">
+      <section class="row">
         <h4>
           Aufgabenstellung</h4>
         <p>
           {{exerciseWorksheet.exerciseDescription}}
         </p>
-      </div>
+      </section>
       <hr>
-      <div class="row">
+      <section class="row">
         <h4>Hints</h4>
         <p>
           {{exerciseWorksheet.hints}}
         </p>
-      </div>
+      </section>
       <hr>
-      <div class="row">
+      <footer class="row">
         <h4>Output</h4>
         <p>
           {{exerciseWorksheet.output}}
         </p>
-      </div>
-    </div>
+      </footer>
+    </aside>
   </div>
 </div>
 <!-- /Aufgabenstellung + Hints + Output + Navigation -->
