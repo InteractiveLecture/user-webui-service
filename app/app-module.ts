@@ -19,7 +19,8 @@ module interactiveLectureWebFrontend {
       'tutorialText',
       'tutorialVideo',
       'exerciseOverview',
-      'exerciseWorksheet'
+      'exerciseWorksheet',
+      'uiComponents'
     ]);
 
     app.config(['$componentLoaderProvider', ($componentLoaderProvider: any) => {

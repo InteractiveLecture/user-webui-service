@@ -6,7 +6,7 @@ module ProfileCtrl {
 
     ctrlName: string;
     cache: Caching.CachingService;
-    profileData: any
+    profileData: lectureDefinitions.models.Profile
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -21,7 +21,7 @@ module ProfileCtrl {
       var vm = this;
       vm.ctrlName = 'ProfileCtrl';
       vm.cache = CachingService;
-      vm.profileData = vm.cache.load('profile');
+      vm.profileData = <lectureDefinitions.models.Profile>vm.cache.load('profile');
     }
   }
 

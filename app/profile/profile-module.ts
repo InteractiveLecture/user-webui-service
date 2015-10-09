@@ -10,6 +10,7 @@ module profile {
   angular
     .module('profile', [
       'ngNewRouter',
+      'uiComponents',
       'interactiveLectureWebFrontend'
     ]);
 }

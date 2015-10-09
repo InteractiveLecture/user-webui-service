@@ -1,37 +1,35 @@
 ///<reference path='../../typings/tsd.d.ts' />
-module TopicDetailsCtrl {
+module UiComponentsCtrl {
   'use strict';
 
-  class TopicDetailsCtrl {
+  class UiComponentsCtrl {
 
     ctrlName: string
-    topicsId: number;
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
-      '$routeParams'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($routeParams: any) {
+    constructor() {
       var vm = this;
-      vm.topicsId = $routeParams.id;
-      vm.ctrlName = 'TopicDetailsCtrl';
+      vm.ctrlName = 'UiComponentsCtrl';
+      console.log('funktioniert');
     }
   }
 
 
   /**
   * @ngdoc object
-  * @name topicDetails.controller:TopicDetailsCtrl
+  * @name uiComponents.controller:UiComponentsCtrl
   *
   * @description
   *
   */
   angular
-    .module('topicDetails')
-    .controller('TopicDetailsCtrl', TopicDetailsCtrl);
+    .module('uiComponents')
+    .controller('UiComponentsCtrl', UiComponentsCtrl);
 }

@@ -9,6 +9,7 @@ module exerciseOverview {
   */
   angular
     .module('exerciseOverview', [
-      'ngNewRouter'
+      'ngNewRouter',
+      'uiComponents'
     ]);
 }

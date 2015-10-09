@@ -1,57 +1,48 @@
+<!-- Siehe uiComponents nav-bar-directive -->
+<nav-bar></nav-bar>
 <!-- Main -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3">
 <!-- Left column -->
-      <a class="primary" href="#">
-        <strong>
-          Dashboard
-        </strong>
-      </a>
-
-      <hr>
-
-      <ul class="nav nav-stacked">
-        <li class="nav-header">
-          <a data-target="#userMenu" data-toggle="collapse" href="#">Kursübersicht</a>
-          <ul class="nav nav-stacked collapse in" id="userMenu">
-            <li class="active">
-              <a href="#">
-                Home</a>
-            </li>
-            <li>
-              <a href="#">
-                Profil
+    <div class="col-sm-3">
+<!-- Siehe uiComponents dash-bar-directive -->
+      <dash-bar></dash-bar>
+    </div>
+<!-- /Left -->
+<!-- Right column -->
+    <div class="col-sm-9">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Aufgabe 1</h4>
+          </div>
+          <div class="panel-body">
+            <article class="primary">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </article>
+            <hr>
+            <a ng-link="exerciseWorksheet({id:1, eId:1})">
+              <button class="btn btn-primary" type="button">
+                Starten
+              </button>
+            </a>
+            <div class="pull-right">
+              <a ng-link="moduleOverview({id:1})">
+                <button class="btn btn-default" type="button">
+                  Modulübersicht
+                </button>
               </a>
-            </li>
-            <li>
-              <a href="#">
-                Logout</a>
-            </li>
-          </ul>
-        </li>
-
-      </div>
-<!-- /col-3 -->
-      <div class="col-sm-9">
-
-<!-- column 2 -->
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4>Aufgabe 1</h4>
-            </div>
-            <div class="panel-body">
-              <article class="primary">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </article>
-              <hr>
-              <button class="btn btn-primary" type="button">Starten</button>
-              <div class="btn-group pull-right">
-                <button class="btn btn-default" type="button">Modulübersicht</button>
-                <button class="btn btn-default" type="button">Topics</button>
-              </div>
-
+              <a ng-link="topicOverview">
+                <button class="btn btn-default" type="button">
+                  Topics
+                </button>
+              </a>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Right column -->
+<!-- /Main -->

@@ -1,47 +1,52 @@
+<!-- Siehe uiComponents nav-bar-directive -->
+<nav-bar></nav-bar>
+<!-- Main -->
 <div class="container">
-  <p><br/></p>
+  <p>
+    <br/>
+    <br/>
+  </p>
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-offset-4 col-md-4">
       <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="page-header">
-            <h3>Login</h3>
-          </div>
-          <form role="form">
-            <div class="form-group">
-              <label for="exampleInputEmail1">FH Kennung</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-user"></span>
-                </span>
-                <input class="form-control" id="exampleInputEmail1" placeholder="Kennung eingeben" type="text"
-                ng-model="login.userData.kennung">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Passwort</label>
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-star"></span>
-                </span>
-                <input class="form-control" id="exampleInputPassword1" placeholder="Password" type="password"
-                ng-model="login.userData.passwort">
-              </div>
-            </div>
-            <hr/>
-            <button class="btn btn-success" type="submit" ng-click="login.attemptLogin(login.userData)">
-              <span class="glyphicon glyphicon-lock"></span>
-              login</button>
-            <button class="btn btn-warning" type="button">
-              <span class="glyphicon glyphicon-arrow-left"></span>
-              zurücksetzen</button>
-
-            <p><br/></p>
-          </form>
+<!-- Titel -->
+        <div class="page-header text-center">
+          <h3>Login</h3>
         </div>
+        <form class="panel-body" role="form">
+<!-- KennungFeld -->
+          <section class="form-group">
+            <label for="inputKennung">FH Kennung</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-user"></span>
+              </span>
+              <input class="form-control" id="inputKennung" ng-model="login.userData.kennung" placeholder="Kennung eingeben" type="text">
+            </div>
+          </section>
+<!-- PasswortFeld -->
+          <section class="form-group">
+            <label for="inputPassword">Passwort</label>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-star"></span>
+              </span>
+              <input class="form-control" id="inputPassword" ng-model="login.userData.passwort" placeholder="Password" type="password">
+            </div>
+          </section>
+<!-- Trenner  -->
+          <hr/>
+          <div class="text-center">
+            <a ng-link="home">
+              <button class="btn btn-success " ng-click="login.attemptLogin(login.userData)" type="submit">
+                <span class="glyphicon glyphicon-lock"></span>
+                login
+              </button>
+            </a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  <div class="col-md-4"></div>
 </div>
+<!-- /Main -->

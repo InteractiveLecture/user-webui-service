@@ -1,43 +1,47 @@
+<!-- Siehe uiComponents nav-bar-directive -->
+<nav-bar></nav-bar>
+<!-- Main -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-9">
-      <div id="editor"></div>
-
-      <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/chrome");
-        editor.getSession().setMode("ace/mode/javascript");
-        editor.setOptions({
-          fontSize: "16pt"
-        });
-      </script>
-
-    </div>
-    <div class="col-sm-3">
-      <div class="row">
-        <button class=" btn btn-primary " name="zurück" type="button">
+<!-- Ace Editor siehe uiComponents-->
+    <section class="col-sm-9">
+      <ace-editor></ace-editor>
+    </section>
+<!-- /Ace Editor-->
+    <aside class="col-sm-3">
+<!-- Aufgabenstellung + Hints + Output + Navigation -->
+      <nav class="row">
+        <button class=" btn btn-primary " name="weiter" type="button">
           weiter
         </button>
         <button class="btn pull-right" name="zurück" type="button">
           zurück
         </button>
-      </div>
+      </nav>
       <hr>
-      <div class="row">
+      <section class="row">
         <h4>
           Aufgabenstellung</h4>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {{exerciseWorksheet.exerciseDescription}}
         </p>
-      </div>
+      </section>
       <hr>
-      <div class="row">
-        hints
-      </div>
+      <section class="row">
+        <h4>Hints</h4>
+        <p>
+          {{exerciseWorksheet.hints}}
+        </p>
+      </section>
       <hr>
-      <div class="row">
-        output
-      </div>
-    </div>
+      <footer class="row">
+        <h4>Output</h4>
+        <p>
+          {{exerciseWorksheet.output}}
+        </p>
+      </footer>
+    </aside>
   </div>
 </div>
+<!-- /Aufgabenstellung + Hints + Output + Navigation -->
+<!-- /Main -->

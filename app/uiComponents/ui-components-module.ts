@@ -1,16 +1,16 @@
 ///<reference path='../../typings/tsd.d.ts' />
-module topicOverview {
+module uiComponents {
   'use strict';
 
   /* @ngdoc object
-  * @name topicOverview
+  * @name uiComponents
   * @description
-  * Module zur Übersicht der verschiedenen Themen
+  *
   */
   angular
-    .module('topicOverview', [
+    .module('uiComponents', [
       'ngNewRouter',
-      'uiComponents',
+      'ngCookies',
       'interactiveLectureWebFrontend'
     ]);
 }
