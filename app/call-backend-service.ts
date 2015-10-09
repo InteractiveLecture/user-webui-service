@@ -6,17 +6,21 @@ module CallBackend {
 
     cache: Caching.CachingService;
     $routeParams: any;
+    $http: any;
+
 
     public static $inject: string[] = [
       'CachingService',
-      '$routeParams'
+      '$routeParams',
+      '$http'
     ];
 
     // Dependency einbinden
-    constructor(CachingService: Caching.CachingService, $routeParams: any) {
+    constructor(CachingService: Caching.CachingService, $routeParams: any, $http: any) {
       var vm = this;
       vm.cache = CachingService;
       vm.$routeParams =$routeParams;
+      vm.$http = $http;
 
     }
 
@@ -81,14 +85,27 @@ module CallBackend {
 
     // Gibt die eingetippten Daten ans Backend weiter. resultat wird im Cache gespeichert und zurückgegeben
     postUserData(userData: any) {
-      if (userData.kennung == 'cremerm' && userData.passwort == 1234) {
-        //TODO: Richtiger HTTP-Request für postUserData.
-        var dummyProfile: any = new lectureDefinitions.models.BaseModel({ 'id': 90, 'kennung': 'cremerm', 'passwort': '1234', 'email': 'cremerm@hochschule-trier.de', 'links': null, 'cacheIndex': 'profile', 'gender': 'male', 'birth': '19.02.1993' });
+        var username = userData.kennung;
+        var passwort = userData.passwort;
+        var clientId = "acme";
+        var grant_type = "password";
+        var data = {
+          username: username,
+          password: passwort,
+          client_id: clientId,
+          grant_type: grant_type,
+        };
+        this.$http.post('http://10.143.19.135:8080/oauth/token', data).then(
+          (token:any)=> {console.log(token.access_token)},
+          (error:any)=> {console.log(error)}
+        )
+
+        var dummyProfile: lectureDefinitions.models.Profile = new lectureDefinitions.models.Profile({ 'id': 90, 'kennung': 'cremerm', 'passwort': '1234', 'email': 'cremerm@hochschule-trier.de', 'links': null, 'cacheIndex': 'profile', 'gender': 'male', 'birth': '19.02.1993' });
         this.cache.save('profile', dummyProfile);
         return dummyProfile;
       }
     }
-  }
+
 
   /**
    * @ngdoc service
