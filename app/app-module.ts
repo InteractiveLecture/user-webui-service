@@ -10,6 +10,12 @@ module interactiveLectureWebFrontend {
   var app = angular
     .module('interactiveLectureWebFrontend', [
     'ngNewRouter',
+    "ngSanitize",
+		"com.2fdevs.videogular",
+		"com.2fdevs.videogular.plugins.controls",
+		"com.2fdevs.videogular.plugins.overlayplay",
+		"com.2fdevs.videogular.plugins.poster",
+    'angular-jwt',
     'home',
     'login',
     'profile',
@@ -20,8 +26,8 @@ module interactiveLectureWebFrontend {
     'tutorialVideo',
     'exerciseOverview',
     'exerciseWorksheet',
-    'uiComponents',
-    'angular-jwt'
+    'uiComponents'
+
   ]);
 
   app.config(['$componentLoaderProvider', '$httpProvider', 'jwtInterceptorProvider',
