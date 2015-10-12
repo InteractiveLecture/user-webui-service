@@ -85,6 +85,7 @@ module CallBackend {
 
     // Gibt die eingetippten Daten ans Backend weiter. resultat wird im Cache gespeichert und zurückgegeben
     postUserData(userData: any) {
+      /*
         var username = userData.kennung;
         var passwort = userData.passwort;
         var clientId = "acme";
@@ -99,6 +100,7 @@ module CallBackend {
           (token:any)=> {console.log(token.access_token)},
           (error:any)=> {console.log(error)}
         )
+        */
 
         var dummyProfile: lectureDefinitions.models.Profile = new lectureDefinitions.models.Profile({ 'id': 90, 'kennung': 'cremerm', 'passwort': '1234', 'email': 'cremerm@hochschule-trier.de', 'links': null, 'cacheIndex': 'profile', 'gender': 'male', 'birth': '19.02.1993' });
         this.cache.save('profile', dummyProfile);

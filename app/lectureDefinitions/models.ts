@@ -61,9 +61,13 @@ module lectureDefinitions.models {
 
   export class Profile extends models.BaseModel {
     cacheIndex: string = 'profile';
-    email: string;
-    kennung: string;
+    email: string = this.user_name + "@hochschule-trier.de";
+    user_name: string;
     passwort: string;
+    exp: number;
+    authorities: string[];
+    jti: string;
+    client_id: string;
   }
 
   export class Hint {
