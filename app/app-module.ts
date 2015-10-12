@@ -9,21 +9,23 @@ module interactiveLectureWebFrontend {
    */
   var app = angular
     .module('interactiveLectureWebFrontend', [
-      'ngNewRouter',
-      'home',
-      'login',
-      'profile',
-      'moduleOverview',
-      'topicOverview',
-      'topicDetails',
-      'tutorialText',
-      'tutorialVideo',
-      'exerciseOverview',
-      'exerciseWorksheet',
-      'uiComponents'
-    ]);
+    'ngNewRouter',
+    'home',
+    'login',
+    'profile',
+    'moduleOverview',
+    'topicOverview',
+    'topicDetails',
+    'tutorialText',
+    'tutorialVideo',
+    'exerciseOverview',
+    'exerciseWorksheet',
+    'uiComponents',
+    'angular-jwt'
+  ]);
 
-    app.config(['$componentLoaderProvider', ($componentLoaderProvider: any) => {
+  app.config(['$componentLoaderProvider', '$httpProvider', 'jwtInterceptorProvider',
+    ($componentLoaderProvider: any, $httpProvider: ng.IHttpProvider, jwtInterceptorProvider: ng.jwt.IJwtInterceptor) => {
       // Die generierten Controller nutzen
       $componentLoaderProvider.setCtrlNameMapping((name: string) => {
         // name is component name
@@ -32,8 +34,17 @@ module interactiveLectureWebFrontend {
       // Die generierten Templates nutzen
       $componentLoaderProvider.setTemplateMapping((name: string) => {
         // name is component name
-        return name +'/'+ name + '.tpl.html';
+        return name + '/' + name + '.tpl.html';
       });
+
+      jwtInterceptorProvider.tokenGetter = function(){
+        console.log("Rufe Token auf");
+        //TODO Implemnéntierung prüfen
+        return <string> localStorage.getItem('id_token');
+      };
+
+      $httpProvider.interceptors.push('jwtInterceptor');
+
     }]);
 
 }
