@@ -26,22 +26,25 @@ module LoginCtrl {
       vm.callBackend = CallBackendService;
     }
 
-    attemptLogin(userData: any): boolean {
+    public attemptLogin(userData: any){
       // CallBackend Service nutzen
-      var cookieData: any = this.callBackend.postUserData(userData);
-      // Bei erfolgreichem LogIn Cookie setzen
-      if (cookieData == undefined) {
-        if (cookieData == null) {
-          this.$cookies.put('kennung', 'unbekannt');
-          this.$cookies.put('authenticated', 'false');
-          return false;
+      this.callBackend.postUserData(userData,(err: any, data: any) => {
+        if(err !== null){
+          console.log("you are not logged in... moron!");
+          //TODO error anzeigen und redirect auf login.
         }
-      }
-      else {
-        this.$cookies.put('kennung', cookieData.kennung);
-        this.$cookies.put('authenticated', 'true');
-        return true;
-      }
+        else {
+          console.log(`congrats! here is your token:${data.access_token}`);
+          /*
+           * vorhandene eigenschaften des objektes:
+           *{
+              access_token, token_type,refresh_token,expires_in,scope,id,jti,
+            }
+           *
+           * */
+          //TODO auf Seite weiterleiten.
+        }
+      })
     }
   }
 

@@ -87,33 +87,36 @@ module CallBackend {
     }
 
     // Gibt die eingetippten Daten ans Backend weiter. resultat wird im Cache gespeichert und zurückgegeben
-    postUserData(userData: any) {
-      /*
-        var username = userData.kennung;
-        var passwort = userData.passwort;
-        var clientId = "acme";
-        var grant_type = "password";
-        var data = {
-          username: username,
-          password: passwort,
-          client_id: clientId,
-          grant_type: grant_type,
-        };
-        this.$http.post('http://10.143.19.135:8080/oauth/token', data).then(
-          (token:any)=> {console.log(token.access_token)},
-          (error:any)=> {console.log(error)}
-        )
-        */
-        // HTTP-Request zum Backend -> Ergebnis ist das Token
-        var token = "eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIm9wZW5pZCJdLCJpZCI6MSwiZXhwIjoxNDQ0NTMxOTg0LCJhdXRob3JpdGllcyI6WyJhZG1pbiJdLCJqdGkiOiI4ZTZhYzVkMS0zNGFhLTQ1YTEtYTZmYy02YmU3MzRhMTgwZjciLCJjbGllbnRfaWQiOiJ1c2VyLXdlYi1jbGllbnQifQ.X3gGBmqimFGfb4pIR_J4C9gqi3W4E1x80E8xp7jSXiKxMBQTPhRHG7cmGJjTy2HDx5xogQjhTFgg2qa3iStY6hKJXm6PDSu6478gKhBZNaF4OQvbSC9NmT8jFaoY_vWqAWFkAshQQBeHIoqFXFdB3K_0ia6Vn_UEdm-zAti-rPlE5xxykEJWhWGaNIndoMyfAM3zcrPe2GlVbPAz-LbJFEnRYkRLrtmIRX7Nu1LQWEydwvJ8zLe5prNoN_6XXid1rm6x727REJ2Mlqffh5EX3CWXsWmznXuv_-0lraPdpEpCWC3Teeg2fIreuSL0DKLxgxOTmE0CxO_jST8lb7Q0Sw"
-        localStorage.setItem('id_tocken', token);
-        var dummyProfile = new lectureDefinitions.models.Profile(this.jwtHelper.decodeToken(token));
+    postUserData(userData: any, callback: any) {
 
-        //var dummyProfile: lectureDefinitions.models.Profile = new lectureDefinitions.models.Profile({ 'id': 90, 'kennung': 'cremerm', 'passwort': '1234', 'email': 'cremerm@hochschule-trier.de', 'links': null, 'cacheIndex': 'profile', 'gender': 'male', 'birth': '19.02.1993' });
-        this.cache.save('profile', dummyProfile);
-        return dummyProfile;
+      var username = userData.kennung;
+      var passwort = userData.passwort;
+      var clientId = "user-web-client";
+      var clientSecret = "user-web-client-secret"
+      var grant_type = "password";
+      var data = `username=${username}&password=${passwort}&client_id=${clientId}&client_secret=${clientSecret}&grant_type=${grant_type}`
+      var req = {
+        method: 'POST',
+        url: '/authentication-service/oauth/token',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: data
       }
+      this.$http(req).then(
+          (token:any)=> {callback(null,token.data)},
+          (error:any)=> {callback(error,null)}
+      )
+        /* HTTP-Request zum Backend -> Ergebnis ist das Token
+           var token = "eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIm9wZW5pZCJdLCJpZCI6MSwiZXhwIjoxNDQ0NTMxOTg0LCJhdXRob3JpdGllcyI6WyJhZG1pbiJdLCJqdGkiOiI4ZTZhYzVkMS0zNGFhLTQ1YTEtYTZmYy02YmU3MzRhMTgwZjciLCJjbGllbnRfaWQiOiJ1c2VyLXdlYi1jbGllbnQifQ.X3gGBmqimFGfb4pIR_J4C9gqi3W4E1x80E8xp7jSXiKxMBQTPhRHG7cmGJjTy2HDx5xogQjhTFgg2qa3iStY6hKJXm6PDSu6478gKhBZNaF4OQvbSC9NmT8jFaoY_vWqAWFkAshQQBeHIoqFXFdB3K_0ia6Vn_UEdm-zAti-rPlE5xxykEJWhWGaNIndoMyfAM3zcrPe2GlVbPAz-LbJFEnRYkRLrtmIRX7Nu1LQWEydwvJ8zLe5prNoN_6XXid1rm6x727REJ2Mlqffh5EX3CWXsWmznXuv_-0lraPdpEpCWC3Teeg2fIreuSL0DKLxgxOTmE0CxO_jST8lb7Q0Sw"
+           localStorage.setItem('id_tocken', token);
+           var dummyProfile = new lectureDefinitions.models.Profile(this.jwtHelper.decodeToken(token));
+
+           //var dummyProfile: lectureDefinitions.models.Profile = new lectureDefinitions.models.Profile({ 'id': 90, 'kennung': 'cremerm', 'passwort': '1234', 'email': 'cremerm@hochschule-trier.de', 'links': null, 'cacheIndex': 'profile', 'gender': 'male', 'birth': '19.02.1993' });
+           this.cache.save('profile', dummyProfile);
+           return dummyProfile;*/
     }
+  }
 
 
   /**
