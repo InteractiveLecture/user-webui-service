@@ -13,11 +13,12 @@ module ProfileCtrl {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
-      'CachingService'
+      'CachingService',
+      '$http'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(CachingService: Caching.CachingService) {
+    constructor(CachingService: Caching.CachingService, $http: ng.IHttpService) {
       var vm = this;
       vm.ctrlName = 'ProfileCtrl';
       vm.cache = CachingService;

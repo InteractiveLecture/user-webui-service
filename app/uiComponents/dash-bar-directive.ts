@@ -35,6 +35,7 @@ module DashBar {
           $cookies.remove('kennung');
           $cookies.remove('authenticated');
           CachingService.save('profile', null);
+          localStorage.setItem('id_token', null);
         };
       },
       link: function(scope: ng.IScope, element: JQuery, attrs: any) {

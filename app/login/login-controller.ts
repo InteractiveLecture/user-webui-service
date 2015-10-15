@@ -28,6 +28,7 @@ module LoginCtrl {
 
     public attemptLogin(userData: any){
       // CallBackend Service nutzen
+      console.log("HIER")
       this.callBackend.postUserData(userData,(err: any, data: any) => {
         if(err !== null){
           console.log("you are not logged in... moron!");
@@ -35,6 +36,8 @@ module LoginCtrl {
         }
         else {
           console.log(`congrats! here is your token:${data.access_token}`);
+          localStorage.setItem('id_token', data.access_token);
+          localStorage.setItem('refresh_token', data.refreh_token);
           /*
            * vorhandene eigenschaften des objektes:
            *{
