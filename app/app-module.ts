@@ -44,25 +44,28 @@ module interactiveLectureWebFrontend {
       });
 
       jwtInterceptorProvider.tokenGetter = ['config', 'jwtHelper', '$http', (config: any, jwtHelper: ng.jwt.IJwtHelper, $http: any) => {
-        // Skip authentication for any requests ending in .html
+        // Keine Token für .html mitschicken
         if (config.url.substr(config.url.length - 5) == '.html') {
           return null;
         }
+        // Keine Token für .css mitschicken
         if (config.url.substr(config.url.length - 4) == '.css') {
           return null;
         }
+        // Keine Token für .js mitschicken
         if (config.url.substr(config.url.length - 3) == '.js') {
           return null;
         }
 
+        // localStorage abrufen
         var idToken = localStorage.getItem('id_token');
         var refreshToken = localStorage.getItem('refresh_token');
-        console.log(idToken);
-        console.log(typeof idToken);
+
+        // Den leeren localStorage für Chrome und Firefox abfangen. (Grrr)
         if (idToken !== 'null' && idToken !== null) {
-          console.log('Broken bei idToken != null')
+          // Falls das aktuelle Token abläuft soll...
           if (jwtHelper.isTokenExpired(idToken)) {
-            // This is a promise of a JWT id_token
+            // Ein Request geschickt werden für ein refreshToken
             return $http({
               url: '/authentication-service/oauth/token',
               // This makes it so that this request doesn't send the JWT
@@ -73,20 +76,24 @@ module interactiveLectureWebFrontend {
                 'Content-Type': 'application/x-www-form-urlencoded'
               }
             }).then(function(response: any) {
+              // Falls die Anfrage erfolg hat tue ich das mit der Antwort
               console.log('Broken bei function(response: any')
               var id_token = response.data.id_token;
               localStorage.setItem('id_token', id_token);
               return id_token;
             });
           } else {
+            // Falls das Token nicht abgelaufen ist gebe ich das aktuelle zurück
             return idToken;
           }
         }
         else {
+          // Falls es noch kein Token gibt, gibt es keins zurück
           return null;
         }
       }];
 
+      // Überschriebenen Interceptor nutzen.
       $httpProvider.interceptors.push('jwtInterceptor');
 
     }]);
