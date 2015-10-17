@@ -68,6 +68,8 @@
         "app/tutorialVideo/tutorial-video-module.ts",
         "app/uiComponents/ace-editor-directive_test.ts",
         "app/uiComponents/ace-editor-directive.ts",
+        "app/uiComponents/citoscape-directive_test.ts",
+        "app/uiComponents/citoscape-directive.ts",
         "app/uiComponents/dash-bar-directive_test.ts",
         "app/uiComponents/dash-bar-directive.ts",
         "app/uiComponents/nav-bar-directive_test.ts",
