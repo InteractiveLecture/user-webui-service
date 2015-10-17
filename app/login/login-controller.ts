@@ -7,7 +7,11 @@ module LoginCtrl {
     ctrlName: string;
     userData: any;
     $cookies: ng.cookies.ICookiesService;
+    $location: ng.ILocationService;
     callBackend: CallBackend.CallBackendService;
+
+    errorStatus: string;
+
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -15,39 +19,47 @@ module LoginCtrl {
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
       '$cookies',
-      'CallBackendService'
+      'CallBackendService',
+      '$location'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($cookies: any, CallBackendService: any) {
+    constructor($cookies: any, CallBackendService: any, $location: ng.ILocationService) {
       var vm = this;
       vm.ctrlName = 'LoginCtrl';
       vm.$cookies = $cookies;
+      vm.$location = $location;
       vm.callBackend = CallBackendService;
+
     }
 
-    public attemptLogin(userData: any){
+    public attemptLogin(userData: any) {
       // CallBackend Service nutzen
-      console.log("HIER")
-      this.callBackend.postUserData(userData,(err: any, data: any) => {
-        if(err !== null){
-          console.log("you are not logged in... moron!");
-          //TODO error anzeigen und redirect auf login.
-        }
-        else {
-          console.log(`congrats! here is your token:${data.access_token}`);
-          localStorage.setItem('id_token', data.access_token);
-          localStorage.setItem('refresh_token', data.refreh_token);
-          /*
-           * vorhandene eigenschaften des objektes:
-           *{
-              access_token, token_type,refresh_token,expires_in,scope,id,jti,
-            }
-           *
-           * */
-          //TODO auf Seite weiterleiten.
-        }
-      })
+      if (userData !== null && userData !== undefined) {
+        this.callBackend.postUserData(userData, (err: any, data: any) => {
+          if (err !== null) {
+            this.errorStatus = err.status;
+            console.log("you are not logged in... moron!");
+            this.userData.passwort = "";
+
+            //TODO error anzeigen und redirect auf login.
+          }
+          else {
+            console.log(`congrats! here is your token:${data.access_token}`);
+            this.$location.path("/home");
+            localStorage.setItem('id_token', data.access_token);
+            localStorage.setItem('refresh_token', data.refreh_token);
+            /*
+             * vorhandene eigenschaften des objektes:
+             *{
+                access_token, token_type,refresh_token,expires_in,scope,id,jti,
+              }
+             *
+             * */
+            //TODO auf Seite weiterleiten.
+          }
+        })
+      }
     }
   }
 

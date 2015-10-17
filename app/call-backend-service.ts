@@ -104,8 +104,8 @@ module CallBackend {
         data: data
       }
       this.$http(req).then(
-          (token:any)=> {callback(null,token.data)},
-          (error:any)=> {callback(error,null)}
+          (token:any)=> {callback(null, token.data)},
+          (error:any)=> {callback(error, null)}
       )
         /* HTTP-Request zum Backend -> Ergebnis ist das Token
            var token = "eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIm9wZW5pZCJdLCJpZCI6MSwiZXhwIjoxNDQ0NTMxOTg0LCJhdXRob3JpdGllcyI6WyJhZG1pbiJdLCJqdGkiOiI4ZTZhYzVkMS0zNGFhLTQ1YTEtYTZmYy02YmU3MzRhMTgwZjciLCJjbGllbnRfaWQiOiJ1c2VyLXdlYi1jbGllbnQifQ.X3gGBmqimFGfb4pIR_J4C9gqi3W4E1x80E8xp7jSXiKxMBQTPhRHG7cmGJjTy2HDx5xogQjhTFgg2qa3iStY6hKJXm6PDSu6478gKhBZNaF4OQvbSC9NmT8jFaoY_vWqAWFkAshQQBeHIoqFXFdB3K_0ia6Vn_UEdm-zAti-rPlE5xxykEJWhWGaNIndoMyfAM3zcrPe2GlVbPAz-LbJFEnRYkRLrtmIRX7Nu1LQWEydwvJ8zLe5prNoN_6XXid1rm6x727REJ2Mlqffh5EX3CWXsWmznXuv_-0lraPdpEpCWC3Teeg2fIreuSL0DKLxgxOTmE0CxO_jST8lb7Q0Sw"

@@ -9,42 +9,42 @@
   <div class="row">
     <div class="col-md-offset-4 col-md-4">
       <div class="panel panel-default">
-<!-- Titel -->
+        <!-- Titel -->
         <div class="page-header text-center">
           <h3>Login</h3>
         </div>
-        <form class="panel-body" role="form">
-<!-- KennungFeld -->
+        <form class="panel-body myform" role="form">
+          <!-- KennungFeld -->
           <section class="form-group">
             <label for="inputKennung">FH Kennung</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
               </span>
-              <input class="form-control" id="inputKennung" ng-model="login.userData.kennung" placeholder="Kennung eingeben" type="text">
+              <input class="form-control" id="inputKennung" required ng-model="login.userData.kennung" placeholder="Kennung eingeben" type="text">
             </div>
           </section>
-<!-- PasswortFeld -->
+          <!-- PasswortFeld -->
           <section class="form-group">
             <label for="inputPassword">Passwort</label>
             <div class="input-group">
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-star"></span>
               </span>
-              <input class="form-control" id="inputPassword" ng-model="login.userData.passwort" placeholder="Password" type="password">
+              <input class="form-control" id="inputPassword" required ng-model="login.userData.passwort" placeholder="Password" type="password">
             </div>
           </section>
-<!-- Trenner  -->
+          <!-- Trenner  -->
           <hr/>
           <div class="text-center">
-            <a ng-link="home">
-              <button class="btn btn-success " ng-click="login.attemptLogin(login.userData)" type="submit">
-                <span class="glyphicon glyphicon-lock"></span>
-                login
-              </button>
-            </a>
+            <button class="btn btn-success " ng-click="login.attemptLogin(login.userData)" type="submit">
+              <span class="glyphicon glyphicon-lock"></span>
+              login
+            </button>
           </div>
         </form>
+        <span class="alert" ng-show="login.errorStatus == 401"> Falsche Eingabe - bitte nochmal versuchen</span>
+        <span class="alert" ng-show="login.errorStatus !== undefined && login.errorStatus !== 401"> Server antwortet nicht - bitte versuche später noch einmal</span>
       </div>
     </div>
   </div>
