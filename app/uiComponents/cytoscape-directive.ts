@@ -1,10 +1,10 @@
 ///<reference path='../../typings/tsd.d.ts' />
-module Citoscape {
+module Cytoscape {
   'use strict';
 
   /**
   * @ngdoc directive
-  * @name uiComponents.directive:citoscape
+  * @name uiComponents.directive:cytoscape
   * @restrict EA
   * @element
   *
@@ -13,24 +13,32 @@ module Citoscape {
   * @example
     <example module="uiComponents">
       <file name="index.html">
-        <citoscape></citoscape>
+        <cytoscape></cytoscape>
       </file>
     </example>
   *
   */
   angular
     .module('uiComponents')
-    .directive('citoscape', citoscape);
+    .directive('cytoscape', cytoscape);
 
-  function citoscape(): ng.IDirective {
+  function cytoscape(CytoscapeFactory: any): ng.IDirective {
     return {
       restrict: 'EA',
       scope: {},
-      templateUrl: 'uiComponents/citoscape-directive.tpl.html',
+      templateUrl: 'uiComponents/cytoscape-directive.tpl.html',
       replace: false,
-      controllerAs: 'citoscape',
+      controllerAs: 'cytoscape',
       controller: function () {
         var vm = this;
+        var cy: Cy.Instance;
+        console.log('lade cytoscape-directive controller')
+        CytoscapeFactory.renderCyto().then((result: any)=> {
+          cy = result;
+          console.log('log:');
+          console.log(result);
+        },
+      ()=> {console.log('promise schlägt fehl')});
       },
       link: function (scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */
