@@ -24,7 +24,9 @@ module CytoscapeFactory {
       console.log("go in factory");
       angular.element(document).ready(() => { // On DOM Ready
         var cy = cytoscape({
+          // Container zum rendern des Graphen festlegen
           container: document.getElementById('cy'),
+          // Aussehen des Graphen festlegen
           style: cytoscape.stylesheet()
             .selector('node')
             .css({
@@ -51,36 +53,28 @@ module CytoscapeFactory {
             'text-opacity': 0
           }),
           elements: {
+            // Knoten bestimmen
             nodes: [
               { data: { id: 'j', name: 'Jerry' } },
-              { data: { id: 'e', name: 'Elaine' } },
-              { data: { id: 'k', name: 'Kramer' } },
-              { data: { id: 'g', name: 'George' } }
+              { data: { id: 'e', name: 'Elaine' } }
             ],
+            // Kanten bestimmen
             edges: [
-              { data: { source: 'j', target: 'e' } },
-              { data: { source: 'j', target: 'k' } },
-              { data: { source: 'j', target: 'g' } },
-              { data: { source: 'e', target: 'j' } },
-              { data: { source: 'e', target: 'k' } },
-              { data: { source: 'k', target: 'j' } },
-              { data: { source: 'k', target: 'e' } },
-              { data: { source: 'k', target: 'g' } },
-              { data: { source: 'g', target: 'j' } }
+              { data: { source: 'j', target: 'e' } }
             ]
           },
           layout: {
+            // Layout betsimmen
             name: 'grid',
             padding: 10
           },
           ready: () => {
+            // Promise soll das Cytoscape.js Objekt übergeben sobald es fertig initialisiert ist
             deferred.resolve(this);
           }
         });
       }) // On DOM Ready
-
       return deferred.promise;
-
     };
     return CytoscapeBase;
   }

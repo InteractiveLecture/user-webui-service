@@ -32,13 +32,10 @@ module Cytoscape {
       controller: function () {
         var vm = this;
         var cy: Cy.Instance;
-        console.log('lade cytoscape-directive controller')
         CytoscapeFactory.renderCyto().then((result: any)=> {
           cy = result;
-          console.log('log:');
-          console.log(result);
         },
-      ()=> {console.log('promise schlägt fehl')});
+      ()=> {console.log('Cytoscape.js arbeitet nicht richtig')});
       },
       link: function (scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */
