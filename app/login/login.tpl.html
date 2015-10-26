@@ -13,7 +13,7 @@
         <div class="page-header text-center">
           <h3>Login</h3>
         </div>
-        <form class="panel-body myform" role="form">
+        <form class="panel-body myform" name="login" role="form">
           <!-- KennungFeld -->
           <section class="form-group">
             <label for="inputKennung">FH Kennung</label>
@@ -21,7 +21,7 @@
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-user"></span>
               </span>
-              <input class="form-control" id="inputKennung" required ng-model="login.userData.kennung" placeholder="Kennung eingeben" type="text">
+              <input class="form-control" id="inputKennung" name="inputKennung" ng-model="login.userData.kennung" placeholder="Kennung eingeben" required type="text">
             </div>
           </section>
           <!-- PasswortFeld -->
@@ -31,7 +31,7 @@
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-star"></span>
               </span>
-              <input class="form-control" id="inputPassword" required ng-model="login.userData.passwort" placeholder="Password" type="password">
+              <input class="form-control" id="inputPassword" name="inputPassword" ng-model="login.userData.passwort" placeholder="Password" required type="password">
             </div>
           </section>
           <!-- Trenner  -->
@@ -43,10 +43,19 @@
             </button>
           </div>
         </form>
-        <span class="alert" ng-show="login.errorStatus == 401"> Falsche Eingabe - bitte nochmal versuchen</span>
-        <span class="alert" ng-show="login.errorStatus !== undefined && login.errorStatus !== 401"> Server antwortet nicht - bitte versuche später noch einmal</span>
       </div>
     </div>
   </div>
+  <div class="col-md-offset-4 col-md-4">
+    <div class="row">
+      <!-- Messages anhand der logik-->
+      <div class="alert alert-danger text-center" ng-show="login.errorStatus == 401">
+        Falsche Eingabe -</br>
+      bitte nochmal versuchen</div>
+    <div class="alert alert-danger text-center" ng-show="login.errorStatus !== undefined && login.errorStatus !== 401">
+      Server antwortet nicht -</br>
+    bitte versuche es später noch einmal</div>
+</div>
+</div>
 </div>
 <!-- /Main -->
