@@ -4,8 +4,7 @@ module ProfileCtrl {
 
   class ProfileCtrl {
 
-    ctrlName: string;
-    cache: Caching.CachingService;
+    cache: Caching.CachingService
     profileData: lectureDefinitions.models.Profile
 
     // $inject annotation.
@@ -20,19 +19,17 @@ module ProfileCtrl {
     // dependencies are injected via AngularJS $injector
     constructor(CachingService: Caching.CachingService, $http: ng.IHttpService) {
       var vm = this;
-      vm.ctrlName = 'ProfileCtrl';
       vm.cache = CachingService;
       vm.profileData = <lectureDefinitions.models.Profile>vm.cache.load('profile');
     }
   }
-
 
   /**
   * @ngdoc object
   * @name profile.controller:ProfileCtrl
   *
   * @description
-  *
+  * Profildaten darstellen
   */
   angular
     .module('profile')

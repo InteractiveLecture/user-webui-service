@@ -5,7 +5,7 @@
 
 describe('LoginCtrl', function() {
   var ctrl: any;
-  var dummyData: any = { 'kennung': 'cremerm', 'passwort': 1234 };
+  var dummyData: any;
 
 
   beforeEach(module('login'));
@@ -14,18 +14,14 @@ describe('LoginCtrl', function() {
     ctrl = $controller('LoginCtrl');
   }));
 
-  it('should have ctrlName as LoginCtrl', function() {
-    expect(ctrl.ctrlName).toEqual('LoginCtrl');
-  });
-
   it('should login me', function() {
-  //  expect(ctrl.attemptLogin(dummyData)).toBe(true);
-  // TODO: Auf die Arbeit mit Token anpassen
+    //  expect(ctrl.attemptLogin(dummyData)).toBe(true);
+    // TODO: Auf die Arbeit mit Token anpassen
   });
 
   it('shouldnt login me', function() {
-  //  expect(ctrl.attemptLogin({ 'kennung': 'hugo', 'passwort': '4312' })).toBe(false);
-  // TODO: Auf die Arbeit mit Token anpassen
+    //  expect(ctrl.attemptLogin({ 'kennung': 'hugo', 'passwort': '4312' })).toBe(false);
+    // TODO: Auf die Arbeit mit Token anpassen
   });
 
 });

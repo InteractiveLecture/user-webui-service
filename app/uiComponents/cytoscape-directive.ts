@@ -35,7 +35,7 @@ module Cytoscape {
         CytoscapeFactory.renderCyto().then((result: any)=> {
           cy = result;
         },
-      ()=> {console.log('Cytoscape.js arbeitet nicht richtig')});
+      ()=> {console.log("Cytoscape.js isn't working")});
       },
       link: function (scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */

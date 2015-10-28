@@ -4,8 +4,7 @@ module TopicOverviewCtrl {
 
   class TopicOverviewCtrl {
 
-    ctrlName: string
-    topics: lectureDefinitions.models.Topic[];
+    topics: lectureDefinitions.models.Topic[]
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -18,7 +17,6 @@ module TopicOverviewCtrl {
     // dependencies are injected via AngularJS $injector
     constructor(private CallBackend: lectureDefinitions.interfaces.ModelService) {
       var vm = this;
-      vm.ctrlName = 'TopicOverviewCtrl';
       CallBackend.loadModel('hugo', (topics: lectureDefinitions.models.Topic[]) => {
         vm.topics = topics;
       });

@@ -4,9 +4,8 @@ module TutorialVideoCtrl {
 
   class TutorialVideoCtrl {
 
-    ctrlName: string;
-    moduleId: number;
-    $sce: ng.ISCEService;
+    moduleId: number
+    $sce: ng.ISCEService
     config: any
 
     // $inject annotation.
@@ -22,9 +21,8 @@ module TutorialVideoCtrl {
     constructor($routeParams: any, $sce: ng.ISCEService) {
       var vm = this;
       vm.moduleId = $routeParams.id;
-      vm.ctrlName = 'TutorialVideoCtrl';
 
-      // TODO Test Daten entfernen
+      // TODO Test Daten entfernen und ersetzen
       this.config = {
         sources: [
           { src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/videos/videogular.mp4"), type: "video/mp4" },

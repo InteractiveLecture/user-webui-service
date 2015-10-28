@@ -4,8 +4,7 @@ module TopicDetailsCtrl {
 
   class TopicDetailsCtrl {
 
-    ctrlName: string
-    topicsId: number;
+    topicsId: number
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -19,17 +18,15 @@ module TopicDetailsCtrl {
     constructor($routeParams: any) {
       var vm = this;
       vm.topicsId = $routeParams.id;
-      vm.ctrlName = 'TopicDetailsCtrl';
     }
   }
-
 
   /**
   * @ngdoc object
   * @name topicDetails.controller:TopicDetailsCtrl
   *
   * @description
-  *
+  * Informationen des gewählten Topics dastellen
   */
   angular
     .module('topicDetails')

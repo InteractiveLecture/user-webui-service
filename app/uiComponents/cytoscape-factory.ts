@@ -7,7 +7,7 @@ module CytoscapeFactory {
   * @name uiComponents.factory:Cytoscape
   *
   * @description
-  *
+  * Bäume grafisch erzeugen
   */
   angular
     .module('uiComponents')

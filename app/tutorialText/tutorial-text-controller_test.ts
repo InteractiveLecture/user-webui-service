@@ -4,7 +4,7 @@
 'use strict';
 
 describe('TutorialTextCtrl', function() {
-  var ctrl;
+  var ctrl: any;
 
   beforeEach(module('tutorialText'));
 
@@ -13,10 +13,6 @@ describe('TutorialTextCtrl', function() {
       $routeParams: { id: 25 }
     });
   }));
-
-  it('should have ctrlName as TutorialTextCtrl', function() {
-    expect(ctrl.ctrlName).toEqual('TutorialTextCtrl');
-  });
 
   it('should read the RouteParams', function() {
     expect(ctrl.moduleId).toEqual(25);

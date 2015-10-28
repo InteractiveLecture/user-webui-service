@@ -4,7 +4,7 @@
 'use strict';
 
 describe('TutorialVideoCtrl', function() {
-  var ctrl;
+  var ctrl: any;
 
   beforeEach(module('tutorialVideo'));
 
@@ -13,10 +13,6 @@ describe('TutorialVideoCtrl', function() {
       $routeParams: { id: 42 }
     });
   }));
-
-  it('should have ctrlName as TutorialVideoCtrl', function() {
-    expect(ctrl.ctrlName).toEqual('TutorialVideoCtrl');
-  });
 
   it('should read the RouteParams', function() {
     expect(ctrl.moduleId).toEqual(42);

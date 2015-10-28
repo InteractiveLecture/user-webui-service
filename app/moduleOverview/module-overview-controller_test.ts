@@ -4,19 +4,15 @@
 'use strict';
 
 describe('ModuleOverviewCtrl', function() {
-  var ctrl;
+  var ctrl: any;
 
   beforeEach(module('moduleOverview'));
 
   beforeEach(inject(function($rootScope: any, $controller: any, $routeParams: any) {
     ctrl = $controller('ModuleOverviewCtrl', {
-      $routeParams: {id: 12}
+      $routeParams: { id: 12 }
     });
   }));
-
-  it('should have ctrlName as ModuleOverviewCtrl', function() {
-    expect(ctrl.ctrlName).toEqual('ModuleOverviewCtrl');
-  });
 
   it('should read the RouteParams', function() {
     expect(ctrl.topicsId).toEqual(12);

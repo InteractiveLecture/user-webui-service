@@ -3,17 +3,13 @@
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
-describe('TopicOverviewCtrl', function () {
-  var ctrl;
+describe('TopicOverviewCtrl', function() {
+  var ctrl: any;
 
   beforeEach(module('topicOverview'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function($rootScope: any, $controller: any) {
     ctrl = $controller('TopicOverviewCtrl');
   }));
-
-  it('should have ctrlName as TopicOverviewCtrl', function () {
-    expect(ctrl.ctrlName).toEqual('TopicOverviewCtrl');
-  });
 
 });

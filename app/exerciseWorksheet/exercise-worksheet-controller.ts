@@ -4,13 +4,11 @@ module ExerciseWorksheetCtrl {
 
   class ExerciseWorksheetCtrl {
 
-    ctrlName: string;
-    moduleId: number;
-    exerciseId: number;
-    hints: string;
-    output: string;
-    exerciseDescription: string;
-
+    moduleId: number
+    exerciseId: number
+    hints: string
+    output: string
+    exerciseDescription: string
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -25,7 +23,6 @@ module ExerciseWorksheetCtrl {
       var vm = this;
       vm.moduleId = $routeParams.id;
       vm.exerciseId = $routeParams.eId;
-      vm.ctrlName = 'ExerciseWorksheetCtrl';
       vm.hints = "Hinweis 1";
       vm.output = "Hallo Welt";
       vm.exerciseDescription = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -38,7 +35,7 @@ module ExerciseWorksheetCtrl {
   * @name exerciseWorksheet.controller:ExerciseWorksheetCtrl
   *
   * @description
-  *
+  * Stellt momentan zu lösende Aufgabe für den User dar
   */
   angular
     .module('exerciseWorksheet')

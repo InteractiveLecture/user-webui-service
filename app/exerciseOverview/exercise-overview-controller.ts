@@ -4,9 +4,8 @@ module ExerciseOverviewCtrl {
 
   class ExerciseOverviewCtrl {
 
-    ctrlName: string;
-    moduleId: number;
-    exercises: any;
+    moduleId: number
+    exercises: any
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -20,20 +19,18 @@ module ExerciseOverviewCtrl {
     constructor($routeParams: any) {
       var vm = this;
       vm.moduleId = $routeParams.id;
-      vm.ctrlName = 'ExerciseOverviewCtrl';
-      vm.exercises = [{"title": "Variablen","description": "Der Umgang mit Variablen in Java"},
-                      {"title": "Vererbung","description": "Der Umgang mit Vererbung in Java"},
-                      {"title": "Klassen","description": "Was ist eine Klasse in Java"}];
+      vm.exercises = [{ "title": "Variablen", "description": "Der Umgang mit Variablen in Java" },
+        { "title": "Vererbung", "description": "Der Umgang mit Vererbung in Java" },
+        { "title": "Klassen", "description": "Was ist eine Klasse in Java" }];
     }
   }
-
 
   /**
   * @ngdoc object
   * @name exerciseOverview.controller:ExerciseOverviewCtrl
   *
   * @description
-  *
+  * Anzeigen der einzelnen Aufgaben je Modul
   */
   angular
     .module('exerciseOverview')

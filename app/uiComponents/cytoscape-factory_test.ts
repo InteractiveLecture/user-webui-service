@@ -3,21 +3,13 @@
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
-describe('Cytoscape', function () {
-  var factory;
+describe('Cytoscape', function() {
+  var factory: any;
 
   beforeEach(module('uiComponents'));
 
-  beforeEach(inject(function (Cytoscape) {
+  beforeEach(inject(function(Cytoscape: any) {
     factory = Cytoscape;
   }));
-
-  it('should have someValue be Cytoscape', function () {
-    expect(factory.someValue).toEqual('Cytoscape');
-  });
-
-  it('should have someMethod return Cytoscape', function () {
-    expect(factory.someMethod()).toEqual('Cytoscape');
-  });
 
 });

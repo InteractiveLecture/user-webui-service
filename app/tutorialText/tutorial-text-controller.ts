@@ -4,8 +4,7 @@ module TutorialTextCtrl {
 
   class TutorialTextCtrl {
 
-    ctrlName: string;
-    moduleId: number;
+    moduleId: number
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -19,7 +18,6 @@ module TutorialTextCtrl {
     constructor($routeParams: any) {
       var vm = this;
       vm.moduleId = $routeParams.id;
-      vm.ctrlName = 'TutorialTextCtrl';
     }
   }
 

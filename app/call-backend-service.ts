@@ -6,7 +6,7 @@ module CallBackend {
 
     cache: Caching.CachingService;
     $routeParams: any;
-    $http: any;
+    $http: ng.IHttpService;
     jwtHelper: ng.jwt.IJwtHelper;
 
 
@@ -21,7 +21,7 @@ module CallBackend {
     constructor(CachingService: Caching.CachingService, $routeParams: any, $http: ng.IHttpService, jwtHelper: any) {
       var vm = this;
       vm.cache = CachingService;
-      vm.$routeParams =$routeParams;
+      vm.$routeParams = $routeParams;
       vm.$http = $http;
       vm.jwtHelper = jwtHelper;
 
@@ -31,22 +31,9 @@ module CallBackend {
       return 'CallBackendService';
     }
 
-    // TODO: Implentieren der Methode ohne Pseudocode
     getLoadingUrl() {
-      // if (elementAngeklickt) {
-      //    if (angeklicktesElement.needPage) {
-      //       angeklicktesElement.getPageFor(woDerUserHinWill)
-      //    }
-      //      angeklicktesElement.getUrlFor(woDerUserHinWill)
-      // }
-      // else {
-      // erzeugeEineUrl(routeParams, woDerUserHinWill)
-      //}
-      console.log("die Methode getLoadingUrl muss Implentiert werden");
-      // erzeugeEineUrl(routeParams, woDerUserHinWill) {
-      // url = woDerUserHinWill.split -> (anpassenAnBackendUrl)
-      // return url.routeParamsEinfügen(routeParams);
-      // }
+      // hier müssen die Routen in Anfragen übersetzt werden.
+      // Alle Urls könnten vorher abgefragt werden und im Cache liegen
     }
 
     // Modeldaten anhand der übergebenen Url laden.
@@ -104,17 +91,9 @@ module CallBackend {
         data: data
       }
       this.$http(req).then(
-          (token:any)=> {callback(null, token.data)},
-          (error:any)=> {callback(error, null)}
-      )
-        /* HTTP-Request zum Backend -> Ergebnis ist das Token
-           var token = "eyJhbGciOiJSUzI1NiJ9.eyJ1c2VyX25hbWUiOiJhZG1pbiIsInNjb3BlIjpbIm9wZW5pZCJdLCJpZCI6MSwiZXhwIjoxNDQ0NTMxOTg0LCJhdXRob3JpdGllcyI6WyJhZG1pbiJdLCJqdGkiOiI4ZTZhYzVkMS0zNGFhLTQ1YTEtYTZmYy02YmU3MzRhMTgwZjciLCJjbGllbnRfaWQiOiJ1c2VyLXdlYi1jbGllbnQifQ.X3gGBmqimFGfb4pIR_J4C9gqi3W4E1x80E8xp7jSXiKxMBQTPhRHG7cmGJjTy2HDx5xogQjhTFgg2qa3iStY6hKJXm6PDSu6478gKhBZNaF4OQvbSC9NmT8jFaoY_vWqAWFkAshQQBeHIoqFXFdB3K_0ia6Vn_UEdm-zAti-rPlE5xxykEJWhWGaNIndoMyfAM3zcrPe2GlVbPAz-LbJFEnRYkRLrtmIRX7Nu1LQWEydwvJ8zLe5prNoN_6XXid1rm6x727REJ2Mlqffh5EX3CWXsWmznXuv_-0lraPdpEpCWC3Teeg2fIreuSL0DKLxgxOTmE0CxO_jST8lb7Q0Sw"
-           localStorage.setItem('id_tocken', token);
-           var dummyProfile = new lectureDefinitions.models.Profile(this.jwtHelper.decodeToken(token));
-
-           //var dummyProfile: lectureDefinitions.models.Profile = new lectureDefinitions.models.Profile({ 'id': 90, 'kennung': 'cremerm', 'passwort': '1234', 'email': 'cremerm@hochschule-trier.de', 'links': null, 'cacheIndex': 'profile', 'gender': 'male', 'birth': '19.02.1993' });
-           this.cache.save('profile', dummyProfile);
-           return dummyProfile;*/
+        (token: any) => { callback(null, token.data) },
+        (error: any) => { callback(error, null) }
+        )
     }
   }
 

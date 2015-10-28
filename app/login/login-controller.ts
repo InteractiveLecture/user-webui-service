@@ -4,13 +4,11 @@ module LoginCtrl {
 
   class LoginCtrl {
 
-    ctrlName: string;
-    userData: any;
-    $cookies: ng.cookies.ICookiesService;
-    $location: ng.ILocationService;
-    callBackend: CallBackend.CallBackendService;
-
-    errorStatus: string;
+    userData: any
+    $cookies: ng.cookies.ICookiesService
+    $location: ng.ILocationService
+    callBackend: CallBackend.CallBackendService
+    errorStatus: string
 
 
     // $inject annotation.
@@ -26,7 +24,6 @@ module LoginCtrl {
     // dependencies are injected via AngularJS $injector
     constructor($cookies: any, CallBackendService: any, $location: ng.ILocationService) {
       var vm = this;
-      vm.ctrlName = 'LoginCtrl';
       vm.$cookies = $cookies;
       vm.$location = $location;
       vm.callBackend = CallBackendService;
@@ -39,14 +36,11 @@ module LoginCtrl {
         this.callBackend.postUserData(userData, (err: any, data: any) => {
           if (err !== null) {
             this.errorStatus = err.status;
-            console.log("you are not logged in... moron!");
             this.userData.passwort = "";
-
-            //TODO error anzeigen und redirect auf login.
+            // console.log("you are not logged in... moron!");
           }
           else {
-            console.log(`congrats! here is your token:${data.access_token}`);
-            this.$location.path("/home");
+            // console.log(`congrats! here is your token:${data.access_token}`);
             localStorage.setItem('id_token', data.access_token);
             localStorage.setItem('refresh_token', data.refreh_token);
             /*
@@ -56,7 +50,9 @@ module LoginCtrl {
               }
              *
              * */
-            //TODO auf Seite weiterleiten.
+
+            // Weiterleitung / Redirect
+            this.$location.path("/home");
           }
         })
       }

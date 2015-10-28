@@ -4,7 +4,7 @@
 'use strict';
 
 describe('TopicDetailsCtrl', function() {
-  var ctrl;
+  var ctrl: any;
 
   beforeEach(module('topicDetails'));
 
@@ -13,10 +13,6 @@ describe('TopicDetailsCtrl', function() {
       $routeParams: { id: 80 }
     });
   }));
-
-  it('should have ctrlName as TopicDetailsCtrl', function() {
-    expect(ctrl.ctrlName).toEqual('TopicDetailsCtrl');
-  });
 
   it('should read the RouteParams', function() {
     expect(ctrl.topicsId).toEqual(80);
