@@ -36,7 +36,7 @@ describe('models.BaseModel', function() {
       .setHost('goggle')
       .setDomain('de')
       .setPort(80)
-      .setUrlPath('/bilder')
+      .setUrlPath('bilder')
       .setQuery('name=hugo')
       .build();
     expect(result).toBe('http://goggle.de:80/bilder?name=hugo');
@@ -55,12 +55,31 @@ describe('models.BaseModel', function() {
 
   it('should generate URLs without notice the order of the setter', function() {
     var result = new lectureDefinitions.models.UrlBuilder()
-      .setUrlPath('/bilder')
+      .setUrlPath('bilder')
       .setHost('goggle')
       .setQuery('name=hugo')
       .setDomain('de')
       .build();
     expect(result).toBe('http://goggle.de/bilder?name=hugo');
+  })
+
+  it('should stack UrlPaths', function() {
+    var result = new lectureDefinitions.models.UrlBuilder()
+      .setUrlPath('bilder')
+      .setHost('goggle')
+      .setUrlPath('10-02-14')
+      .build();
+    expect(result).toBe('http://goggle/bilder/10-02-14');
+  })
+
+  it('should skip the Schema', function() {
+    var result = new lectureDefinitions.models.UrlBuilder()
+      .noScheme()
+      .setUrlPath('bilder')
+      .setHost('goggle')
+      .setUrlPath('10-02-14')
+      .build();
+    expect(result).toBe('goggle/bilder/10-02-14');
   })
   // Ende der Tests
 });

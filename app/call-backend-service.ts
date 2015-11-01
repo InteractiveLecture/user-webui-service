@@ -31,11 +31,6 @@ module CallBackend {
       return 'CallBackendService';
     }
 
-    getLoadingUrl() {
-      // hier müssen die Routen in Anfragen übersetzt werden.
-      // Alle Urls könnten vorher abgefragt werden und im Cache liegen
-    }
-
     // Modeldaten anhand der übergebenen Url laden.
     // Die Verwendung der Daten bestimmt der Nutzer per Callback
     loadModel(linkUrl: string, callback: any) {
@@ -94,6 +89,21 @@ module CallBackend {
         (token: any) => { callback(null, token.data) },
         (error: any) => { callback(error, null) }
         )
+    }
+
+    /*
+    ---------------------------------------------------------------------------
+    Generieren der ServeranfrageUrls
+    ---------------------------------------------------------------------------
+    */
+
+    // Return localhost/topics/<ID>
+    topic_path(topicId: number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('localhost')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .build()
     }
   }
 

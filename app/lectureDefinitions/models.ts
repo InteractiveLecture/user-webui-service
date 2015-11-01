@@ -102,6 +102,11 @@ module lectureDefinitions.models {
       return this;
     }
 
+    noScheme(): UrlBuilder {
+      this.scheme = '';
+      return this;
+    }
+
     setHost(host: string): UrlBuilder {
       this.host = host;
       return this;
@@ -118,7 +123,13 @@ module lectureDefinitions.models {
     }
 
     setUrlPath(path: string): UrlBuilder {
-      this.urlPath = path;
+      if (this.urlPath !== '') {
+        this.urlPath = this.urlPath + '/' + path
+      }
+      else {
+        this.urlPath = '/' + path;
+      }
+
       return this;
     }
 
