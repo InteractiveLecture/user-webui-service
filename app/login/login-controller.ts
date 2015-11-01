@@ -10,7 +10,6 @@ module LoginCtrl {
     callBackend: CallBackend.CallBackendService
     errorStatus: string
 
-
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
@@ -27,7 +26,6 @@ module LoginCtrl {
       vm.$cookies = $cookies;
       vm.$location = $location;
       vm.callBackend = CallBackendService;
-
     }
 
     public attemptLogin(userData: any) {

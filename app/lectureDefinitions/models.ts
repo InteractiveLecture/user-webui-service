@@ -3,9 +3,9 @@
 module lectureDefinitions.models {
 
   export class BaseModel implements interfaces.Linkable {
-    links: models.Link[];
-    cacheIndex: string;
-    id: number;
+    links: models.Link[]
+    cacheIndex: string
+    id: number
     constructor(object: any) {
       this.links = object.links;
       for (var prop in object) {
@@ -36,48 +36,107 @@ module lectureDefinitions.models {
   }
 
   export class Topic extends models.BaseModel {
-    cacheIndex: string = 'topics';
-    topicName: string;
-    topicDescription: string;
+    cacheIndex: string = 'topics'
+    topicName: string
+    topicDescription: string
   }
 
   export class Module extends models.BaseModel {
-    cacheIndex: string = 'module';
-    description: string;
+    cacheIndex: string = 'module'
+    description: string
   }
 
   export class Exercise extends models.BaseModel {
-    cacheIndex: string = 'exercise';
-    task: string;
-    points: number;
+    cacheIndex: string = 'exercise'
+    task: string
+    points: number
   }
 
   export class Tutorial extends models.BaseModel {
-    cacheIndex: string = 'tutorial';
-    id: number;
-    name: string;
-    description: string;
+    cacheIndex: string = 'tutorial'
+    id: number
+    name: string
+    description: string
   }
 
   export class Profile extends models.BaseModel {
-    cacheIndex: string = 'profile';
-    email: string = this.user_name + "@hochschule-trier.de";
-    user_name: string;
-    passwort: string;
-    exp: number;
-    authorities: string[];
-    jti: string;
-    client_id: string;
+    cacheIndex: string = 'profile'
+    email: string = this.user_name + "@hochschule-trier.de"
+    user_name: string
+    passwort: string
+    exp: number
+    authorities: string[]
+    jti: string
+    client_id: string
   }
 
   export class Hint {
-    description: string;
+    description: string
   }
 
   export class Link {
-    rel: string;
-    href: string;
+    rel: string
+    href: string
   }
 
+  /*
+  UrlBuilder für leichteres generieren der AnfrageUrls
+  Arbeitet mit dem Schema HTTP
+  Aufgebaut nach dem Builder Pattern
+  */
+  export class UrlBuilder {
+    scheme: string
+    host: string
+    domain: string
+    port: string
+    urlPath: string
+    query: string
 
+    constructor() {
+      this.scheme = 'http://'
+      this.host = ''
+      this.domain = ''
+      this.port = ''
+      this.urlPath = ''
+      this.query = ''
+      return this;
+    }
+
+    setHost(host: string): UrlBuilder {
+      this.host = host;
+      return this;
+    }
+
+    setDomain(domain: string): UrlBuilder {
+      this.domain = '.' + domain;
+      return this;
+    }
+
+    setPort(portNumber: number): UrlBuilder {
+      this.port = ':' + portNumber;
+      return this;
+    }
+
+    setUrlPath(path: string): UrlBuilder {
+      this.urlPath = path;
+      return this;
+    }
+
+    setQuery(queryParam: string): UrlBuilder {
+
+      if (this.query !== '') {
+        this.query = this.query + '&' + queryParam
+      }
+      else {
+        this.query = '?' + queryParam;
+      }
+
+      return this;
+    }
+
+    build(): string {
+      return this.scheme + this.host + this.domain + this.port + this.urlPath + this.query;
+    }
+  }
+  // Ende Modul
 }
