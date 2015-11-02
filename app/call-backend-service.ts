@@ -97,14 +97,84 @@ module CallBackend {
     ---------------------------------------------------------------------------
     */
 
-    // Return localhost/topics/<ID>
+    // Return lecture-service/topics/<ID>
     topic_path(topicId: number): string {
       return new lectureDefinitions.models.UrlBuilder()
-        .setHost('localhost')
+        .setHost('lecture-service')
         .setUrlPath('topics')
         .setUrlPath(topicId.toString())
         .build()
     }
+
+    // Exercise einer bestimmten ID anfragen
+    // GET, DELETE, PUT,
+    exercise_id_path(exerciseId:number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .build()
+    }
+
+    // Exercise einer bestimmten ID anfragen
+    // POST,
+    exercise_child_path(exerciseId:number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .build()
+    }
+
+    // Exercise beendet
+    // POST
+    exercise_success_path(exerciseId:number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .setUrlPath('success')
+        .build()
+    }
+
+    // Neues Root Hint einfügen
+    // POST
+    exercise_roothint_path(exerciseId:number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .setUrlPath('hints')
+        .build()
+    }
+
+    // Hints anzeigen nach standard
+    // GET
+    exercise_hint_path(exerciseId:number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .setUrlPath('hints')
+        .build()
+    }
+
+    // Hints anzeigen nach eigener Pagegröße
+    // GET
+    exercise_hint_pageable_path(exerciseId:number, pagenumber:number, pagesize:number) {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .setUrlPath('hints')
+        .setQuery('page='+ pagenumber)
+        .setQuery('pagesize=' + pagesize)
+        .build()
+    }
+
+
+
+
   }
 
 
