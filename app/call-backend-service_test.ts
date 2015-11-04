@@ -38,34 +38,37 @@ describe('CallBackend', function() {
 
   // Routen für exercises
   it('should return lecture-service/exercises/id', function() {
-    var result = this.service.exercise_id_path(1);
+    var result = this.service.exercise_id_path_get(1);
     expect(result).toEqual('http://lecture-service/exercises/1');
   })
 
   it('should return lecture-service/exercises/id', function() {
-    var result = this.service.exercise_child_path(1);
+    var result = this.service.exercise_child_path_post(1);
     expect(result).toEqual('http://lecture-service/exercises/1');
   })
 
   it('should return lecture-service/exercises/id/success', function() {
-    var result = this.service.exercise_success_path(1);
+    var result = this.service.exercise_success_path_post(1);
     expect(result).toEqual('http://lecture-service/exercises/1/success');
   })
 
   it('should return lecture-service/exercises/id/hints (root)', function() {
-    var result = this.service.exercise_roothint_path(1);
+    var result = this.service.exercise_roothint_path_post(1);
     expect(result).toEqual('http://lecture-service/exercises/1/hints');
   })
 
   it('should return lecture-service/exercises/id/hints', function() {
-    var result = this.service.exercise_hint_path(1);
+    var result = this.service.exercise_hint_path_get(1);
     expect(result).toEqual('http://lecture-service/exercises/1/hints');
   })
 
   it('should return lecture-service/exercises/id/hints?page=number&pagesize=number', function() {
-    var result = this.service.exercise_hint_pageable_path(1, 1, 20);
+    var result = this.service.exercise_hint_pageable_path_get(1, 1, 20);
     expect(result).toEqual('http://lecture-service/exercises/1/hints?page=1&pagesize=20');
   })
   // exercises ende
+  // hint
+
+  
 
 });

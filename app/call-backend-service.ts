@@ -108,7 +108,23 @@ module CallBackend {
 
     // Exercise einer bestimmten ID anfragen
     // GET, DELETE, PUT,
-    exercise_id_path(exerciseId:number): string {
+    exercise_id_path_get(exerciseId:number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .build()
+    }
+
+    exercise_id_path_delete(exerciseId:number): string {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
+        .build()
+    }
+
+    exercise_id_path_put(exerciseId:number): string {
       return new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
@@ -118,7 +134,7 @@ module CallBackend {
 
     // Exercise einer bestimmten ID anfragen
     // POST,
-    exercise_child_path(exerciseId:number): string {
+    exercise_child_path_post(exerciseId:number): string {
       return new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
@@ -128,7 +144,7 @@ module CallBackend {
 
     // Exercise beendet
     // POST
-    exercise_success_path(exerciseId:number): string {
+    exercise_success_path_post(exerciseId:number): string {
       return new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
@@ -139,7 +155,7 @@ module CallBackend {
 
     // Neues Root Hint einfügen
     // POST
-    exercise_roothint_path(exerciseId:number): string {
+    exercise_roothint_path_post(exerciseId:number): string {
       return new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
@@ -150,7 +166,7 @@ module CallBackend {
 
     // Hints anzeigen nach standard
     // GET
-    exercise_hint_path(exerciseId:number): string {
+    exercise_hint_path_get(exerciseId:number): string {
       return new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
@@ -161,7 +177,7 @@ module CallBackend {
 
     // Hints anzeigen nach eigener Pagegröße
     // GET
-    exercise_hint_pageable_path(exerciseId:number, pagenumber:number, pagesize:number) {
+    exercise_hint_pageable_path_get(exerciseId:number, pagenumber:number, pagesize:number) {
       return new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
@@ -172,8 +188,53 @@ module CallBackend {
         .build()
     }
 
+    // Hint der vom User verbraucht wird
+    // POST
+    hint_consume_path_post(hintID: number) {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(hintID.toString())
+        .setUrlPath('order')
+        .build()
+    }
 
+    // Einen bestimten Hint
+    // GET
+    hint_get_path_post_get(hintID: number) {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(hintID.toString())
+        .build()
+    }
 
+    // new child hint hinzufügen route
+    hint_newchild_path_post(hintID: number) {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(hintID.toString())
+        .build()
+    }
+
+    // Einen Hint löschen
+    hint_newchild_path_delete(hintID: number) {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(hintID.toString())
+        .build()
+    }
+
+    // Einen Hint ändern
+    hint_newchild_path_put(hintID: number) {
+      return new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(hintID.toString())
+        .build()
+    }
 
   }
 
