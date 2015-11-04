@@ -1,0 +1,174 @@
+= Prokektdokumentation des User-Webui-service
+Michael Cremer <cremerm@hochschule-trier.de>
+include::../includes/config.adoc[]
+
+== Ziel des Projekts
+Es soll eine GUI für die Interactive Lecture geschaffen werden. Ziel ist eine
+Implementierung als Website. Verwendet werden dabei meist bekannte Größen für
+Frontend-entwicklung, zum Beispiel bower oder git.
+
+Zur besseren Strukturierung wird Typescript an der Stelle von Javascript verwendet.
+Als Single-Page-Application (SPA) Framework wurde AngularJS gewählt.
+
+== Projektstruktur
+Durch Yeoman ist das Projekt vorstrukturiert. Diese Struktur vereinfacht
+das Hinzufügen neuer Komponenten.
+
+[source, bash]
+----
+
+.
+├── app
+│   ├── app-module.ts
+│   ├── home                        <----- Die Komponenten
+|   ......
+│   ├── fonts
+│   ├── images
+│   ├── index.html
+│   ├── route-controller_test.ts    <--- Die Routen
+│   └── route-controller.ts
+├── bower_components                <----- Abhängigkeiten der bower.json
+│   ├── angular
+│   ├── ....
+├── bower.json
+├── build                           <---- Build der Website
+│   └── app
+├── build.config.js
+├── e2e                             <--- End 2 End test
+│   ├── home
+│   ├── ....
+├── gulp                            <--- Gulp Einstellungen
+│   ├── analyze.js
+│   ├── ....
+├── Gulpfile.js                     <--- Gulp Einstellungen
+├── karma.config.js
+├── node_modules                    <-- Alle Abhängigkeiten aus der package.json
+├── package.json
+├── tsconfig.json                   <--- Die Einstellungsdatei für Intellisense
+├── tsd.json
+└── typings
+    ├── angularjs                   <---- Typings der Framworks
+    ├── jasmine
+    ├── jquery
+    ├── karma-jasmine
+    ├── lodash
+    ├── sinon
+    └── tsd.d.ts                   <---- Sammelung aller Typings
+
+
+----
+
+
+== Installation der Arbeitsumgebung
+
+Um am Projekt mizuwirken sind Grundkenntnisse mit *npm, git, gulp und yeoman* nötig.
+
+[source, bash]
+----
+// Installation der Werkzeuge
+npm install -g yo gulp bower
+
+// Clonen des Git Repository
+git clone https://github.com/InteractiveLecture/user-webui-service.git
+
+// In das Projektverzeichnis wechseln
+cd path/to/Projekt
+
+// Node module lokal nachinstallieren
+npm install
+
+// Bower Components nachladen
+bower install
+
+----
+
+Da die Arbeiten am *New Router* für AngularJS noch nicht abgeschlossen sind, muss
+die *.bower.json* um einen main-eintrag ergänzt werden. Gleiches gilt für den ace-editor.
+
+[source, json]
+----
+{
+  "name": "angular-new-router",
+  "homepage": "https://github.com/angular/router",
+  "main": "./dist/router.es5.js",  <------ Wichtig
+  "version": "0.5.3",
+  "_release": "0.5.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.5.3",
+    "commit": "c7b6b498c551754cc07d4b56a74fd951cbe2a483"
+  },
+  "_source": "git://github.com/angular/router.git",
+  "_target": "~0.5.3",
+  "_originalSource": "angular-new-router"
+}
+----
+
+=== Informationen zu den Werkzeugen bzw Sprachen/Frameworks
+
+* git - https://git-scm.com/documentation
+* npm - https://docs.npmjs.com/
+* gulp - https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+* bower - http://bower.io/#getting-started
+* yeoman - http://yeoman.io/
+* cytoscapeJS - http://js.cytoscape.org/
+* angularJS - https://angular.io/
+* typescript - http://www.typescriptlang.org/Tutorial
+
+=== Arbeiten mit dem Yeoman-Genrator
+
+Der verwendete Generator für dieses Projekt heißt *ng-poly* zu finden unter:
+https://github.com/dustinspecker/generator-ng-poly Die einzelnen Task des
+Taskrunners Gulp sind ebenfalls von Generator erstellt und
+in der Dokumentation nachzulesen.
+
+TIP: Die Ordner im Projekt heißen nicht komform zum *ng-poly* Generator. Jeder Camel-Case muss mit Bindestrich getrennt werden um vom Generator erkannt zu werden. Bsp. uiComponents = ui-components
+
+
+=== Warum Angular 1.4.5 ?
+Da Angular 2.0 noch nicht für den produktiven Einsatz gedacht ist fiel die Entscheidung
+auf die zum start der Entwicklung aktuellsten Version des SPA-Frameworks.
+Eine Portierung auf 2.0 ist vorgesehen.
+
+
+== Die Komponenten des Webui-Service
+
+=== UI Components
+
+Dieses Modul soll alle (sichtbaren) Komponenten des Frontends verfügbar und
+wiederverwendbar machen. Deshalb sind
+
+* die Navigationsbar
+* das Dash
+* der Ace-Editor
+* die Cytoscape Graphen
+
+als Directive in diesem Modul integriert.
+
+=== Lecture Definitions
+
+Dieser Ordner sammelt alle Models und Interfaces die für den Webui-service definiert
+wurden. Ebenso sind Helferklassen enthalten um zum Beispiel den Umgang mit URL's
+zu vereinfachen. 
+
+=== CallBackend
+
+=== Login
+
+=== Profile
+
+=== Topic Overview
+
+=== Topic Detail
+
+=== Module Overview
+
+=== Home
+
+=== Tutorial (text)
+
+=== Tutorial (video)
+
+=== Exercise Overview
+
+=== Exercise Worksheet
