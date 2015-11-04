@@ -1,6 +1,6 @@
 = Prokektdokumentation des User-Webui-service
 Michael Cremer <cremerm@hochschule-trier.de>
-include::../includes/config.adoc[]
+
 
 == Ziel des Projekts
 Es soll eine GUI für die Interactive Lecture geschaffen werden. Ziel ist eine
@@ -136,7 +136,7 @@ Eine Portierung auf 2.0 ist vorgesehen.
 === UI Components
 
 Dieses Modul soll alle (sichtbaren) Komponenten des Frontends verfügbar und
-wiederverwendbar machen. Deshalb sind
+*wiederverwendbar* machen. Deshalb sind
 
 * die Navigationsbar
 * das Dash
@@ -149,13 +149,61 @@ als Directive in diesem Modul integriert.
 
 Dieser Ordner sammelt alle Models und Interfaces die für den Webui-service definiert
 wurden. Ebenso sind Helferklassen enthalten um zum Beispiel den Umgang mit URL's
-zu vereinfachen. 
+zu vereinfachen.
 
-=== CallBackend
+Bisherige Interfaces
+
+* Linkable - Ein Objekt enthält Content um nach
+HATEOAS (Hypertext As The Engine Of Application State) zu arbeiten
+* Modelservice - Definiert ob eine Klasse dazu eignet ist mit dem Backend zu kommunizieren
+
+Bisherige Models
+
+* BaseModel - Oberklasse der Models. Definiert alle Eigenschaften die Modelle des
+Webui-service gemeinsam haben.
+* Topic - Topic des Backends abbilden
+* Module - Module des Backends abbilden- Topic des Backends abbilden- Topic des Backends abbilden
+* Exercise - Exercise des Backends abbilden- Topic des Backends abbilden
+* Tutorial- Topic des Backends abbilden
+* Hint- Hint des Backends abbilden
+* UrlBuilder - Helferklasse um einfacher fehlerfreie URLs zu schreiben
+
+
+=== CallBackend-Service
+Der CallBackend-Service implementiert das Interface Modelservice. Bisher bietet er
+folgende Funktionalität.
+
+postUserData(userData: any, callback: any)::
+beschreibt den Login-Versuch. Dabei wird nach dem oauth Verfahren authentifiziert.
+Dabei werden Json Web Token verwendet um die User zu identifizieren. Ebenso wird sichergestellt,
+dass der Client der Webui-service ist.
+
+TIP: Siehe http://jwt.io/ für weitere Information zu oauth und JWT
+
+extractId(idName: string, url: string): number::
+extrahiert eine Id aus einer URL. Dafür wird der Name bzw der UrlPath vor der mitgegeben.
+Zum Beisiel "topic, /topic/1 " findet die 1.
+
+loadModel(linkUrl: string, callback: any)::
+sendet den HTTP-Request für die Modeldaten der aktuellen View zu laden. Durch den
+Callback kann der Konsument selber bestimmen wie das Ergebnis der Anfrage zu verwenden ist.
+
+Routen anfragen::
+die einzelenen Routen des Backends anfragen. Work in Progress
 
 === Login
 
+Dem User stehen 2 Felder zur Verfügung. Einmal seine Kennung und einmal sein Passwort
+werden verlangt. Diese Daten werden durch den Backend-service verschickt. Die Auswertung
+entscheidet, ob es zu einem Redirect kommt oder nicht.
+
+WARNING: Die Nachrichten "Server nicht verfügbar" oder  "Eingabe falsch" können nicht mit angular-messages implementiert werden. Da ngMessages das Formular prüft, aber das Ergebnis einer HTTP Request ausgewertet wird
+
 === Profile
+
+Im Profil werden die Profildaten dagestellt. Dazu können die Daten des JWT Token
+verwendet werden oder ein Service des Backends wird angefragt. Die Darstellung
+erfolgt angular-typisch durch databinding.
 
 === Topic Overview
 
@@ -163,12 +211,27 @@ zu vereinfachen.
 
 === Module Overview
 
+Da die Module wie Bäume aufgebaut sind, benötigt man eine entsprechende Visualisierung.
+Das Cytoscpae.JS Framework bietet genau das.
+
+TIP: Cytoscape unter Angular hat einige Tücken. https://gist.github.com/maxkfranz/a1aea574f0e248b2b38e zeigt ein einfaches Beispiel
+
 === Home
 
 === Tutorial (text)
 
 === Tutorial (video)
 
+Videos werden durch das Videogular Projekt dargestellt.
+
+TIP: Weitere Infos zu Videogular: http://www.videogular.com/tutorials/how-to-start/
+
 === Exercise Overview
 
 === Exercise Worksheet
+
+Um dem User eine IDE ähnliche Arbeitsumgebung zu schaffen arbeitet dieses Module
+mit dem Ace-Editor bzw mit der für den Ace-Editor definierten Directive. Die API
+des Editors ist gut dokumentiert, allerdings ist die *.bower.json* unvollständig.
+
+TIP: Weitere Infos zu Ace: https://ace.c9.io/#nav=embedding
