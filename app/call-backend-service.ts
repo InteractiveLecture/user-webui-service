@@ -142,6 +142,10 @@ module CallBackend {
     ---------------------------------------------------------------------------
     */
 
+    /*
+    Exercises
+    -------------------------------------------------------------------
+    */
     // Alle Exercises anfordern und per Callback nutzen
     // Dependency loadModel() -> http_get()
     request_exercises(callback: Function) {
@@ -222,6 +226,71 @@ module CallBackend {
       this.http_post(url, RootHint);
     }
 
+    /*
+    Hints
+    -------------------------------------------------------------------
+    */
+
+    // Alle Hints anfragen
+    request_hints(callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .build()
+
+      this.loadModel(url, callback);
+    }
+
+    //TODO: id/order POST ???
+
+    // Konsumiere einen Hinweis
+    request_oneHint(id: number, callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(id.toString())
+        .build()
+
+      this.loadModel(url, callback);
+    }
+
+    // Einen neuen Hint anhängen. Parent angeben
+    post_appendHint(id: number, newHint: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(id.toString())
+        .build()
+
+      this.http_post(url, newHint);
+    }
+
+    delete_oneHint(id: number) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(id.toString())
+        .build()
+
+      this.http_delete(url);
+    }
+
+    update_oneHint(id: number, updateData: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('hints')
+        .setUrlPath(id.toString())
+        .build()
+
+      this.http_put(url, updateData);
+    }
+
+    /*
+    Module
+    -------------------------------------------------------------------
+    */
+
+    
 
   }
 
