@@ -553,6 +553,51 @@ module CallBackend {
 
       this.http_post(url, rootModule);
     }
+    /*
+    User nach Readme des lecture-service
+    -------------------------------------------------------------------
+    */
+
+    request_user(userId: number, callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('users')
+        .setUrlPath(userId.toString())
+        .build()
+
+      this.loadModel(url, callback);
+    }
+
+    delete_user(userId: number) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('users')
+        .setUrlPath(userId.toString())
+        .build()
+
+      this.http_delete(url);
+    }
+
+    update_user(userId: number, updateData: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('users')
+        .setUrlPath(userId.toString())
+        .build()
+
+      this.http_put(url, updateData);
+    }
+
+    post_createUser(userId: number, newUser: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('users')
+        .build()
+
+      this.http_post(url, newUser);
+    }
+
+
 
   }
 
