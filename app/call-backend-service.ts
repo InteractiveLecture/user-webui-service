@@ -139,53 +139,43 @@ module CallBackend {
     /*
     ---------------------------------------------------------------------------
     Generieren der ServeranfrageUrls
+    Dependency loadModel() -> http_get()
     ---------------------------------------------------------------------------
     */
 
     /*
-    Exercises
+    Exercises nach Readme des lecture-service
     -------------------------------------------------------------------
     */
-    // Alle Exercises anfordern und per Callback nutzen
-    // Dependency loadModel() -> http_get()
-    request_exercises(callback: Function) {
-      var url = new lectureDefinitions.models.UrlBuilder()
-        .setHost('lecture-service')
-        .setUrlPath('exercises')
-        .build()
-
-      this.loadModel(url, callback);
-    }
 
     // Eine Exercise mit der ID X anfordern under per Callbackverwenden
-    // Dependency loadModel() -> http_get()
-    request_oneExercise(id: number, callback: Function) {
+    request_oneExercise(exerciseId: number, callback: Function) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
-        .setUrlPath(id.toString())
+        .setUrlPath(exerciseId.toString())
         .build()
 
       this.loadModel(url, callback);
     }
 
     // Eine Exercise mit ID x löschen
-    delete_oneExercise(id: number) {
+    delete_oneExercise(exerciseId: number) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
-        .setUrlPath(id.toString())
+        .setUrlPath(exerciseId.toString())
         .build()
 
       this.http_delete(url);
     }
 
     // Eine Exercise mit bestimmter ID updaten
-    update_oneExercise(id: number, updateData: any) {
+    update_oneExercise(exerciseId: number, updateData: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
-        .setUrlPath(id.toString())
+        .setUrlPath(exerciseId.toString())
         .build()
 
       this.http_put(url, updateData);
@@ -202,12 +192,12 @@ module CallBackend {
       this.http_post(url, childData);
     }
 
-    // Erfolg einer Exercise posten. successData = userID
-    post_exerciseSuccess(id: number, successData: any) {
+    // Erfolg einer Exercise posten. successData = Email des User als String
+    post_exerciseSuccess(exerciseId: number, successData: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
-        .setUrlPath(id.toString())
+        .setUrlPath(exerciseId.toString())
         .setUrlPath('success')
         .build()
 
@@ -215,92 +205,95 @@ module CallBackend {
     }
 
     // Neuen RootHint anlegen
-    post_newRootHint(id: number, RootHint: any) {
+    post_newRootHint(exerciseId: number, RootHint: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('exercises')
-        .setUrlPath(id.toString())
+        .setUrlPath(exerciseId.toString())
         .setUrlPath('hints')
         .build()
 
       this.http_post(url, RootHint);
     }
 
-    /*
-    Hints
-    -------------------------------------------------------------------
-    */
-
-    // Alle Hints anfragen
-    request_hints(callback: Function) {
+    // Den RootHint der Exercise anfragen
+    request_rootHint(exerciseId: number, callback: Function) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
+        .setUrlPath('exercises')
+        .setUrlPath(exerciseId.toString())
         .setUrlPath('hints')
         .build()
 
       this.loadModel(url, callback);
     }
 
+    /*
+    Hints nach Readme des lecture-service
+    -------------------------------------------------------------------
+    */
+
     //TODO: id/order POST ???
 
     // Konsumiere einen Hinweis
-    request_oneHint(id: number, callback: Function) {
+    request_oneHint(hintId: number, callback: Function) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('hints')
-        .setUrlPath(id.toString())
+        .setUrlPath(hintId.toString())
         .build()
 
       this.loadModel(url, callback);
     }
 
     // Einen neuen Hinweis anhängen. Parent angeben
-    post_appendHint(id: number, newHint: any) {
+    post_appendHint(hintId: number, newHint: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('hints')
-        .setUrlPath(id.toString())
+        .setUrlPath(hintId.toString())
         .build()
 
       this.http_post(url, newHint);
     }
 
     // Lösche den Hinwweis
-    delete_oneHint(id: number) {
+    delete_oneHint(hintId: number) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('hints')
-        .setUrlPath(id.toString())
+        .setUrlPath(hintId.toString())
         .build()
 
       this.http_delete(url);
     }
 
     // Update den Hinweis
-    update_oneHint(id: number, updateData: any) {
+    update_oneHint(hintId: number, updateData: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('hints')
-        .setUrlPath(id.toString())
+        .setUrlPath(hintId.toString())
         .build()
 
       this.http_put(url, updateData);
     }
 
-    /*
-    Module
-    -------------------------------------------------------------------
-    */
-
-    // Alle Module anfragen
-    request_modules(callback: Function) {
+    // Konsumiert einen Hint des Users. UserData = Email des Users
+    post_consumeHint(hintId: number, userData: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
-        .setUrlPath('modules')
+        .setUrlPath('hints')
+        .setUrlPath(hintId.toString())
         .build()
 
-      this.loadModel(url, callback);
+      this.http_post(url, userData);
     }
+
+    /*
+    Module nach Readme des lecture-service
+    -------------------------------------------------------------------
+    */
 
     // Kind Modul erstellen
     post_childModule(childData: any) {
@@ -313,11 +306,11 @@ module CallBackend {
     }
 
     // Ein einzelnes Modul anfordern
-    request_oneModule(id: number, callback: Function) {
+    request_oneModule(moduleId: number, callback: Function) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('modules')
-        .setUrlPath(id.toString())
+        .setUrlPath(moduleId.toString())
         .build()
 
       this.loadModel(url, callback);
@@ -335,22 +328,22 @@ module CallBackend {
     }
 
     // Löschen eines Modules
-    delete_oneModule(id: number) {
+    delete_oneModule(moduleId: number) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('modules')
-        .setUrlPath(id.toString())
+        .setUrlPath(moduleId.toString())
         .build()
 
       this.http_delete(url);
     }
 
     // Anfragen der empfohlenen Module für das Modul mit der ID. Verwenden per Callback
-    request_recommendedModules(id: number, callback: Function) {
+    request_recommendedModules(moduleId: number, callback: Function) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('modules')
-        .setUrlPath(id.toString())
+        .setUrlPath(moduleId.toString())
         .setUrlPath('recommendations')
         .build()
 
@@ -358,11 +351,11 @@ module CallBackend {
     }
 
     // Neue Empfehlung einfügen. ID des zu verwenden Modules nutzen
-    post_addRecommendedModule(moduleThatIsRecommendId: number, moduledata: any) {
+    post_addRecommendedModule(recommendationsId: number, moduledata: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('modules')
-        .setUrlPath(moduleThatIsRecommendId.toString())
+        .setUrlPath(recommendationsId.toString())
         .setUrlPath('recommendations')
         .build()
 
@@ -370,7 +363,7 @@ module CallBackend {
     }
 
     // TODO: Fragen welche ID für welches Modul ist
-    delete_removeRecommendedModule(recommendationsId: number, moduleId: number) {
+    delete_removeRecommendedModule(moduleId: number, recommendationsId: number) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('modules')
@@ -383,11 +376,11 @@ module CallBackend {
     }
 
     // Alle Aufgaben eines Modules anfragen
-    request_moduleExercises(id: number, callback: Function) {
+    request_moduleExercises(moduleId: number, callback: Function) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('modules')
-        .setUrlPath(id.toString())
+        .setUrlPath(moduleId.toString())
         .setUrlPath('exercises')
         .build()
 
@@ -395,11 +388,11 @@ module CallBackend {
     }
 
     // Neue RootExercise für das Module erstelllen
-    post_createRootExercise(id: number, rootExerciseData: any) {
+    post_createRootExercise(moduleId: number, rootExerciseData: any) {
       var url = new lectureDefinitions.models.UrlBuilder()
         .setHost('lecture-service')
         .setUrlPath('modules')
-        .setUrlPath(id.toString())
+        .setUrlPath(moduleId.toString())
         .setUrlPath('exercises')
         .build()
 
@@ -407,11 +400,159 @@ module CallBackend {
     }
 
     /*
-    Topics
+    Topics nach Readme des lecture-service
     -------------------------------------------------------------------
     */
+    // Alle Topics abfragen. PAGEABLE
+    request_topics(callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .build()
 
-    
+      this.loadModel(url, callback);
+    }
+
+    // Erstelle ein neues Topic
+    post_createTopic(newTopic: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .build()
+
+      this.http_post(url, newTopic);
+    }
+
+    // Frage nach einem Topic
+    request_oneTopic(topicId: number, callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .build()
+
+      this.loadModel(url, callback);
+    }
+
+    // Lösche ein Topic
+    delete_oneTopic(topicId: number) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .build()
+
+      this.http_delete(url);
+    }
+
+    // Update ein Topic
+    update_oneTopic(topicId: number, updateData: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .build()
+
+      this.http_put(url, updateData);
+    }
+
+    // Erstelle einen neuen Officer für das Topic
+    post_newOfficer(topicId: number, newOfficer: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('officers')
+        .build()
+
+      this.http_put(url, newOfficer);
+    }
+
+    // Lösche den Officer für das Topic
+    delete_oneOfficer(topicId: number, officerId: number) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('officers')
+        .setUrlPath(officerId.toString())
+        .build()
+
+      this.http_delete(url);
+    }
+
+    // Frage nach allen Officers des Topics
+    request_officers(topicId: number, callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('officers')
+        .build()
+
+      this.loadModel(url, callback);
+    }
+
+    // Erstelle einen neuen Assistant für das Topic
+    post_newAssistant(topicId: number, newAssistant: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('assistants')
+        .build()
+
+      this.http_put(url, newAssistant);
+    }
+
+    // Lösche einen Assistant für das Topic
+    delete_oneAssistant(topicId: number, assistantId: number) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('assistants')
+        .setUrlPath(assistantId.toString())
+        .build()
+
+      this.http_delete(url);
+    }
+
+    // Frage nach allen Assistants für das Topic
+    request_assistants(topicId: number, callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('assistants')
+        .build()
+
+      this.loadModel(url, callback);
+    }
+
+    // Frage nach allen Modulen des Topics
+    request_modulesOfTopic(topicId: number, callback: Function) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('modules')
+        .build()
+
+      this.loadModel(url, callback);
+    }
+
+    // Erstelle ein neues RootModule
+    post_createRootModule(topicId: number, rootModule: any) {
+      var url = new lectureDefinitions.models.UrlBuilder()
+        .setHost('lecture-service')
+        .setUrlPath('topics')
+        .setUrlPath(topicId.toString())
+        .setUrlPath('modules')
+        .build()
+
+      this.http_post(url, rootModule);
+    }
 
   }
 
