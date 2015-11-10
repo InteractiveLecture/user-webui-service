@@ -116,15 +116,15 @@ module CallBackend {
     http_delete(url: string) {
       this.$http.delete(url).then(
         () => { return true },
-        (error) => { return error }
+        (error) => console.log(error)
         )
     }
 
     // Updaten für Url
     http_put(url: string, data: any) {
       this.$http.delete(url, data).then(
-        () => { return true },
-        (error) => { return error }
+        () => { console.log(data +'sending success') },
+        (error) => console.log(error)
         )
     }
 
@@ -132,7 +132,7 @@ module CallBackend {
     http_post(url: string, data: any) {
       this.$http.post(url, data).then(
         () => { return true },
-        (error) => { return error }
+        (error) => console.log(error)
         )
     }
 
