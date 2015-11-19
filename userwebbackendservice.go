@@ -31,36 +31,34 @@ func main() {
 		"authentication-service",
 		"/oauth/token"))
 
-	// TOPIC Anfragen
-	//---------------------
+	//Topics Pfade
+	// ---------------
 
-	// TODO Groupware Nutzung bestimmen. Pfade vereinfachen
-
-	// Liste aller Topics
+	// GET, POST
 	r.Path("/topics").
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
 		"/topics")))
 
-	// Ein spezielles Topic bearbeiten
+	// GET, DELETE; PUT
 	r.Path("/topics/{id}").
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
 		"/topics/{id}")))
 
-	// Rootmodul Pfade
+	// GET; POST
 	r.Path("/topics/{id}/modules").
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
 		"/topics/{id}/modules")))
 
-	// Officer Pfade
+	// POST; GET DELETE
 	r.Path("/topics/{id}/officers").
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
 		"/topics/{id}/officers")))
 
-	// assistant Pfade
+	// POST; GET DELETE
 	r.Path("/topics/{id}/assistants").
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
@@ -69,7 +67,7 @@ func main() {
 	// HINTS Anfragen
 	//---------------------
 
-	// Einen einzelnen Hint anfragen
+	// GET; POST; DELETE; PUT
 	r.Path("/hint/{id}").
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
@@ -85,7 +83,7 @@ func main() {
 	// USER Anfragen
 	//---------------------
 
-	// Einen einzelnen User anfragen
+	// PUT; GET DELETE
 	r.Path("/users/{id}").
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
@@ -97,6 +95,61 @@ func main() {
 		Handler(jwtware.New(createProxy(
 		"lecture-service",
 		"/users")))
+
+	// Exercises Pfade
+	//----------------------------
+
+	// GET; DELETE; POST; PUT
+	r.Path("/exercises/{id}").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/exercises/{id}")))
+
+	// Erfolg einer Übung melden
+	r.Methods("POST").
+		Path("/exercises/{id}/success").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/exercises/{id}/success")))
+
+	// POST; GET
+	r.Path("/exercises/{id}/hints").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/exercises/{id}/hints")))
+
+	// Modules Pfade
+	//----------------------------
+
+	r.Methods("POST").
+		Path("/modules").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/modules")))
+
+	//GET;DELETE;PUT
+	r.Path("/modules/{id}").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/modules/{id}")))
+
+	// GET; POST
+	r.Path("/modules/{id}/recommendations").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/modules/{id}/recommendations")))
+	//DELETE
+	r.Methods("DELETE").
+		Path("/modules/{Tid}/recommendations/{Rid}").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/modules/{Tid}/recommendations/{Rid}")))
+
+	//GET; POST
+	r.Path("/modules/{id}/exercises").
+		Handler(jwtware.New(createProxy(
+		"lecture-service",
+		"/modules/{id}/exercises")))
 
 	// Bind to a port and pass our router in
 	http.ListenAndServe(":8000", r)
