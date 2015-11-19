@@ -1,4 +1,9 @@
-FROM nginx
-VOLUME /var/www/html/
-ADD nginx/nginx.conf /etc/nginx/nginx.conf
+FROM ubuntu
+#ADD ca-certificates.crt /etc/ssl/certs/
+ADD out/main /main
+ADD build/app /app
+ADD tmp /tmp
+#ADD mime.types /etc/mime.types
+cmd ["/main"]
+EXPOSE 8000
 
