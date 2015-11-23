@@ -26,8 +26,9 @@ module interactiveLectureWebFrontend {
     'tutorialVideo',
     'exerciseOverview',
     'exerciseWorksheet',
-    'uiComponents'
-
+    'uiComponents',
+    'tutorialVideoUpload',
+    'tutorialTextUpload'
   ]);
 
   app.config(['$componentLoaderProvider', '$httpProvider', 'jwtInterceptorProvider',

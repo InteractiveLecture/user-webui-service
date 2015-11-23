@@ -26,7 +26,9 @@ module RouteCtrl {
         { path: '/topics/:id', component: 'topicDetails' },
         { path: '/topics/:id/module', component: 'moduleOverview' },
         { path: '/module/:id/tutorial/text', component: 'tutorialText' },
+        { path: '/module/:id/tutorial/text/upload', component: 'tutorialTextUpload' },
         { path: '/module/:id/tutorial/video', component: 'tutorialVideo' },
+        { path: '/module/:id/tutorial/video/upload', component: 'tutorialVideoUpload' },
         { path: '/module/:id/exercise', component: 'exerciseOverview' },
         { path: '/module/:id/exercise/:eId', component: 'exerciseWorksheet' },
       ]);

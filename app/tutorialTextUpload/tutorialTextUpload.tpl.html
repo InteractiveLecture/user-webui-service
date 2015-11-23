@@ -1,0 +1,50 @@
+<!-- Siehe uiComponents nav-bar-directive -->
+<nav-bar></nav-bar>
+<!-- Main -->
+<div class="container-fluid">
+  <div class="row">
+<!-- Left column -->
+    <div class="col-sm-3">
+<!-- Siehe uiComponents dash-bar-directive -->
+      <dash-bar></dash-bar>
+    </div>
+<!-- /Left -->
+<!-- Right column -->
+    <div class="col-sm-9">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Text zu ...</h4>
+          </div>
+          <div class="panel-body">
+            <article class="primary">
+              <form>
+                <textarea name="newTutorial" class="form-control" rows="12" placeholder="Dieses Tuturial behandelt...."></textarea>
+              </form>
+            </article>
+            <hr>
+            <a ng-link="exerciseWorksheet({id:1, eId:1})">
+              <button class="btn btn-primary" type="button">
+                Upload
+              </button>
+            </a>
+            <div class="pull-right">
+              <a ng-link="moduleOverview({id:1})">
+                <button class="btn btn-default" type="button">
+                  Modulübersicht
+                </button>
+              </a>
+              <a ng-link="topicOverview">
+                <button class="btn btn-default" type="button">
+                  Topics
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Right column -->
+<!-- /Main -->
