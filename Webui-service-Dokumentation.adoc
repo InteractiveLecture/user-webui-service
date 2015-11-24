@@ -21,7 +21,7 @@ das Hinzufügen neuer Komponenten.
 ├── app
 │   ├── app-module.ts
 │   ├── home                        <----- Die Komponenten
-|   ......
+|   ...
 │   ├── fonts
 │   ├── images
 │   ├── index.html
@@ -29,17 +29,17 @@ das Hinzufügen neuer Komponenten.
 │   └── route-controller.ts
 ├── bower_components                <----- Abhängigkeiten der bower.json
 │   ├── angular
-│   ├── ....
+│   ├── ...
 ├── bower.json
 ├── build                           <---- Build der Website
 │   └── app
 ├── build.config.js
 ├── e2e                             <--- End 2 End test
 │   ├── home
-│   ├── ....
+│   ├── ...
 ├── gulp                            <--- Gulp Einstellungen
 │   ├── analyze.js
-│   ├── ....
+│   ├── ...
 ├── Gulpfile.js                     <--- Gulp Einstellungen
 ├── karma.config.js
 ├── node_modules                    <-- Alle Abhängigkeiten aus der package.json
@@ -61,7 +61,7 @@ das Hinzufügen neuer Komponenten.
 
 == Installation der Arbeitsumgebung
 
-Um am Projekt mizuwirken sind Grundkenntnisse mit *npm, git, gulp und yeoman* nötig.
+Um am Projekt mitzuwirken sind Grundkenntnisse mit *npm, git, gulp und yeoman* nötig.
 
 [source, bash]
 ----
@@ -83,7 +83,8 @@ bower install
 ----
 
 Da die Arbeiten am *New Router* für AngularJS noch nicht abgeschlossen sind, muss
-die *.bower.json* um einen main-eintrag ergänzt werden. Gleiches gilt für den ace-editor.
+die *.bower.json* um einen main-eintrag ergänzt werden. Gleiches gilt für die Pakete
+des Ace-editor.
 
 [source, json]
 ----
@@ -118,8 +119,11 @@ die *.bower.json* um einen main-eintrag ergänzt werden. Gleiches gilt für den 
 === Arbeiten mit dem Yeoman-Genrator
 
 Der verwendete Generator für dieses Projekt heißt *ng-poly* zu finden unter:
-https://github.com/dustinspecker/generator-ng-poly Die einzelnen Task des
-Taskrunners Gulp sind ebenfalls von Generator erstellt und
+[source, bash]
+----
+https://github.com/dustinspecker/generator-ng-poly
+----
+Die einzelnen Task des Taskrunners Gulp sind ebenfalls von Generator erstellt und
 in der Dokumentation nachzulesen.
 
 TIP: Die Ordner im Projekt heißen nicht komform zum *ng-poly* Generator. Jeder Camel-Case muss mit Bindestrich getrennt werden um vom Generator erkannt zu werden. Bsp. uiComponents = ui-components
@@ -127,11 +131,22 @@ TIP: Die Ordner im Projekt heißen nicht komform zum *ng-poly* Generator. Jeder 
 
 === Warum Angular 1.4.5 ?
 Da Angular 2.0 noch nicht für den produktiven Einsatz gedacht ist fiel die Entscheidung
-auf die zum start der Entwicklung aktuellsten Version des SPA-Frameworks.
+auf die zum Start der Entwicklung aktuellsten Version des SPA-Frameworks.
 Eine Portierung auf 2.0 ist vorgesehen.
 
 
 == Die Komponenten des Webui-Service
+
+=== Das WebUi-Backend
+
+Da die Kommunikation mit Micro-services nicht durch hartcodierte URL's Fehlerfrei
+erfolgen kann, braucht es eine Vermittlung. Das Backend wird zum betreiben des
+Webui-Service zwingend benötigt. Es ist in GO geschrieben und arbeitet anhand eines
+Proxy-Servers so ähnlich wie ein Mapper.
+
+Die Routen werden fast 1:1 auf die Routen des Lecture-Service gemappt. Allerdings
+agiert der Proxy intelligenter als eine einfache Anfrage. Zum Beispiel wird eine
+Instanz des Service gesucht und Loadbalacing betrieben.
 
 === UI Components
 
@@ -148,8 +163,7 @@ als Directive in diesem Modul integriert.
 === Lecture Definitions
 
 Dieser Ordner sammelt alle Models und Interfaces die für den Webui-service definiert
-wurden. Ebenso sind Helferklassen enthalten um zum Beispiel den Umgang mit URL's
-zu vereinfachen.
+wurden.
 
 Bisherige Interfaces
 
@@ -166,7 +180,7 @@ Webui-service gemeinsam haben.
 * Exercise - Exercise des Backends abbilden- Topic des Backends abbilden
 * Tutorial- Topic des Backends abbilden
 * Hint- Hint des Backends abbilden
-* UrlBuilder - Helferklasse um einfacher fehlerfreie URLs zu schreiben
+
 
 
 === CallBackend-Service
@@ -188,8 +202,6 @@ loadModel(linkUrl: string, callback: any)::
 sendet den HTTP-Request für die Modeldaten der aktuellen View zu laden. Durch den
 Callback kann der Konsument selber bestimmen wie das Ergebnis der Anfrage zu verwenden ist.
 
-Routen anfragen::
-die einzelenen Routen des Backends anfragen. Work in Progress
 
 === Login
 
@@ -211,7 +223,7 @@ erfolgt angular-typisch durch databinding.
 
 === Module Overview
 
-Da die Module wie Bäume aufgebaut sind, benötigt man eine entsprechende Visualisierung.
+Da die Module des Projekts wie Bäume aufgebaut sind, benötigt man eine entsprechende Visualisierung.
 Das Cytoscpae.JS Framework bietet genau das.
 
 TIP: Cytoscape unter Angular hat einige Tücken. https://gist.github.com/maxkfranz/a1aea574f0e248b2b38e zeigt ein einfaches Beispiel
@@ -225,6 +237,13 @@ TIP: Cytoscape unter Angular hat einige Tücken. https://gist.github.com/maxkfra
 Videos werden durch das Videogular Projekt dargestellt.
 
 TIP: Weitere Infos zu Videogular: http://www.videogular.com/tutorials/how-to-start/
+
+=== Tutorial (video & text) Upload
+
+Als Teil der administrativen Oberfläche muss es möglich sein Medien bzw Lehrmaterial
+hochzuladen. Genau das sollen die Seiten/Module tutorialTextUpload und tutorialVideoUpload
+ermöglichen.
+
 
 === Exercise Overview
 
