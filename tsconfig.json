@@ -63,9 +63,15 @@
         "./app/tutorialText/tutorial-text-controller_test.ts",
         "./app/tutorialText/tutorial-text-controller.ts",
         "./app/tutorialText/tutorial-text-module.ts",
+        "./app/tutorialTextUpload/tutorial-text-upload-controller_test.ts",
+        "./app/tutorialTextUpload/tutorial-text-upload-controller.ts",
+        "./app/tutorialTextUpload/tutorial-text-upload-module.ts",
         "./app/tutorialVideo/tutorial-video-controller_test.ts",
         "./app/tutorialVideo/tutorial-video-controller.ts",
         "./app/tutorialVideo/tutorial-video-module.ts",
+        "./app/tutorialVideoUpload/tutorial-video-upload-controller_test.ts",
+        "./app/tutorialVideoUpload/tutorial-video-upload-controller.ts",
+        "./app/tutorialVideoUpload/tutorial-video-upload-module.ts",
         "./app/uiComponents/ace-editor-directive_test.ts",
         "./app/uiComponents/ace-editor-directive.ts",
         "./app/uiComponents/cytoscape-directive_test.ts",
@@ -78,5 +84,8 @@
         "./app/uiComponents/nav-bar-directive.ts",
         "./app/uiComponents/ui-components-module.ts"
     ],
-    "exclude": []
+    "exclude": [],
+    "atom": {
+        "rewriteTsconfig": true
+    }
 }

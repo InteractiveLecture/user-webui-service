@@ -4,16 +4,14 @@
 'use strict';
 
 describe('TutorialTextUploadCtrl', function () {
-  var ctrl;
+  var ctrl:any;
 
   beforeEach(module('tutorialTextUpload'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function ($rootScope:any, $controller:any) {
     ctrl = $controller('TutorialTextUploadCtrl');
   }));
 
-  it('should have ctrlName as TutorialTextUploadCtrl', function () {
-    expect(ctrl.ctrlName).toEqual('TutorialTextUploadCtrl');
-  });
+
 
 });
