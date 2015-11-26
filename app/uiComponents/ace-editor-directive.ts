@@ -30,6 +30,11 @@ module AceEditor {
       controllerAs: 'aceEditor',
       controller: function() {
         var vm = this;
+        vm.patcher = new diff_match_patch()
+        var diff = vm.patcher.diff_main("hund", "Katze")
+        console.log(vm.patcher)
+        console.log(diff)
+
         vm.editor = ace.edit("editor");
         vm.editor.setTheme("ace/theme/chrome");
         vm.editor.getSession().setMode("ace/mode/javascript");
