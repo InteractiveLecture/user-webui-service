@@ -21,8 +21,7 @@ interface DiffMatchPatch {
   diff_cleanupMerge(diffs: Diff[]): void;
   diff_xIndex(diffs: Diff[], loc: number): number;
   diff_prettyHtml(diffs: Diff[]): string;
-  diff_text1(diffs: Diff[]): string;
-  diff_text2(diffs: Diff[]): string;
+  patch_toText(patches:any): string;
   diff_levenshtein(diffs: Diff[]): number;
   diff_toDelta(diffs: Diff[]): string;
   diff_fromDelta(text1: string, delta: string): Diff[];

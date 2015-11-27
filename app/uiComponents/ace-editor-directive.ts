@@ -30,11 +30,12 @@ module AceEditor {
       controllerAs: 'aceEditor',
       controller: function($timeout: ng.ITimeoutService) {
         var vm = this;
-        vm.lastShot =""
-        vm.timer
+        vm.socketEnd = new WebSocket("/javahandler", []);
         // Using diff_match_patch
         vm.patcher = new diff_match_patch()
         // Using ace-editor
+        vm.lastShot =""
+        vm.timer
         vm.editor = ace.edit("editor");
         vm.editor.setTheme("ace/theme/chrome");
         vm.editor.getSession().setMode("ace/mode/javascript");
@@ -50,6 +51,7 @@ module AceEditor {
             var patch = vm.patcher.patch_make(vm.patcher.diff_main(vm.lastShot, shot))
             console.log(patch)
             vm.lastShot = shot;
+            vm.socketEnd.send(vm.patcher.patch_toText(patch))
           }, 1500)
         })
       },
