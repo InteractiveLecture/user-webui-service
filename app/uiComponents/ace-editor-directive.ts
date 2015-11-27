@@ -30,7 +30,7 @@ module AceEditor {
       controllerAs: 'aceEditor',
       controller: function($timeout: ng.ITimeoutService) {
         var vm = this;
-        vm.socketEnd = new WebSocket("/javahandler", []);
+        vm.socketEnd = new WebSocket("ws://localhost:8000/java-backend", []);
         // Using diff_match_patch
         vm.patcher = new diff_match_patch()
         // Using ace-editor
@@ -46,6 +46,11 @@ module AceEditor {
           if(vm.timer != null) {
           $timeout.cancel(vm.timer)
           }
+
+          vm.socketEnd.onerror((err:any)=> console.log(err))
+
+          vm.socketEnd.onmessage((message:any)=> console.log(message))
+
           vm.timer = $timeout(()=> {
             var shot = vm.editor.getValue()
             var patch = vm.patcher.patch_make(vm.patcher.diff_main(vm.lastShot, shot))
