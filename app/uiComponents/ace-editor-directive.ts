@@ -28,8 +28,10 @@ module AceEditor {
       templateUrl: 'uiComponents/ace-editor-directive.tpl.html',
       replace: false,
       controllerAs: 'aceEditor',
-      controller: function() {
+      controller: function($timeout: ng.ITimeoutService) {
         var vm = this;
+        vm.lastShot =""
+        vm.timer
         // Using diff_match_patch
         vm.patcher = new diff_match_patch()
         // Using ace-editor
@@ -39,7 +41,17 @@ module AceEditor {
         vm.editor.setOptions({
           fontSize: "16pt"
         });
-        vm.editor.on('change', (eingabe: any) => vm.patcher.diff_main())
+        vm.editor.on('change', (eingabe: any) => {
+          if(vm.timer != null) {
+          $timeout.cancel(vm.timer)
+          }
+          vm.timer = $timeout(()=> {
+            var shot = vm.editor.getValue()
+            var patch = vm.patcher.patch_make(vm.patcher.diff_main(vm.lastShot, shot))
+            console.log(patch)
+            vm.lastShot = shot;
+          }, 1500)
+        })
       },
       link: function(scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */

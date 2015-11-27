@@ -125,7 +125,7 @@ module lectureDefinitions.models {
     TEST
   }
 
-  class Operation{
+ export class Operation{
 
     constructor (operationstype: OperationsType, path: string, from: string, value: string) {
       this.operationstype =operationstype
