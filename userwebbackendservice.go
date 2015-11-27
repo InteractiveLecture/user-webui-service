@@ -2,8 +2,8 @@ package main
 
 import (
 	//"github.com/gorilla/context"
-
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -13,6 +13,7 @@ import (
 	"github.com/InteractiveLecture/middlewares/jwtware"
 	"github.com/InteractiveLecture/servicecache"
 	"github.com/gorilla/mux"
+	"golang.org/x/net/websocket"
 )
 
 func main() {
@@ -151,6 +152,8 @@ func main() {
 		"lecture-service",
 		"/modules/{id}/exercises")))
 
+	r.Path("/java-backend").Handler(websocket.Handler(websocketHandler))
+
 	// Bind to a port and pass our router in
 	http.ListenAndServe(":8000", r)
 }
@@ -167,4 +170,8 @@ func createProxy(service, servicePath string) http.Handler {
 		r.URL = targetURL
 	}
 	return handler
+}
+
+func websocketHandler(ws *websocket.Conn) {
+	io.Copy(ws, ws)
 }
