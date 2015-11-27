@@ -79,75 +79,68 @@ module lectureDefinitions.models {
     href: string
   }
 
-  /*
-  UrlBuilder für leichteres generieren der AnfrageUrls
-  Arbeitet mit dem Schema HTTP
-  Aufgebaut nach dem Builder Pattern
-  */
-  export class UrlBuilder {
-    scheme: string
-    host: string
-    domain: string
-    port: string
-    urlPath: string
-    query: string
+  export class TopicPatch {
+    version: number
+    topicID: string
+    operations: Operation[]
+    // TODO: Trash nicht per HTTP mitschicken.
+    trash: Operation[]
 
-    constructor() {
-      this.scheme = 'http://'
-      this.host = ''
-      this.domain = ''
-      this.port = ''
-      this.urlPath = ''
-      this.query = ''
-      return this;
+
+    deleteOperation(path: string) {
+      this.operations.push(new Operation(OperationsType.REMOVE, path, null, null ))
+      this.trash = new Array()
     }
 
-    noScheme(): UrlBuilder {
-      this.scheme = '';
-      return this;
+    addOperation(path: string, value:string) {
+      this.operations.push(new Operation(OperationsType.ADD, path, null, value ))
+      this.trash = new Array()
     }
 
-    setHost(host: string): UrlBuilder {
-      this.host = host;
-      return this;
+    replaceOperation(path: string, value:string) {
+      this.operations.push(new Operation(OperationsType.REPLACE, path, null, value ))
+      this.trash = new Array()
     }
 
-    setDomain(domain: string): UrlBuilder {
-      this.domain = '.' + domain;
-      return this;
+    moveOperation(path: string, from:string) {
+      this.operations.push(new Operation(OperationsType.REPLACE, path, from, null ))
+      this.trash = new Array()
     }
 
-    setPort(portNumber: number): UrlBuilder {
-      this.port = ':' + portNumber;
-      return this;
+    redo() {
+      this.operations.push(this.trash.pop())
     }
 
-    setUrlPath(path: string): UrlBuilder {
-      if (this.urlPath !== '') {
-        this.urlPath = this.urlPath + '/' + path
-      }
-      else {
-        this.urlPath = '/' + path;
-      }
-
-      return this;
-    }
-
-    setQuery(queryParam: string): UrlBuilder {
-
-      if (this.query !== '') {
-        this.query = this.query + '&' + queryParam
-      }
-      else {
-        this.query = '?' + queryParam;
-      }
-
-      return this;
-    }
-
-    build(): string {
-      return this.scheme + this.host + this.domain + this.port + this.urlPath + this.query;
+    undo() {
+      this.trash.push(this.operations.pop())
     }
   }
+
+  export enum OperationsType{
+    ADD,
+    REMOVE,
+    COPY,
+    REPLACE,
+    MOVE,
+    TEST
+  }
+
+  class Operation{
+
+    constructor (operationstype: OperationsType, path: string, from: string, value: string) {
+      this.operationstype =operationstype
+      this.path = path
+      this.from = from
+      this.value= value
+    }
+
+    operationstype: OperationsType
+    path: string
+    from: string
+    value: string
+  }
+
+
+
   // Ende Modul
 }

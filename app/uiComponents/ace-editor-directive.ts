@@ -30,18 +30,16 @@ module AceEditor {
       controllerAs: 'aceEditor',
       controller: function() {
         var vm = this;
+        // Using diff_match_patch
         vm.patcher = new diff_match_patch()
-        var diff = vm.patcher.diff_main("hund", "Katze")
-        console.log(vm.patcher)
-        console.log(diff)
-
+        // Using ace-editor
         vm.editor = ace.edit("editor");
         vm.editor.setTheme("ace/theme/chrome");
         vm.editor.getSession().setMode("ace/mode/javascript");
         vm.editor.setOptions({
           fontSize: "16pt"
         });
-        vm.editor.on('change', (e: any) => console.log('Änderung registriert'))
+        vm.editor.on('change', (eingabe: any) => vm.patcher.diff_main())
       },
       link: function(scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */
