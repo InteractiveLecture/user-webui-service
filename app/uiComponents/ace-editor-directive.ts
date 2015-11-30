@@ -30,27 +30,37 @@ module AceEditor {
       controllerAs: 'aceEditor',
       controller: function($timeout: ng.ITimeoutService) {
         var vm = this;
+        // Using Websocket
         vm.socketEnd = new WebSocket("ws://localhost:8000/java-backend", []);
         // Using diff_match_patch
         vm.patcher = new diff_match_patch()
-        // Using ace-editor
-        vm.lastShot =""
-        vm.timer
+        // Using ace-editor & config
         vm.editor = ace.edit("editor");
         vm.editor.setTheme("ace/theme/chrome");
         vm.editor.getSession().setMode("ace/mode/javascript");
         vm.editor.setOptions({
           fontSize: "16pt"
         });
+
+        // Eventlistener ON
+        vm.lastShot =""
+        vm.timer
         vm.editor.on('change', (eingabe: any) => {
+          // Wenn noch nicht getippt würde, braucht der Timer nicht gecancelt werden
           if(vm.timer != null) {
+          // Timeout abbrechen, falls erneut getippt wird
           $timeout.cancel(vm.timer)
           }
-
+          // Fehler ausgeben
           vm.socketEnd.onerror((err:any)=> console.log(err))
-
+          // Nachrichten / success ausgeben
           vm.socketEnd.onmessage((message:any)=> console.log(message))
-
+          /*
+          Timeout nutzen.
+          Sobald der User tippt geht ein Timer von 1,5 Sekunden los.
+          Wenn er aufhört zu tippen läuft der Timer durch und Der Patch wird
+          zum Server verschickt.
+          */
           vm.timer = $timeout(()=> {
             var shot = vm.editor.getValue()
             var patch = vm.patcher.patch_make(vm.patcher.diff_main(vm.lastShot, shot))
@@ -59,6 +69,7 @@ module AceEditor {
             vm.socketEnd.send(vm.patcher.patch_toText(patch))
           }, 1500)
         })
+
       },
       link: function(scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */

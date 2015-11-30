@@ -86,37 +86,45 @@ module lectureDefinitions.models {
     // TODO: Trash nicht per HTTP mitschicken.
     trash: Operation[]
 
+    constructor(id: string) {
+      this.operations = new Array()
+      this.topicID = id
+    }
 
     deleteOperation(path: string) {
-      this.operations.push(new Operation(OperationsType.REMOVE, path, null, null ))
+      this.operations.push(new Operation(OperationsType.REMOVE, path, null, null))
       this.trash = new Array()
     }
 
-    addOperation(path: string, value:string) {
-      this.operations.push(new Operation(OperationsType.ADD, path, null, value ))
+    addOperation(path: string, value: string) {
+      this.operations.push(new Operation(OperationsType.ADD, path, null, value))
       this.trash = new Array()
     }
 
-    replaceOperation(path: string, value:string) {
-      this.operations.push(new Operation(OperationsType.REPLACE, path, null, value ))
+    replaceOperation(path: string, value: string) {
+      this.operations.push(new Operation(OperationsType.REPLACE, path, null, value))
       this.trash = new Array()
     }
 
-    moveOperation(path: string, from:string) {
-      this.operations.push(new Operation(OperationsType.REPLACE, path, from, null ))
+    moveOperation(from: string, path: string) {
+      this.operations.push(new Operation(OperationsType.MOVE, path, from, null))
       this.trash = new Array()
     }
 
     redo() {
-      this.operations.push(this.trash.pop())
+      if (this.trash[0] !== undefined) {
+        this.operations.push(this.trash.pop())
+      }
     }
 
     undo() {
-      this.trash.push(this.operations.pop())
+      if (this.operations[0] !== undefined ) {
+        this.trash.push(this.operations.pop())
+      }
     }
   }
 
-  export enum OperationsType{
+  export enum OperationsType {
     ADD,
     REMOVE,
     COPY,
@@ -125,13 +133,13 @@ module lectureDefinitions.models {
     TEST
   }
 
- export class Operation{
+  export class Operation {
 
-    constructor (operationstype: OperationsType, path: string, from: string, value: string) {
-      this.operationstype =operationstype
+    constructor(operationstype: OperationsType, path: string, from: string, value: string) {
+      this.operationstype = operationstype
       this.path = path
       this.from = from
-      this.value= value
+      this.value = value
     }
 
     operationstype: OperationsType

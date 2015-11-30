@@ -40,18 +40,6 @@ describe('CallBackend', function() {
     expect(this.service.extractId('module', 'http://localhost:8080/module/test')).toEqual(null);
   })
 
-  it('should perform a HTTP GET', function() {
-    var temp: any;
-    this.service.http_get('/topics', (response: any) => temp = response)
-    this.httpBackend.flush()
-    expect(temp.data).toEqual(this.topic)
-  })
-
-  it('should perform a HTTP DELETE', function() {
-    this.httpBackend.expectDELETE('/topics/1')
-    this.service.http_delete('/topics/1')
-    this.httpBackend.flush()
-  })
 
 
 

@@ -45,10 +45,13 @@ module CallBackend {
         }
       }
       //var jsonResult = JSON.parse('{"links":[{"rel":"self","href":"http://localhost:8080/topics"}],"content":[{"topicName":"Programmierung","id":"1", "topicDescription":"Eine Einführung in die Programmierung mit Java","links":[{"rel":"self","href":"http://localhost:8080/topics/1"},{"rel":"modules","href":"http://localhost:8080/topics/1/modules"},{"rel":"root-module","href":"http://localhost:8080/modules/1"},{"rel":"officers","href":"http://localhost:8080/topics/1/officers"},{"rel":"assistants","href":"http://localhost:8080/topics/1/assistants"}]},{"topicName":"Mathematik","id":"2","topicDescription":"Mathematik für Wirtschaftswissenschaftler","links":[{"rel":"self","href":"http://localhost:8080/topics/2"},{"rel":"modules","href":"http://localhost:8080/topics/2/modules"},{"rel":"root-module","href":"http://localhost:8080/modules/4"},{"rel":"officers","href":"http://localhost:8080/topics/2/officers"},{"rel":"assistants","href":"http://localhost:8080/topics/2/assistants"}]},{"topicName":"Statistik","id":"3","topicDescription":"Deskriptive und induktive Statistik","links":[{"rel":"self","href":"http://localhost:8080/topics/3"},{"rel":"modules","href":"http://localhost:8080/topics/3/modules"},{"rel":"root-module","href":"http://localhost:8080/modules/5"},{"rel":"officers","href":"http://localhost:8080/topics/3/officers"},{"rel":"assistants","href":"http://localhost:8080/topics/3/assistants"}]},{"topicName":null,"topicDescription":null,"links":[{"rel":"self","href":"http://localhost:8080/topics/0"},{"rel":"modules","href":"http://localhost:8080/topics/0/modules"},{"rel":"officers","href":"http://localhost:8080/topics/0/officers"},{"rel":"assistants","href":"http://localhost:8080/topics/0/assistants"}]}],"page":{"size":20,"totalElements":4,"totalPages":1,"number":0}}');
-      this.http_get(linkUrl, (result: any) => {
+      this.$http({
+        method: 'GET',
+        url: linkUrl
+      }).then((result: any) => {
         var jsonResult = JSON.parse(<string> result);
         callback(jsonResult.content.map((item: any) => new lectureDefinitions.models.BaseModel(item)));
-      })
+      }, (err) => console.log(err))
       //callback(jsonResult.content.map((item: any) => new lectureDefinitions.models.BaseModel(item)));
     }
 
@@ -95,44 +98,6 @@ module CallBackend {
       this.$http(req).then(
         (token: any) => { callback(null, token.data) },
         (error: any) => { callback(error, null) }
-        )
-    }
-
-    /*
-    ---------------------------------------------------------------------------
-    Http Request erzeugen
-    ---------------------------------------------------------------------------
-    */
-
-    // HTTP GET an URL X und verwenden des Ergebnisses per Callback
-    http_get(url: string, callback: Function) {
-      this.$http.get(url).then(
-        (data) => callback(data),
-        (error) => console.log(error)
-        );
-    }
-
-    // Löschen für Url
-    http_delete(url: string) {
-      this.$http.delete(url).then(
-        () => { return true },
-        (error) => console.log(error)
-        )
-    }
-
-    // Updaten für Url
-    http_put(url: string, data: any) {
-      this.$http.delete(url, data).then(
-        () => { console.log(data +'sending success') },
-        (error) => console.log(error)
-        )
-    }
-
-    // Posten für Url
-    http_post(url: string, data: any) {
-      this.$http.post(url, data).then(
-        () => { return true },
-        (error) => console.log(error)
         )
     }
   }
