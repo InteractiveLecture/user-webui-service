@@ -30,16 +30,14 @@ describe('models.BaseModel', function() {
     expect(patch.operations[0].path).toEqual("/topics")
     expect(patch.operations[0].value).toEqual("Programmierung")
     expect(patch.operations[0].operationstype).toEqual(lectureDefinitions.models.OperationsType.ADD)
-    patch = null
   });
 
   it('should take more than one Patch', function() {
     var patch = new lectureDefinitions.models.TopicPatch("1")
-    patch.addOperation("/topics", "Programmierung")
-    patch.addOperation("/topics", "Mathematik")
-    patch.addOperation("/topics", "Statistik")
+    patch.addOperation("/topics/1", "Programmierung")
+    patch.replaceOperation("/topics/1", "Mathematik")
+    patch.addOperation("/topics/2", "Statistik")
     expect(patch.operations.length).toBe(3)
-    patch = null
   })
 
   it('should delete an Path', function() {
@@ -47,7 +45,6 @@ describe('models.BaseModel', function() {
     patch.deleteOperation("/topics")
     expect(patch.operations.length).toBe(1)
     expect(patch.operations[0].operationstype).toEqual(lectureDefinitions.models.OperationsType.REMOVE)
-    patch = null
   });
 
   it('should move the value to the location', function() {
@@ -57,7 +54,6 @@ describe('models.BaseModel', function() {
     expect(patch.operations[0].path).toEqual('topics/2')
     expect(patch.operations[0].from).toEqual('topics/1')
     expect(patch.operations[0].operationstype).toEqual(lectureDefinitions.models.OperationsType.MOVE)
-    patch = null
   });
 
   it('should replace an value at Path', function() {
@@ -67,7 +63,6 @@ describe('models.BaseModel', function() {
     expect(patch.operations[0].path).toEqual("/topics/7")
     expect(patch.operations[0].value).toEqual("anderer Eintrag")
     expect(patch.operations[0].operationstype).toEqual(lectureDefinitions.models.OperationsType.REPLACE)
-    patch = null
   });
 
   it('should undo a patch', function() {
@@ -96,13 +91,25 @@ describe('models.BaseModel', function() {
     expect(patch.operations.length).toBe(1)
     patch.undo()
     expect(patch.operations.length).toBe(0)
-    patch.addOperation("modules/1/exercise","Eintrag" )
+    patch.addOperation("modules/1/exercise", "Eintrag")
     expect(patch.operations.length).toBe(1)
     patch.redo()
     expect(patch.operations.length).toBe(1)
   });
 
-  // TODO: Mehr Fälle von Undo und Redo testen
+  it('should not undo nothing', function() {
+    var patch = new lectureDefinitions.models.TopicPatch("1")
+    expect(patch.operations.length).toBe(0)
+    patch.undo()
+    expect(patch.operations.length).toBe(0)
+  })
+
+  it('should not redo nothing', function() {
+    var patch = new lectureDefinitions.models.TopicPatch("1")
+    expect(patch.operations.length).toBe(0)
+    patch.redo()
+    expect(patch.operations.length).toBe(0)
+  })
 
   // Ende der Tests
 });

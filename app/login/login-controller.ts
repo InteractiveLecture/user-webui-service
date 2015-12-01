@@ -35,19 +35,17 @@ module LoginCtrl {
           if (err !== null) {
             this.errorStatus = err.status;
             this.userData.passwort = "";
-            // console.log("you are not logged in... moron!");
+
           }
           else {
+            // TODO: Typo klären
             // console.log(`congrats! here is your token:${data.access_token}`);
             localStorage.setItem('id_token', data.access_token);
             localStorage.setItem('refresh_token', data.refreh_token);
-            /*
-             * vorhandene eigenschaften des objektes:
-             *{
+            /*vorhandene eigenschaften des objektes:
+             {
                 access_token, token_type,refresh_token,expires_in,scope,id,jti,
-              }
-             *
-             * */
+              }*/
 
             // Weiterleitung / Redirect
             this.$location.path("/home");

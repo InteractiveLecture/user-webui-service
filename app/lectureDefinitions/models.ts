@@ -111,17 +111,21 @@ module lectureDefinitions.models {
       this.trash = new Array()
     }
 
+    // TODO: Rückmeldung über das Ergebnis vielleicht sinnvoll
     redo() {
-      if (this.trash[0] !== undefined) {
-        this.operations.push(this.trash.pop())
+      if (this.trash !== undefined) {
+        if (this.trash[0] !== undefined) {
+          this.operations.push(this.trash.pop())
+        }
       }
     }
 
     undo() {
-      if (this.operations[0] !== undefined ) {
+      if (this.operations[0] !== undefined) {
         this.trash.push(this.operations.pop())
       }
     }
+
   }
 
   export enum OperationsType {
