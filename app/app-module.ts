@@ -78,7 +78,6 @@ module interactiveLectureWebFrontend {
               }
             }).then(function(response: any) {
               // Falls die Anfrage erfolg hat tue ich das mit der Antwort
-              console.log('Broken bei function(response: any')
               var id_token = response.data.id_token;
               localStorage.setItem('id_token', id_token);
               return id_token;

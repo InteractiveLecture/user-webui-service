@@ -41,7 +41,7 @@ module LoginCtrl {
             // TODO: Typo klären
             // console.log(`congrats! here is your token:${data.access_token}`);
             localStorage.setItem('id_token', data.access_token);
-            localStorage.setItem('refresh_token', data.refreh_token);
+            localStorage.setItem('refresh_token', data.refresh_token);
             /*vorhandene eigenschaften des objektes:
              {
                 access_token, token_type,refresh_token,expires_in,scope,id,jti,

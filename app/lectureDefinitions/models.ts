@@ -50,6 +50,8 @@ module lectureDefinitions.models {
     cacheIndex: string = 'exercise'
     task: string
     points: number
+    title: string
+    description: string
   }
 
   export class Tutorial extends models.BaseModel {
