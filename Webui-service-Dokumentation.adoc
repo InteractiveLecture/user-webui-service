@@ -91,7 +91,7 @@ des Ace-editor.
 {
   "name": "angular-new-router",
   "homepage": "https://github.com/angular/router",
-  "main": "./dist/router.es5.js",  <------ Wichtig
+  "main": "./dist/router.es5.js",  <------ Wichtig, bitte nachtragen
   "version": "0.5.3",
   "_release": "0.5.3",
   "_resolution": {
@@ -108,6 +108,7 @@ des Ace-editor.
 === Informationen zu den Werkzeugen bzw Sprachen/Frameworks
 
 * git - https://git-scm.com/documentation
+* diff-match-patch - Url einfügen...
 * npm - https://docs.npmjs.com/
 * gulp - https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 * bower - http://bower.io/#getting-started
@@ -128,6 +129,12 @@ in der Dokumentation nachzulesen.
 
 TIP: Die Ordner im Projekt heißen nicht komform zum *ng-poly* Generator. Jeder Camel-Case muss mit Bindestrich getrennt werden um vom Generator erkannt zu werden. Bsp. uiComponents = ui-components
 
+
+=== Test mit Jasmin
+Die Tests des Projektes werden mit dem Testingframework Jasmin durchgeführt. Ziel
+ist es jede Logik im Projekt auf ihre korrekte Funktionalität zu testen.
+
+WARNING: Die Directiven des Projekts sind nicht getestet, da Directiven mit dem Scope vom Angular 1.X zusammenhängen. Lösungsvorschläge für das Problem sind willkommen.
 
 === Warum Angular 1.4.5 ?
 Da Angular 2.0 noch nicht für den produktiven Einsatz gedacht ist fiel die Entscheidung
@@ -156,7 +163,7 @@ Dieses Modul soll alle (sichtbaren) Komponenten des Frontends verfügbar und
 * die Navigationsbar
 * das Dash
 * der Ace-Editor
-* die Cytoscape Graphen
+* die Cytoscape Graphen (Diretive + Faktory)
 
 als Directive in diesem Modul integriert.
 
@@ -173,13 +180,15 @@ HATEOAS (Hypertext As The Engine Of Application State) zu arbeiten
 
 Bisherige Models
 
-* BaseModel - Oberklasse der Models. Definiert alle Eigenschaften die Modelle des
-Webui-service gemeinsam haben.
+* BaseModel - Oberklasse der Models. Definiert alle Eigenschaften die Modelle des Webui-service gemeinsam haben.
 * Topic - Topic des Backends abbilden
 * Module - Module des Backends abbilden- Topic des Backends abbilden- Topic des Backends abbilden
 * Exercise - Exercise des Backends abbilden- Topic des Backends abbilden
 * Tutorial- Topic des Backends abbilden
 * Hint- Hint des Backends abbilden
+* TopicPatch - Stellt die Patches dar, welche zur Serverkommunikation benötigt werden. Die Patches sparen Bandbreite und vereinfachen die Kommunikation
+* Operation - Die Operationen, die summiert den TopicPatch ergeben (Hierbei handelt es sich um JsonPatches. Es wird nach Konvention ein JSON Object verschickt, welches eine Transaktion beschreibt)
+* OperationType - Ein Enum für die möglichen Operationsarten einer 'Operation'
 
 
 
@@ -219,10 +228,16 @@ erfolgt angular-typisch durch databinding.
 
 === Topic Overview
 
+Die Übersicht aller Topics. Topics entsprechen im groben einer Vorlesung in einer
+Hochschule oder Uni.
+
 === Topic Detail
+
+Genauere Informationen zu einem Topic lassen hier finden.
 
 === Module Overview
 
+Alle Module eines Topics sind hier zu finden. Ein Modul ist ein Thema eines Topics.
 Da die Module des Projekts wie Bäume aufgebaut sind, benötigt man eine entsprechende Visualisierung.
 Das Cytoscpae.JS Framework bietet genau das.
 
@@ -230,10 +245,15 @@ TIP: Cytoscape unter Angular hat einige Tücken. https://gist.github.com/maxkfra
 
 === Home
 
+Hier werden aggregierte Informationen für den User dagestellt.
+
 === Tutorial (text)
+
+Ein Text-Tutorial zum Modul kann bereitgestellt werden.
 
 === Tutorial (video)
 
+Ein Video-Tutorial zum Modul kann bereitgestellt werden.
 Videos werden durch das Videogular Projekt dargestellt.
 
 TIP: Weitere Infos zu Videogular: http://www.videogular.com/tutorials/how-to-start/
@@ -244,8 +264,9 @@ Als Teil der administrativen Oberfläche muss es möglich sein Medien bzw Lehrma
 hochzuladen. Genau das sollen die Seiten/Module tutorialTextUpload und tutorialVideoUpload
 ermöglichen.
 
-
 === Exercise Overview
+
+Hier werden alle Übungen zu einem Modul dargestellt.
 
 === Exercise Worksheet
 
@@ -254,3 +275,8 @@ mit dem Ace-Editor bzw mit der für den Ace-Editor definierten Directive. Die AP
 des Editors ist gut dokumentiert, allerdings ist die *.bower.json* unvollständig.
 
 TIP: Weitere Infos zu Ace: https://ace.c9.io/#nav=embedding
+
+Damit die Übungen ausgewertet werden können, müssen die Änderungen der User an den
+Server geschickt werden. Dafür werden ebenfalls Patches verwendet. Die Library *diff-match-patch*
+besitzt eine einheitliche API und erstellt die Patches aus den Eingaben der User heraus.
+Die Patches werden als Text an den auswertenden Microservices geschickt.
