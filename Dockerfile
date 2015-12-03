@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM scratch
 #ADD ca-certificates.crt /etc/ssl/certs/
 ADD out/main /main
 ADD build/app /app

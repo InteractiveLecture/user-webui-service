@@ -1,0 +1,48 @@
+app:
+  image: interactive-lecture/user-webui
+  links:
+    - "discovery:discovery"
+  ports:
+    - "8000:8000"
+
+  command: "/main -auth=false"
+discovery:
+  image: progrium/consul
+  expose:
+    - "8500"
+    - "8400"
+    - "53/udp"
+  hostname: "node1"
+  command: "-server -bootstrap"
+
+registrator:
+  image: gliderlabs/registrator
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock"
+  links:
+    - "discovery:discovery"
+  command: "-internal consul://discovery:8500"
+
+authentication:
+  image: interactive-lecture/authentication-service
+  links:
+    - "authdatabase:postgres"
+authdatabase:
+  image: postgres
+  expose:
+    - "5432"  
+  environment:
+    - "SERVICE_IGNORE=1"
+    - "POSTGRES_PASSWORD=users"
+    - "POSTGRES_USER=users"
+
+lecture:
+  image: interactive-lecture/lecture-service
+  links:
+    - "lecturedatabase:postgres"
+  command: "/main -dbhost=postgres"
+lecturedatabase:
+  image: interactive-lecture/lecture-database-test
+  environment:
+    - "SERVICE_IGNORE=1"
+
