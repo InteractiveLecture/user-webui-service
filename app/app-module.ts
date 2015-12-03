@@ -46,6 +46,7 @@ module interactiveLectureWebFrontend {
 
       jwtInterceptorProvider.tokenGetter = ['config', 'jwtHelper', '$http', (config: any, jwtHelper: ng.jwt.IJwtHelper, $http: any) => {
         // Keine Token für .html mitschicken
+
         if (config.url.substr(config.url.length - 5) == '.html') {
           return null;
         }
@@ -61,7 +62,7 @@ module interactiveLectureWebFrontend {
         // localStorage abrufen
         var idToken = localStorage.getItem('id_token');
         var refreshToken = localStorage.getItem('refresh_token');
-
+        
         // Den leeren localStorage für Chrome und Firefox abfangen. (Grrr)
         if (idToken !== 'null' && idToken !== null) {
 
