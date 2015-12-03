@@ -64,8 +64,10 @@ module interactiveLectureWebFrontend {
 
         // Den leeren localStorage für Chrome und Firefox abfangen. (Grrr)
         if (idToken !== 'null' && idToken !== null) {
+
           // Falls das aktuelle Token abläuft soll...
           if (jwtHelper.isTokenExpired(idToken)) {
+
             // Ein Request geschickt werden für ein refreshToken
             return $http({
               url: '/authentication-service/oauth/token',

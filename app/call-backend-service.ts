@@ -9,22 +9,25 @@ module CallBackend {
     $http: ng.IHttpService;
     $q: ng.IQService;
     jwtHelper: ng.jwt.IJwtHelper;
+    $exceptionHandler: ng.IExceptionHandlerService
 
 
     public static $inject: string[] = [
       'CachingService',
       '$routeParams',
       '$http',
+      '$exceptionHandler',
       'jwtHelper'
     ];
 
     // Dependency einbinden
-    constructor(CachingService: Caching.CachingService, $routeParams: any, $http: ng.IHttpService, $q: ng.IQService, jwtHelper: any) {
+    constructor(CachingService: Caching.CachingService, $routeParams: any, $http: ng.IHttpService, $q: ng.IQService, jwtHelper: any, $exceptionHandler: ng.IExceptionHandlerService) {
       var vm = this
       vm.cache = CachingService
       vm.$routeParams = $routeParams
       vm.$http = $http
       vm.$q = $q
+      vm.$exceptionHandler = $exceptionHandler
       vm.jwtHelper = jwtHelper
 
     }
@@ -78,7 +81,6 @@ module CallBackend {
     // Gibt die eingetippten Daten ans Backend weiter. resultat wird im Cache
     // gespeichert und zurückgegeben
     postUserData(userData: any, callback: any) {
-
       var username = userData.kennung;
       var passwort = userData.passwort;
       var clientId = "user-web-client";
@@ -94,7 +96,7 @@ module CallBackend {
         data: data
       }
       this.$http(req).then(
-        (token: any) => { callback(null, token.data) },
+        (token: any) => { callback(null, token) },
         (error: any) => { callback(error, null) }
         )
     }

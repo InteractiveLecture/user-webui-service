@@ -30,18 +30,19 @@ module LoginCtrl {
 
     public attemptLogin(userData: any) {
       // CallBackend Service nutzen
+      this.userData = userData
       if (userData !== null && userData !== undefined) {
-        this.callBackend.postUserData(userData, (err: any, data: any) => {
+        this.callBackend.postUserData(userData, (err: any, token: any) => {
           if (err !== null) {
             this.errorStatus = err.status;
-            this.userData.passwort = "";
+            this.userData.passwort = '';
 
           }
           else {
             // TODO: Typo klären
             // console.log(`congrats! here is your token:${data.access_token}`);
-            localStorage.setItem('id_token', data.access_token);
-            localStorage.setItem('refresh_token', data.refresh_token);
+            localStorage.setItem('id_token', token.data.access_token);
+            localStorage.setItem('refresh_token', token.data.refresh_token);
             /*vorhandene eigenschaften des objektes:
              {
                 access_token, token_type,refresh_token,expires_in,scope,id,jti,

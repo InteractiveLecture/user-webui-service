@@ -20,6 +20,7 @@ describe('CallBackend', function() {
   afterEach(function() {
     this.httpBackend.verifyNoOutstandingExpectation()
     this.httpBackend.verifyNoOutstandingRequest()
+    this.httpBackend.resetExpectations()
   })
 
   it('should equal CallBackend', function() {
@@ -42,8 +43,8 @@ describe('CallBackend', function() {
 
   it('should post userData to /authentication-service/oauth/token', function() {
     var userData = {kennung: "cremerm", passwort: "1234"}
-    this.service.postUserData(userData, (err: any, data: any)=> {
-      expect(data).toBe(true)
+    this.service.postUserData(userData, (err: any, res: any)=> {
+      expect(res.data).toBe(true)
     })
     this.httpBackend.flush()
   })
