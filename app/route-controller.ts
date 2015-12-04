@@ -24,6 +24,7 @@ module RouteCtrl {
         { path: '/profile', component: 'profile' },
         { path: '/topics', component: 'topicOverview' },
         { path: '/topics/:id', component: 'topicDetails' },
+        { path: '/topics/:id/edit', component: 'topicEdit' },
         { path: '/topics/:id/module', component: 'moduleOverview' },
         { path: '/module/:id/tutorial/text', component: 'tutorialText' },
         { path: '/module/:id/tutorial/text/upload', component: 'tutorialTextUpload' },

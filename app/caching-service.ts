@@ -20,13 +20,13 @@ module Caching {
 
     // Save Function zum einspeichern in den Cache. Aufruf ist dem Servicenutzer
     // überlassen
-    save(url: string, value: lectureDefinitions.models.BaseModel) {
-      this.cacheArray[url] = value;
+    save(uuid: string, value: lectureDefinitions.models.BaseModel) {
+      this.cacheArray[uuid] = value;
     }
 
     // loadFunction zum auslesen aus dem Cache.
-    load(url: string): lectureDefinitions.models.BaseModel {
-      return this.cacheArray[url];
+    load(uuid: string): lectureDefinitions.models.BaseModel {
+      return this.cacheArray[uuid];
     }
 
 

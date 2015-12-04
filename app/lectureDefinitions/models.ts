@@ -2,43 +2,23 @@
 
 module lectureDefinitions.models {
 
-  export class BaseModel implements interfaces.Linkable {
-    links: models.Link[]
+  export var testdata = '{"id":"b8c98f3e-bb7c-39e7-a3ce-e479c7892882","name":"Grundlagen der Programmierung mit Java","description":"bla","version":1,"authorities":[{"user_id":"233804c6-55b8-3807-9733-9c090d75decf","kind":"OFFICER"}], "modules": [{"id":"98bf99f7-3fed-3fd0-b43e-0b0f376b3607","level":0,"paths":["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607"],"description":"foo","topic_id":"b8c98f3e-bb7c-39e7-a3ce-e479c7892882","video_id":"62a69684-d4f0-3cbe-9016-58d1bf67b42a","script_id":"3d6cf4b2-37e1-3d38-9251-3636bab8bb9e"},{"id":"a9a0ad45-2d48-3f7b-bb7e-93340887a3ed","level":1,"paths":["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed"],"description":"bar","topic_id":"b8c98f3e-bb7c-39e7-a3ce-e479c7892882","video_id":"62a69684-d4f0-3cbe-9016-58d1bf67b42a","script_id":"3d6cf4b2-37e1-3d38-9251-3636bab8bb9e"},{"id":"6d22f47b-5627-3b6b-b110-b1c7b65ec51f","level":2,"paths":["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f"],"description":"bli","topic_id":"b8c98f3e-bb7c-39e7-a3ce-e479c7892882","video_id":"62a69684-d4f0-3cbe-9016-58d1bf67b42a","script_id":"3d6cf4b2-37e1-3d38-9251-3636bab8bb9e"},{"id":"76ca2474-f18f-39e7-9a11-21f5981685d6","level":3,"paths":["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/76ca2474-f18f-39e7-9a11-21f5981685d6"],"description":"blubb","topic_id":"b8c98f3e-bb7c-39e7-a3ce-e479c7892882","video_id":"62a69684-d4f0-3cbe-9016-58d1bf67b42a","script_id":"3d6cf4b2-37e1-3d38-9251-3636bab8bb9e"},{"id":"921f23fb-de2a-32cf-855b-8d57ac12f7d1","level":3,"paths":["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/921f23fb-de2a-32cf-855b-8d57ac12f7d1"],"description":"bla","topic_id":"b8c98f3e-bb7c-39e7-a3ce-e479c7892882","video_id":"62a69684-d4f0-3cbe-9016-58d1bf67b42a","script_id":"3d6cf4b2-37e1-3d38-9251-3636bab8bb9e"},{"id":"834e4592-5a04-32ed-8b44-6c5d2d187c55","level":4,"paths":["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/76ca2474-f18f-39e7-9a11-21f5981685d6/834e4592-5a04-32ed-8b44-6c5d2d187c55","/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/921f23fb-de2a-32cf-855b-8d57ac12f7d1/834e4592-5a04-32ed-8b44-6c5d2d187c55"],"description":"bazz","topic_id":"b8c98f3e-bb7c-39e7-a3ce-e479c7892882","video_id":"62a69684-d4f0-3cbe-9016-58d1bf67b42a","script_id":"3d6cf4b2-37e1-3d38-9251-3636bab8bb9e"}]}'
+
+  export class BaseModel {
     cacheIndex: string
     id: number
     constructor(object: any) {
-      this.links = object.links;
       for (var prop in object) {
         this[prop] = object[prop];
       }
     }
-
-    getUrlFor(name: string): string {
-      var result = this.links.filter((link) => name === link.rel)
-      if (result.length > 0) {
-        return result[0].href;
-      }
-      return null;
-    }
-
-    getPageFor(name: string, page: number, size: number, sort: string = null): string {
-      var result = this.getUrlFor(name);
-      if (result === null) {
-        return null;
-      }
-      result += '?page=' + page + '&size=' + size;
-      if (sort === null) {
-        return result;
-      }
-      return result + '&sort=' + sort;
-    }
-
   }
 
   export class Topic extends models.BaseModel {
     cacheIndex: string = 'topics'
-    topicName: string
     topicDescription: string
+    modules: Module[]
+
   }
 
   export class Module extends models.BaseModel {
@@ -81,35 +61,33 @@ module lectureDefinitions.models {
     href: string
   }
 
-  export class TopicPatch {
+  export class LecturePatch {
     version: number
-    topicID: string
     operations: Operation[]
     // TODO: Trash nicht per HTTP mitschicken.
     trash: Operation[]
 
-    constructor(id: string) {
+    constructor() {
       this.operations = new Array()
-      this.topicID = id
     }
 
     deleteOperation(path: string) {
-      this.operations.push(new Operation(OperationsType.REMOVE, path, null, null))
+      this.operations.push(new Operation(OperationsType[OperationsType.REMOVE], path, null, null))
       this.trash = new Array()
     }
 
     addOperation(path: string, value: string) {
-      this.operations.push(new Operation(OperationsType.ADD, path, null, value))
+      this.operations.push(new Operation(OperationsType[OperationsType.ADD], path, null, value))
       this.trash = new Array()
     }
 
     replaceOperation(path: string, value: string) {
-      this.operations.push(new Operation(OperationsType.REPLACE, path, null, value))
+      this.operations.push(new Operation(OperationsType[OperationsType.REPLACE], path, null, value))
       this.trash = new Array()
     }
 
     moveOperation(from: string, path: string) {
-      this.operations.push(new Operation(OperationsType.MOVE, path, from, null))
+      this.operations.push(new Operation(OperationsType[OperationsType.MOVE], path, from, null))
       this.trash = new Array()
     }
 
@@ -141,14 +119,14 @@ module lectureDefinitions.models {
 
   export class Operation {
 
-    constructor(operationstype: OperationsType, path: string, from: string, value: string) {
+    constructor(operationstype: string, path: string, from: string, value: string) {
       this.operationstype = operationstype
       this.path = path
       this.from = from
       this.value = value
     }
 
-    operationstype: OperationsType
+    operationstype: string
     path: string
     from: string
     value: string
