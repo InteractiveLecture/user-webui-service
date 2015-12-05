@@ -7,8 +7,8 @@
       <label class="col-md-4 control-label" for="selectbasic">Move module</label>
       <div class="col-md-4">
         <select id="selectbasic" name="selectbasic" class="form-control">
-          <option value="1">Option one</option>
-          <option value="2">Option two</option>
+          <option ng-repeat="module in topicEdit.workingTopic.modules" value="{{module.id}}">{{module.id}} {{module.description}}
+          </option>
         </select>
       </div>
     </div>
@@ -80,8 +80,8 @@
       <label class="col-md-4 control-label" for="selectbasic">Module</label>
       <div class="col-md-4">
         <select id="selectbasic" name="selectbasic" class="form-control">
-          <option value="1">Option one</option>
-          <option value="2">Option two</option>
+          <option ng-repeat="module in topicEdit.workingTopic.modules" value="{{module.id}}">{{module.id}} {{module.description}}
+          </option>
         </select>
       </div>
     </div>

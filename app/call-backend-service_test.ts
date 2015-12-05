@@ -30,7 +30,7 @@ describe('CallBackend', function() {
   it('should transform to Topic', function() {
     this.service.loadModel('/topics/1', (models: lectureDefinitions.models.BaseModel[]) => {
       expect(models.length).toEqual(4)
-      expect(models[0].getUrlFor('self')).toEqual('http://localhost:8080/topics/1')
+
     })
     this.httpBackend.flush()
   })

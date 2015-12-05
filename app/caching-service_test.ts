@@ -5,7 +5,7 @@
 
 describe('Caching', function () {
   var service: any;
-  var topic = new lectureDefinitions.models.Topic(JSON.parse('{"topicName": "Programmierung","topicDescription": "Eine Einführung in die Programmierung mit Java","links": [{"rel": "self","href": "http://localhost:8080/topics/1"},{"rel": "modules","href": "http://localhost:8080/topics/1/modules"},{"rel": "root-module","href": "http://localhost:8080/modules/1"},{"rel": "officers","href": "http://localhost:8080/topics/1/officers"},{"rel": "assistants","href": "http://localhost:8080/topics/1/assistants"}]}'));
+  var topic = new lectureDefinitions.models.Topic(JSON.parse('{"topicDescription": "Eine Einführung in die Programmierung mit Java"}'));
 
   beforeEach(module('interactiveLectureWebFrontend'));
 
@@ -19,7 +19,7 @@ describe('Caching', function () {
 
   it('should save and load the lectureDefinitions Object', function () {
     this.service.save('topic', topic);
-    expect(this.service.load('topic').topicName).toEqual(topic.topicName);
+    expect(this.service.load('topic').topicDescription).toEqual(topic.topicDescription);
   })
 
 });

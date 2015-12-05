@@ -4,13 +4,18 @@ module TopicEditCtrl {
 
   class TopicEditCtrl {
 
+    description: string
+    relatedText: any[]
+    relatedVideos: any[]
     cachingService: Caching.CachingService
     callBackendService: CallBackend.CallBackendService
     workingTopic: lectureDefinitions.models.Topic
     patch: lectureDefinitions.models.LecturePatch
     deleteId: string
-
-
+    addId: string
+    moveId: string
+    textId: any
+    videoId: any
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -24,12 +29,13 @@ module TopicEditCtrl {
 
     // dependencies are injected via AngularJS $injector
     constructor(callBackendService: CallBackend.CallBackendService, $routeParams: any, cachingService: Caching.CachingService) {
-      var vm = this;
+      var vm = this
       vm.callBackendService = callBackendService
       vm.patch = new lectureDefinitions.models.LecturePatch()
       //vm.workingTopic = <lectureDefinitions.models.Topic>cachingService.load($routeParams.id)
       vm.workingTopic = new lectureDefinitions.models.Topic(JSON.parse(lectureDefinitions.models.testdata))
-      // console.log(vm.workingTopic)
+      // Beispiele für Videos, Texte
+
     }
 
     generateDeleteModulePatch(deleteId: string) {
@@ -37,7 +43,15 @@ module TopicEditCtrl {
       this.patch.deleteOperation(path)
     }
 
+    generateAddModulePatch(addId: string, description: string) {
+      var path = "/modules/" + addId
+      this.patch.addOperation(path, description)
+    }
 
+    generateMoveModulePatch(moveId: string, parents: any[]) {
+      var from = "modules/"
+      var path = "modules/"
+    }
 
   }
 
