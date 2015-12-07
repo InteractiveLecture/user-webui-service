@@ -4,8 +4,8 @@ Michael Cremer <cremerm@hochschule-trier.de>
 
 == Ziel des Projekts
 Es soll eine GUI für die Interactive Lecture geschaffen werden. Ziel ist eine
-Implementierung als Website. Verwendet werden dabei meist bekannte Größen für
-Frontend-entwicklung, zum Beispiel bower oder git.
+Implementierung als Website, genauer als Single Page Application. Verwendet werden
+dabei meist bekannte Größen für Frontend-entwicklung, zum Beispiel bower oder npm.
 
 Zur besseren Strukturierung wird Typescript an der Stelle von Javascript verwendet.
 Als Single-Page-Application (SPA) Framework wurde AngularJS gewählt.
@@ -54,6 +54,8 @@ das Hinzufügen neuer Komponenten.
     ├── lodash
     ├── sinon
     └── tsd.d.ts                   <---- Sammelung aller Typings
+    + Doku
+    + Backend speziell für den WebUi service
 
 
 ----
@@ -108,7 +110,7 @@ des Ace-editor.
 === Informationen zu den Werkzeugen bzw Sprachen/Frameworks
 
 * git - https://git-scm.com/documentation
-* diff-match-patch - Url einfügen...
+* diff-match-patch - https://code.google.com/p/google-diff-match-patch/wiki/API
 * npm - https://docs.npmjs.com/
 * gulp - https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 * bower - http://bower.io/#getting-started
@@ -116,6 +118,8 @@ des Ace-editor.
 * cytoscapeJS - http://js.cytoscape.org/
 * angularJS - https://angular.io/
 * typescript - http://www.typescriptlang.org/Tutorial
+* jwt - http://jwt.io/
+* jsonPatch - http://jsonpatch.com/
 
 === Arbeiten mit dem Yeoman-Genrator
 
@@ -130,8 +134,8 @@ in der Dokumentation nachzulesen.
 TIP: Die Ordner im Projekt heißen nicht komform zum *ng-poly* Generator. Jeder Camel-Case muss mit Bindestrich getrennt werden um vom Generator erkannt zu werden. Bsp. uiComponents = ui-components
 
 
-=== Test mit Jasmin
-Die Tests des Projektes werden mit dem Testingframework Jasmin durchgeführt. Ziel
+=== Test mit Jasmine
+Die Tests des Projektes werden mit dem Testingframework Jasmine durchgeführt. Ziel
 ist es jede Logik im Projekt auf ihre korrekte Funktionalität zu testen.
 
 WARNING: Die Directiven des Projekts sind nicht getestet, da Directiven mit dem Scope vom Angular 1.X zusammenhängen. Lösungsvorschläge für das Problem sind willkommen.
@@ -170,12 +174,11 @@ als Directive in diesem Modul integriert.
 === Lecture Definitions
 
 Dieser Ordner sammelt alle Models und Interfaces die für den Webui-service definiert
-wurden.
+wurden. (die Tests der Models fallen auch darunter)
 
 Bisherige Interfaces
 
-* Linkable - Ein Objekt enthält Content um nach
-HATEOAS (Hypertext As The Engine Of Application State) zu arbeiten
+
 * Modelservice - Definiert ob eine Klasse dazu eignet ist mit dem Backend zu kommunizieren
 
 Bisherige Models
@@ -186,10 +189,9 @@ Bisherige Models
 * Exercise - Exercise des Backends abbilden- Topic des Backends abbilden
 * Tutorial- Topic des Backends abbilden
 * Hint- Hint des Backends abbilden
-* TopicPatch - Stellt die Patches dar, welche zur Serverkommunikation benötigt werden. Die Patches sparen Bandbreite und vereinfachen die Kommunikation
+* LecturePatch - Stellt die Patches dar, welche zur Serverkommunikation benötigt werden. Die Patches sparen Bandbreite und vereinfachen die Kommunikation
 * Operation - Die Operationen, die summiert den TopicPatch ergeben (Hierbei handelt es sich um JsonPatches. Es wird nach Konvention ein JSON Object verschickt, welches eine Transaktion beschreibt)
 * OperationType - Ein Enum für die möglichen Operationsarten einer 'Operation'
-
 
 
 === CallBackend-Service
@@ -206,6 +208,8 @@ TIP: Siehe http://jwt.io/ für weitere Information zu oauth und JWT
 extractId(idName: string, url: string): number::
 extrahiert eine Id aus einer URL. Dafür wird der Name bzw der UrlPath vor der mitgegeben.
 Zum Beisiel "topic, /topic/1 " findet die 1.
+
+WARNING: extractId wird bald entfernt da sich die Struktur der Interactive-lecture verändert hat
 
 loadModel(linkUrl: string, callback: any)::
 sendet den HTTP-Request für die Modeldaten der aktuellen View zu laden. Durch den
@@ -231,6 +235,11 @@ erfolgt angular-typisch durch databinding.
 Die Übersicht aller Topics. Topics entsprechen im groben einer Vorlesung in einer
 Hochschule oder Uni.
 
+=== TopicEdit
+
+Zum jetzigen Zeitpunkt nur ein Mock an Formularen.
+Um die Controller einfacher schreiben zu können.
+
 === Topic Detail
 
 Genauere Informationen zu einem Topic lassen hier finden.
@@ -245,7 +254,8 @@ TIP: Cytoscape unter Angular hat einige Tücken. https://gist.github.com/maxkfra
 
 === Home
 
-Hier werden aggregierte Informationen für den User dagestellt.
+Hier werden aggregierte Informationen für den User dagestellt. Dafür muss der
+Rest des Projektes stehen.
 
 === Tutorial (text)
 
