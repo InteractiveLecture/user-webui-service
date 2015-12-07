@@ -3,13 +3,13 @@
 <!-- Main -->
 <div class="container-fluid">
   <div class="row">
-<!-- Left column -->
+    <!-- Left column -->
     <div class="col-sm-3">
-<!-- Siehe uiComponents dash-bar-directive -->
+      <!-- Siehe uiComponents dash-bar-directive -->
       <dash-bar></dash-bar>
     </div>
-<!-- /Left -->
-<!-- Right column -->
+    <!-- /Left -->
+    <!-- Right column -->
     <div class="col-sm-9">
       <div class="col-md-12">
         <div class="panel panel-default">
@@ -19,7 +19,13 @@
           <div class="panel-body">
             <article class="primary">
               <form>
-                <textarea name="newTutorial" class="form-control" rows="12" placeholder="Dieses Tuturial behandelt...."></textarea>
+                <div class="form-group">
+                  <label for="ieberschrift">Überschrift des Tutorials</label>
+                  <input class="form-control" name="ueberschrift">
+                </div>
+                <div class="form-group">
+                  <textarea name="newTutorial" class="form-control" rows="12" placeholder="Dieses Tuturial behandelt...."></textarea>
+                </div>
               </form>
             </article>
             <hr>
