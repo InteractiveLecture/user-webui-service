@@ -29,7 +29,8 @@ module interactiveLectureWebFrontend {
     'uiComponents',
     'tutorialVideoUpload',
     'tutorialTextUpload',
-    'topicEdit'
+    'topicEdit',
+    'moduleEdit'
   ]);
 
   app.config(['$componentLoaderProvider', '$httpProvider', 'jwtInterceptorProvider',

@@ -1,0 +1,41 @@
+<!-- Siehe uiComponents nav-bar-directive -->
+<nav-bar></nav-bar>
+<!-- Main -->
+<div class="container-fluid">
+  <div class="row">
+    <!-- Left column -->
+    <aside class="col-sm-3">
+      <!-- Siehe uiComponents dash-bar-directive -->
+      <dash-bar></dash-bar>
+    </aside>
+    <!-- /Left -->
+    <!-- Right column -->
+    <section class="col-sm-9">
+      <ul class="nav nav-tabs">
+        <li><a ng-click="moduleEdit.currentTab = 1">Bewegen</a></li>
+        <li><a ng-click="moduleEdit.currentTab = 2">Löschen</a></li>
+        <li><a ng-click="moduleEdit.currentTab = 3">Hinzufügen</a></li>
+        <li><a ng-click="moduleEdit.currentTab = 4">Hints verwalten</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Tab Bewegen-->
+        <div ng-show="moduleEdit.currentTab == 1">
+          <h1> Bewegen</h1>
+        </div>
+        <!-- Tab Löschen-->
+        <div ng-show="moduleEdit.currentTab == 2">
+          <h1> löschen</h1>
+        </div>
+        <!-- Tab Hinzufügen-->
+        <div ng-show="moduleEdit.currentTab == 3">
+          <h1> hinzufügen</h1>
+        </div>
+          <!-- Tab Hinzufügen-->
+        <div ng-show="moduleEdit.currentTab == 4">
+          <h1> Hint Verwaltung</h1>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
