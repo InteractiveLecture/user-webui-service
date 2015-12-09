@@ -29,7 +29,12 @@ module AceEditor {
       replace: false,
       controllerAs: 'aceEditor',
       controller: function($timeout: ng.ITimeoutService) {
-        var vm = this;
+        var vm = this
+        vm.currentTab = 1
+        // TODO: Dummy ersetzen
+        vm.javaClasses = [{id: 1}, {id: 2}]
+        console.log(vm.currentTab)
+        console.log(vm.javaClasses)
         // Using Websocket
         vm.socketEnd = new WebSocket("ws://localhost:8000/java-backend", []);
         // Using diff_match_patch

@@ -14,7 +14,7 @@ module RouteCtrl {
 
     // dependencies are injected via AngularJS $injector
     constructor(private $router: any) {
-      var vm = this;
+      var vm = this
       // New Router: Routen definiert anhand von Komponenten
       // Eine Komponente besteht immer aus Template, Controller und eventuell Router
       $router.config([

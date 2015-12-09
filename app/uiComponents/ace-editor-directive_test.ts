@@ -12,7 +12,6 @@ describe('aceEditor', function() {
   beforeEach(inject(function($compile: any, $rootScope: any) {
     scope = $rootScope.$new();
     element = $compile(angular.element('<ace-editor></ace-editor>'))(scope);
-  }));
+  }))
 
-
-});
+})
