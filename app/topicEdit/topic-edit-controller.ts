@@ -16,6 +16,7 @@ module TopicEditCtrl {
     moveId: string
     textId: any
     videoId: any
+    currentTab: number
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -30,6 +31,7 @@ module TopicEditCtrl {
     // dependencies are injected via AngularJS $injector
     constructor(callBackendService: CallBackend.CallBackendService, $routeParams: any, cachingService: Caching.CachingService) {
       var vm = this
+      vm.currentTab = 1
       vm.callBackendService = callBackendService
       vm.patch = new lectureDefinitions.models.LecturePatch()
       //vm.workingTopic = <lectureDefinitions.models.Topic>cachingService.load($routeParams.id)
