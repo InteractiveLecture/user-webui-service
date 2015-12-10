@@ -86,6 +86,8 @@
         "./app/uiComponents/cytoscape-factory.ts",
         "./app/uiComponents/dash-bar-directive_test.ts",
         "./app/uiComponents/dash-bar-directive.ts",
+        "./app/uiComponents/markdown-editor-directive_test.ts",
+        "./app/uiComponents/markdown-editor-directive.ts",
         "./app/uiComponents/nav-bar-directive_test.ts",
         "./app/uiComponents/nav-bar-directive.ts",
         "./app/uiComponents/ui-components-module.ts"

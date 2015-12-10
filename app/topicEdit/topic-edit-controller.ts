@@ -18,6 +18,7 @@ module TopicEditCtrl {
     videoId: any
     currentTab: number
 
+
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
@@ -26,7 +27,7 @@ module TopicEditCtrl {
       'CallBackendService',
       'CachingService',
       '$routeParams'
-    ];
+    ]
 
     // dependencies are injected via AngularJS $injector
     constructor(callBackendService: CallBackend.CallBackendService, $routeParams: any, cachingService: Caching.CachingService) {
@@ -37,7 +38,6 @@ module TopicEditCtrl {
       //vm.workingTopic = <lectureDefinitions.models.Topic>cachingService.load($routeParams.id)
       vm.workingTopic = new lectureDefinitions.models.Topic(JSON.parse(lectureDefinitions.models.testdata))
       // Beispiele für Videos, Texte
-
     }
 
     generateDeleteModulePatch(deleteId: string) {

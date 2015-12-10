@@ -20,7 +20,7 @@ module AceEditor {
   */
   angular
     .module('uiComponents')
-    .directive('aceEditor', aceEditor);
+    .directive('aceEditor', aceEditor)
 
   function aceEditor(): ng.IDirective {
     return {

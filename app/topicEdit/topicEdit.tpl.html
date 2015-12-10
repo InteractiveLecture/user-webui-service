@@ -11,10 +11,12 @@
     <!-- /Left -->
     <!-- Right column -->
     <section class="col-sm-9">
+      <h2> Topic editieren </h2>
       <ul class="nav nav-tabs">
-        <li><a ng-click="topicEdit.currentTab = 1">Bewegen</a></li>
-        <li><a ng-click="topicEdit.currentTab = 2">Löschen</a></li>
-        <li><a ng-click="topicEdit.currentTab = 3">Hinzufügen</a></li>
+        <li><a ng-click="topicEdit.currentTab = 1">Module Bewegen</a></li>
+        <li><a ng-click="topicEdit.currentTab = 2">Module Löschen</a></li>
+        <li><a ng-click="topicEdit.currentTab = 3">Module Hinzufügen</a></li>
+        <li><a ng-click="topicEdit.currentTab = 4">Topic</a></li>
       </ul>
 
       <div class="tab-content">
@@ -22,7 +24,7 @@
         <div ng-show="topicEdit.currentTab == 1">
           <form class="form-horizontal" action="javascript:void(0);">
             <fieldset>
-              <h1>Module Bewegen</h1>
+              <br>
               <!-- Select Basic -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="selectbasic">Move module</label>
@@ -58,7 +60,7 @@
         <div ng-show="topicEdit.currentTab == 2">
           <form class="form-horizontal" action="javascript:void(0);">
             <fieldset>
-              <h1>Module Löschen</h1>
+              <br>
               <!-- Select Basic -->
               <div class="form-group">
                 <label class="col-md-4 control-label" for="selectbasic">Löschen:</label>
@@ -85,7 +87,7 @@
         </div>
         <!-- Tab Hinzufügen-->
         <div ng-show="topicEdit.currentTab == 3">
-          <h1> Module hinzufügen</h1>
+          <br>
 
           <form class="form-horizontal" action="javascript:void(0);">
             <fieldset>
@@ -133,6 +135,19 @@
               </div>
             </fieldset>
           </form>
+        </div>
+        <div ng-show="topicEdit.currentTab == 4">
+
+          <markdown-editor></markdown-editor>
+        <!--
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Beschreibung</label>
+            <div class="col-md-4">
+              <input id="textinput" name="textinput" placeholder="placeholder" class="form-control input-md" type="text">
+              <span class="help-block">help</span>
+            </div>
+          </div>
+        -->
         </div>
       </div>
     </section>

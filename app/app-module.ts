@@ -43,6 +43,8 @@ module interactiveLectureWebFrontend {
       // Die generierten Templates nutzen
       $componentLoaderProvider.setTemplateMapping((name: string) => {
         // name is component name
+        //var regex =  /[-.]/g
+        //regex.test(name)
         return name + '/' + name + '.tpl.html';
       });
 
@@ -64,7 +66,7 @@ module interactiveLectureWebFrontend {
         // localStorage abrufen
         var idToken = localStorage.getItem('id_token');
         var refreshToken = localStorage.getItem('refresh_token');
-        
+
         // Den leeren localStorage für Chrome und Firefox abfangen. (Grrr)
         if (idToken !== 'null' && idToken !== null) {
 
@@ -97,10 +99,7 @@ module interactiveLectureWebFrontend {
           return null;
         }
       }];
-
       // Überschriebenen Interceptor nutzen.
       $httpProvider.interceptors.push('jwtInterceptor');
-
     }]);
-
 }
