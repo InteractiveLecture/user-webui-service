@@ -10,6 +10,7 @@
 1. Use [generator-ng-poly](https://github.com/dustinspecker/generator-ng-poly) to create additional components
 
 ## Gulp tasks
+- Run `gulp default` for build and view in your default Browser
 - Run `gulp build` to compile assets
 - Run `gulp dev` to run the build task and setup the development environment
 - Run `gulp unitTest` to run unit tests via Karma and to create code coverage reports
@@ -34,7 +35,7 @@ cd /path/to/app
 gulp build
 ```
 You can now build the docker-image and run a container:
-```bash 
+```bash
 sudo docker build -t user-web-ui-service .
 sudo docker run --rm -p 8080:80 --name web-test user-web-ui-service
 ```
@@ -44,6 +45,20 @@ Do note that you may need to specify a different ip-adress if you are using dock
 ### Links
 
 Here is a collection of links that might be helpfull.
+
+#### Learning the frameworks and technologies
+
+- git - https://git-scm.com/documentation
+- diff-match-patch - https://code.google.com/p/google-diff-match-patch/wiki/API
+- npm - https://docs.npmjs.com/
+- gulp - https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+- bower - http://bower.io/#getting-started
+- yeoman - http://yeoman.io/
+- cytoscapeJS - http://js.cytoscape.org/
+- angularJS - https://angular.io/
+- typescript - http://www.typescriptlang.org/Tutorial
+- jwt - http://jwt.io/
+- jsonPatch - http://jsonpatch.com/
 
 #### Learning Docker
 
