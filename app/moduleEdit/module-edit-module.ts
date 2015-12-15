@@ -11,5 +11,5 @@ module moduleEdit {
     .module('moduleEdit', [
       'ngNewRouter',
       'interactiveLectureWebFrontend'
-    ]);
+    ])
 }

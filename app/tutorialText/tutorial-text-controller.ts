@@ -16,8 +16,8 @@ module TutorialTextCtrl {
 
     // dependencies are injected via AngularJS $injector
     constructor($routeParams: any) {
-      var vm = this;
-      vm.moduleId = $routeParams.id;
+      var vm = this
+      vm.moduleId = $routeParams.id
     }
   }
 

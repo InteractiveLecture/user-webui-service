@@ -11,5 +11,5 @@ module topicDetails {
     .module('topicDetails', [
       'ngNewRouter',
       'uiComponents'
-    ]);
+    ])
 }

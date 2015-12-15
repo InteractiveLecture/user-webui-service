@@ -19,7 +19,7 @@ module TopicOverviewCtrl {
       var vm = this;
       CallBackend.loadModel('hugo', (topics: lectureDefinitions.models.Topic[]) => {
         vm.topics = topics;
-      });
+      })
 
     }
   }

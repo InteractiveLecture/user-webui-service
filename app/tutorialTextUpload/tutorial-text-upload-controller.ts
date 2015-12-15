@@ -19,6 +19,12 @@ module TutorialTextUploadCtrl {
       var vm = this;
     }
 
+    /**
+     * Ein Tutorial uploaden zum Backend
+     * @param  {string} description [Beschreibung des Tutorials]
+     * @param  {string} name        [Name des Tutorials]
+     * @return {[type]}             [description]
+     */
     uploadText(description: string, name: string) {
       // Do some Upload Magic
     }

@@ -4,10 +4,6 @@ module RouteCtrl {
 
   class RouteCtrl {
 
-    // $inject annotation.
-    // It provides $injector with information about dependencies to be injected into constructor
-    // it is better to have it close to the constructor, because the parameters must match in count and type.
-    // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
       '$router'
     ];
@@ -15,8 +11,10 @@ module RouteCtrl {
     // dependencies are injected via AngularJS $injector
     constructor(private $router: any) {
       var vm = this
-      // New Router: Routen definiert anhand von Komponenten
-      // Eine Komponente besteht immer aus Template, Controller und eventuell Router
+      
+      /** New Router: Routen definiert anhand von Komponenten
+      * 	Eine Komponente besteht immer aus Template, Controller und eventuell Router
+      **/
       $router.config([
         { path: '/', redirectTo: '/login' },
         { path: '/home', component: 'home' },

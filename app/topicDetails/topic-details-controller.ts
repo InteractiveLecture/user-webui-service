@@ -16,8 +16,8 @@ module TopicDetailsCtrl {
 
     // dependencies are injected via AngularJS $injector
     constructor($routeParams: any) {
-      var vm = this;
-      vm.topicsId = $routeParams.id;
+      var vm = this
+      vm.topicsId = $routeParams.id
     }
   }
 

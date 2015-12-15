@@ -40,16 +40,31 @@ module TopicEditCtrl {
       // Beispiele für Videos, Texte
     }
 
+    /**
+     * Einen Delete Patch generieren
+     * @param  {string} deleteId [Welches Module wird gelöscht]
+     */
     generateDeleteModulePatch(deleteId: string) {
       var path = "/modules/" + deleteId
       this.patch.deleteOperation(path)
     }
 
+    /**
+     * Einen Add Patch generieren
+     * @param  {string} addId       [Id des neuen Modules]
+     * @param  {string} description [Modulebeschreibung]
+     */
     generateAddModulePatch(addId: string, description: string) {
       var path = "/modules/" + addId
       this.patch.addOperation(path, description)
     }
 
+    /**
+     * Move Patch generieren
+     * @param  {string} moveId  [Welches Module wird bewegt]
+     * @param  {any[]}  parents [Die neuen Eltern des Modules um den neuen Platz zu erkennen]
+     * @return {[type]}         [description]
+     */
     generateMoveModulePatch(moveId: string, parents: any[]) {
       var from = "modules/"
       var path = "modules/"

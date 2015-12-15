@@ -12,5 +12,5 @@ module home {
         'ngNewRouter',
         'ngCookies',
         'uiComponents'
-    ]);
+    ])
 }

@@ -12,5 +12,5 @@ module login {
       'ngNewRouter',
       'ngCookies',
       'interactiveLectureWebFrontend'
-    ]);
+    ])
 }

@@ -11,5 +11,5 @@ module topicEdit {
     .module('topicEdit', [
       'ngNewRouter',
       'interactiveLectureWebFrontend'
-    ]);
+    ])
 }

@@ -11,5 +11,5 @@ module moduleOverview {
     .module('moduleOverview', [
       'ngNewRouter',
       'uiComponents'
-    ]);
+    ])
 }

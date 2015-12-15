@@ -28,6 +28,11 @@ module LoginCtrl {
       vm.callBackend = CallBackendService;
     }
 
+    /**
+     * Ein Loginversuch des Nutzers. Die Fehlermeldung git den http-status wieder und
+     * bei Erfolg werden die Profildaten in den Cache gespeichert
+     * @param  {any}    userData [User Objekt mit kennung und passwort]
+     */
     public attemptLogin(userData: any) {
       // CallBackend Service nutzen
       this.userData = userData

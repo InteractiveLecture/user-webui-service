@@ -11,5 +11,5 @@ module tutorialVideo {
     .module('tutorialVideo', [
       'ngNewRouter',
       'uiComponents'
-    ]);
+    ])
 }

@@ -18,9 +18,9 @@ module ProfileCtrl {
 
     // dependencies are injected via AngularJS $injector
     constructor(CachingService: Caching.CachingService, $http: ng.IHttpService) {
-      var vm = this;
-      vm.cache = CachingService;
-      vm.profileData = <lectureDefinitions.models.Profile>vm.cache.load('profile');
+      var vm = this
+      vm.cache = CachingService
+      vm.profileData = <lectureDefinitions.models.Profile>vm.cache.load('profile')
     }
   }
 

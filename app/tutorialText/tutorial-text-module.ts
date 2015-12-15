@@ -11,5 +11,5 @@ module tutorialText {
     .module('tutorialText', [
       'ngNewRouter',
       'uiComponents'
-    ]);
+    ])
 }

@@ -12,6 +12,6 @@ module exerciseWorksheet {
     .module('exerciseWorksheet', [
       'ngNewRouter'
 
-    ]);
+    ])
 
 }

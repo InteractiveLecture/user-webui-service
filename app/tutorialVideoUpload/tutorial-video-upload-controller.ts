@@ -18,7 +18,12 @@ module TutorialVideoUploadCtrl {
       var vm = this;
     }
 
-    uploadVideo(file:any, name:string) {
+    /**
+     * Upload eines Videos an das Backend
+     * @param  {any}    file [Videodatei]
+     * @param  {string} name [Name des Videos]
+     */
+    uploadVideo(file: any, name: string) {
       // Do some Upload Magic
     }
   }

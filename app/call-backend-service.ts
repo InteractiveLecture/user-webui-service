@@ -1,6 +1,6 @@
 ///<reference path='../typings/tsd.d.ts' />
 module CallBackend {
-  'use strict';
+  'use strict'
 
   export class CallBackendService implements lectureDefinitions.interfaces.ModelService {
 
@@ -20,7 +20,15 @@ module CallBackend {
       'jwtHelper'
     ];
 
-    // Dependency einbinden
+    /**
+     * Einbinden der Dependency's
+     * @param  {Caching.CachingService}      CachingService    [Die Daten die beschafft werden sollen gecached werden]
+     * @param  {any}                         $routeParams      [RoutenParameter nutzen]
+     * @param  {ng.IHttpService}             $http             [http-request versenden an das Backend]
+     * @param  {ng.IQService}                $q                [Das defered zum schließen der Ressourcen]
+     * @param  {any}                         jwtHelper         [Die Verarbeitung der Jwt-Token]
+     * @param  {ng.IExceptionHandlerService} $exceptionHandler [Eigene Exceptions]
+     */
     constructor(CachingService: Caching.CachingService, $routeParams: any, $http: ng.IHttpService, $q: ng.IQService, jwtHelper: any, $exceptionHandler: ng.IExceptionHandlerService) {
       var vm = this
       vm.cache = CachingService
@@ -32,12 +40,20 @@ module CallBackend {
 
     }
 
+    /**
+     * Service identifizieren
+     * @return {string} [ServiceName]
+     */
     get(): string {
       return 'CallBackendService';
     }
 
-    // Modeldaten anhand der übergebenen Url laden.
-    // Die Verwendung der Daten bestimmt der Nutzer per Callback
+    /**
+     * Modeldaten anhand der übergebenen Url laden. Die Verwendung der Daten
+     * bestimmt der Nutzer per Callback
+     * @param  {string} linkUrl  [Url wo die Ressourcen zu laden sind]
+     * @param  {any}    callback [Callback damit der Aufrufer das Ergebnis verwenden kann]
+     */
     loadModel(linkUrl: string, callback: any) {
       var model = this.cache.load(linkUrl);
       if (model !== undefined) {
@@ -56,9 +72,15 @@ module CallBackend {
       }, (err) => console.log(err))
     }
 
-    // Eine Id aus einer Url herausfiltern
-    // Wichtig ist der idName: z.B. url = http://localhost:8080/topics/1
-    // mit idName = topics; wird die 1 gefunden
+
+    /**
+     * Eine Id aus einer Url herausfiltern
+     * Wichtig ist der idName: z.B. url = http://localhost:8080/topics/1
+     * mit idName = topics; wird die 1 gefunden
+     * @param  {string} idName [Teil der Url dessen Id gesucht wird]
+     * @param  {string} url    [Url die durchsucht werden soll]
+     * @return {number}        [Die Id die angegebener Url gefunden wurde]
+     */
     extractId(idName: string, url: string): number {
       var href = url;
       if (href === null) {
@@ -77,9 +99,12 @@ module CallBackend {
       return null;
     }
 
-    // LOGIN
-    // Gibt die eingetippten Daten ans Backend weiter. resultat wird im Cache
-    // gespeichert und zurückgegeben
+    /**
+     * Gibt die eingetippten Daten ans Backend weiter. Das Resultat wird im Cache
+     * gespeichert und zurückgegeben
+     * @param  {any}    userData [Object, welches ein passwort und eine kennung ernhält]
+     * @param  {any}    callback [Das Egebnis des Post's wird dem Aufrufer gezeigt]
+     */
     postUserData(userData: any, callback: any) {
       var username = userData.kennung;
       var passwort = userData.passwort;
