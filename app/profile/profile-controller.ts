@@ -5,7 +5,7 @@ module ProfileCtrl {
   class ProfileCtrl {
 
     cache: Caching.CachingService
-    profileData: lectureDefinitions.models.Profile
+    profileData: lectureDefinitions.models.User
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -20,7 +20,7 @@ module ProfileCtrl {
     constructor(CachingService: Caching.CachingService, $http: ng.IHttpService) {
       var vm = this
       vm.cache = CachingService
-      vm.profileData = <lectureDefinitions.models.Profile>vm.cache.load('profile')
+      
     }
   }
 

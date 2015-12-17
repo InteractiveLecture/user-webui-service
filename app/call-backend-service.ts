@@ -4,21 +4,19 @@ module CallBackend {
 
   export class CallBackendService implements lectureDefinitions.interfaces.ModelService {
 
-    cache: Caching.CachingService;
-    $routeParams: any;
-    $http: ng.IHttpService;
-    $q: ng.IQService;
-    jwtHelper: ng.jwt.IJwtHelper;
+    $routeParams: any
+    $http: ng.IHttpService
+    $q: ng.IQService
+    jwtHelper: ng.jwt.IJwtHelper
     $exceptionHandler: ng.IExceptionHandlerService
 
 
     public static $inject: string[] = [
-      'CachingService',
       '$routeParams',
       '$http',
       '$exceptionHandler',
       'jwtHelper'
-    ];
+    ]
 
     /**
      * Einbinden der Dependency's
@@ -29,9 +27,8 @@ module CallBackend {
      * @param  {any}                         jwtHelper         [Die Verarbeitung der Jwt-Token]
      * @param  {ng.IExceptionHandlerService} $exceptionHandler [Eigene Exceptions]
      */
-    constructor(CachingService: Caching.CachingService, $routeParams: any, $http: ng.IHttpService, $q: ng.IQService, jwtHelper: any, $exceptionHandler: ng.IExceptionHandlerService) {
+    constructor($routeParams: any, $http: ng.IHttpService, $q: ng.IQService, jwtHelper: any, $exceptionHandler: ng.IExceptionHandlerService) {
       var vm = this
-      vm.cache = CachingService
       vm.$routeParams = $routeParams
       vm.$http = $http
       vm.$q = $q
@@ -54,49 +51,14 @@ module CallBackend {
      * @param  {string} linkUrl  [Url wo die Ressourcen zu laden sind]
      * @param  {any}    callback [Callback damit der Aufrufer das Ergebnis verwenden kann]
      */
-    loadModel(linkUrl: string, callback: any) {
-      var model = this.cache.load(linkUrl);
-      if (model !== undefined) {
-        if (model !== null) {
-          if (model.id === this.extractId(model.cacheIndex, linkUrl)) {
-            return model;
-          }
-        }
-      }
+    loadModel(id: string, callback: any) {
       this.$http({
         method: 'GET',
-        url: linkUrl
+        url: id // An das Backend
       }).then((result: any) => {
         var jsonResult = result.data;
         callback(jsonResult.content.map((item: any) => new lectureDefinitions.models.BaseModel(item)));
       }, (err) => console.log(err))
-    }
-
-
-    /**
-     * Eine Id aus einer Url herausfiltern
-     * Wichtig ist der idName: z.B. url = http://localhost:8080/topics/1
-     * mit idName = topics; wird die 1 gefunden
-     * @param  {string} idName [Teil der Url dessen Id gesucht wird]
-     * @param  {string} url    [Url die durchsucht werden soll]
-     * @return {number}        [Die Id die angegebener Url gefunden wurde]
-     */
-    extractId(idName: string, url: string): number {
-      var href = url
-      if (href === null) {
-        return null;
-      }
-      var elements: string[] = href.split("/");
-      for (var i = 0; i < elements.length; i++) {
-        if (elements[i] === idName) {
-          if (i < elements.length) {
-            if (!isNaN(parseInt(elements[i + 1]))) {
-              return parseInt(elements[i + 1]);
-            }
-          }
-        }
-      }
-      return null
     }
 
     /**

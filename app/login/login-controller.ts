@@ -9,6 +9,7 @@ module LoginCtrl {
     $location: ng.ILocationService
     callBackend: CallBackend.CallBackendService
     errorStatus: string
+    rfc4122: any
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -17,15 +18,17 @@ module LoginCtrl {
     public static $inject: string[] = [
       '$cookies',
       'CallBackendService',
-      '$location'
+      '$location',
+      'rfc4122'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($cookies: any, CallBackendService: any, $location: ng.ILocationService) {
-      var vm = this;
-      vm.$cookies = $cookies;
-      vm.$location = $location;
-      vm.callBackend = CallBackendService;
+    constructor($cookies: any, CallBackendService: any, $location: ng.ILocationService, rfc4122: any) {
+      var vm = this
+      vm.$cookies = $cookies
+      vm.$location = $location
+      vm.callBackend = CallBackendService
+      //console.log(rfc4122.v4())
     }
 
     /**

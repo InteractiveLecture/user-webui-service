@@ -11,6 +11,7 @@ module login {
     .module('login', [
       'ngNewRouter',
       'ngCookies',
+      'uuid',
       'interactiveLectureWebFrontend'
     ])
 }

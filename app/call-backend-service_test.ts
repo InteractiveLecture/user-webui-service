@@ -35,12 +35,6 @@ describe('CallBackend', function() {
     this.httpBackend.flush()
   })
 
-  it('should return an id', function() {
-    expect(this.service.extractId('topics', 'http://localhost:8080/topics/1')).toEqual(1)
-    expect(this.service.extractId('hugo', 'http://localhost:8080/topics/1')).toEqual(null)
-    expect(this.service.extractId('module', 'http://localhost:8080/module/test')).toEqual(null)
-  })
-
   it('should post userData to /authentication-service/oauth/token', function() {
     var userData = {kennung: "cremerm", passwort: "1234"}
     this.service.postUserData(userData, (err: any, res: any)=> {
