@@ -30,9 +30,8 @@ module NavBar {
       replace: false,
       controllerAs: 'navBar',
       controller: function() {
-        var vm = this;
-        vm.name = 'navBar';
-        vm.profileData = CachingService.load('profile');
+        var vm = this
+        vm.name = 'navBar'
       },
       link: function(scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */

@@ -21,5 +21,13 @@
   },
   "devDependencies": {
     "angular-mocks": "~1.4.*"
+  },
+  "overrides": {
+    "ace-builds": {
+      "main": "src-noconflict/ace.js"
+    },
+    "angular-new-router": {
+      "main": "dist/router.es5.js"
+    }
   }
 }

@@ -33,13 +33,13 @@ module interactiveLectureWebFrontend {
     'moduleEdit'
   ]);
 
-/**
- * Startkonfiguration der AngularJs app.
- * @param  '$componentLoaderProvider' [Zum einstellen der Namen für die Komponenten und der Pfade]
- * @param  '$httpProvider'             [Manipuliert die standard http-request]
- * @param  'jwtInterceptorProvider'    [Interceptor zum verwenden der Jwt-Token]
- *
- */
+  /**
+   * Startkonfiguration der AngularJs app.
+   * @param  '$componentLoaderProvider' [Zum einstellen der Namen für die Komponenten und der Pfade]
+   * @param  '$httpProvider'             [Manipuliert die standard http-request]
+   * @param  'jwtInterceptorProvider'    [Interceptor zum verwenden der Jwt-Token]
+   *
+   */
   app.config(['$componentLoaderProvider', '$httpProvider', 'jwtInterceptorProvider',
     ($componentLoaderProvider: any, $httpProvider: ng.IHttpProvider, jwtInterceptorProvider: any) => {
       // Die generierten Controller nutzen
@@ -50,9 +50,8 @@ module interactiveLectureWebFrontend {
       // Die generierten Templates nutzen
       $componentLoaderProvider.setTemplateMapping((name: string) => {
         // name is component name
-        // TODO: Mit regulären ausdruck an ng-poly anpassen
-        //var regex =  /[-.]/g
-        //regex.test(name)
+        //
+        console.log(name.replace(/[A-Z]/g, (match) => { return "-" + match.toLowerCase() }))
         return name + '/' + name + '.tpl.html';
       })
 
