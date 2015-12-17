@@ -9,8 +9,8 @@ module lectureDefinitions.models {
    * Basismodel der Daten für dieses Projekt
    */
   export class BaseModel {
-    cacheIndex: string
-    id: number
+    id: string
+    //
     constructor(object: any) {
       for (var prop in object) {
         this[prop] = object[prop];
@@ -22,66 +22,192 @@ module lectureDefinitions.models {
    * Die Topics, also Vorlesungen der Interactive Lecture
    */
   export class Topic extends models.BaseModel {
-    cacheIndex: string = 'topics'
-    topicDescription: string
-    modules: Module[]
+    name: string
+    description: string
+    // Größer 0 keine komma
+    version: number
+    module: Module[]
+    authorities: authority[]
+  }
 
+  export class authority {
+    user_id: string
+    topic_id: string
+    kind: string
   }
 
   /**
    * Die Module, also Themen der Interactive Lecture
    */
   export class Module extends models.BaseModel {
-    cacheIndex: string = 'module'
+    topic_id: string
+    video_id: string
+    script_id: string
     description: string
+    // Größer 0 keine komma
+    version: number
+    exercises: Exercise[]
   }
 
   /**
    * Die Exercises, also Übungen der Interactive Lecture
    */
   export class Exercise extends models.BaseModel {
-    cacheIndex: string = 'exercise'
+    module_id: string
+    backend: string
+    version: number
     task: string
-    points: number
-    title: string
-    description: string
   }
 
   /**
-   * Die Tutials, also Tutorien der Interactive Lecture
+   * Task des Interactive Lecture
    */
-  export class Tutorial extends models.BaseModel {
-    cacheIndex: string = 'tutorial'
-    id: number
-    name: string
-    description: string
-  }
-
-  /**
-   * Die Profile, also Nutzerprofile der Interactive Lecture
-   */
-  export class Profile extends models.BaseModel {
-    cacheIndex: string = 'profile'
-    email: string = this.user_name + "@hochschule-trier.de"
-    user_name: string
-    passwort: string
-    exp: number
-    authorities: string[]
-    jti: string
-    client_id: string
+  export class Task extends models.BaseModel {
+    exercise_id: string
+    // Gleich der Arrayposition
+    position: number
+    content: string
+    // Id's der Hinweise
+    hints: string[]
   }
 
   /**
    * Die Hints, also Hinweise der Interactive Lecture
    */
-  export class Hint {
-    description: string
+  export class Hint extends models.BaseModel {
+    task_id: string
+    content: string
+    position: number
+    // Int
+    cost: number
   }
 
-  // TODO: Sinn der  Linkklasse klären
-  export class Link {
-    rel: string
-    href: string
+  /**
+   * Definiert alles was History Klassen gemeinsam haben
+   */
+  export class BaseHistory {
+    user_id: string
+    amount: number
+    time: Date
+    state: string
+  }
+
+  /**
+   * Angefangen und Abgeschlossene Module
+   */
+  export class ModuleProgressHistory extends models.BaseHistory {
+    module_id: string
+  }
+
+  /**
+   * Angefangen und Abgeschlossene Exercises
+   */
+  export class ExerciseProgressHistory extends models.BaseHistory {
+    exercise_id: string
+  }
+
+  /**
+   * Welche Hints hat der User benutzt
+   */
+  export class HintPurchaseHistory {
+    user_id: string
+    amount: number
+    time: Date
+  }
+
+  /**
+   * Zeigt die Kredits zum Kauf der Hints an
+   */
+  export class TopicBalance {
+    user_id: string
+    topic_id: string
+    amount: number
+  }
+
+
+  /**
+   * Die Profile, also Nutzerprofile der Interactive Lecture
+   */
+  export class User extends models.BaseModel {
+    username: string
+  }
+
+  /**
+   * Report für die Exercises zu korrigieren
+   */
+  export class CompilationReport {
+    date: Date
+    errors: CompilationDiagnostic[]
+    warnings: CompilationDiagnostic[]
+
+    /**
+     * Prüft ob Fehler vorhanden sind
+     * @return {boolean} [true = Fehler]
+     */
+    hasErrors(): boolean {
+      return this.errors.length > 0
+    }
+
+    /**
+     * Prüft ob Warrnungen vorhanden sind
+     * @return {boolean} [true = Warnung]
+     */
+    hasWarnings(): boolean {
+      return this.warnings.length > 0
+    }
+  }
+
+  /**
+   * Ergebnisse der Exercise des Users nach einer Kontrolle des Backends
+   */
+  export class CompilationDiagnostic {
+    classname: string
+    code: string
+    colNumber: number
+    endPosition: number
+    startPosition: number
+    lineNumber: number
+    message: string
+    position: number
+    noPosition: boolean
+  }
+
+  /**
+   * Momentaner Stand des Server für den User
+   */
+  export class SourceContainer {
+    userId: string
+    taskId: string
+    // Key Klassenname, Value SourceCode
+    // Wenn leer = Exercise nicht begonnen
+    map: any
+    submissionDate: Date
+    compilationReport: CompilationReport
+  }
+
+  /**
+   * Junit TestReport
+   */
+  export class TestReport {
+    allPassed: boolean
+    testResults: TestResult[]
+  }
+
+  /**
+   * Junit Result
+   */
+  export class TestResult {
+    successful: boolean
+    Failures: Failure[]
+  }
+
+  /**
+   * Fehler im TestResult
+   */
+  export class Failure {
+    message:string
+    className: string
+    methodName: string
   }
 
   /**
@@ -189,8 +315,6 @@ module lectureDefinitions.models {
     from: string
     value: string
   }
-
-
 
   // Ende Modul
 }

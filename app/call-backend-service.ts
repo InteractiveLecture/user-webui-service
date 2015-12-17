@@ -82,7 +82,7 @@ module CallBackend {
      * @return {number}        [Die Id die angegebener Url gefunden wurde]
      */
     extractId(idName: string, url: string): number {
-      var href = url;
+      var href = url
       if (href === null) {
         return null;
       }
@@ -96,7 +96,7 @@ module CallBackend {
           }
         }
       }
-      return null;
+      return null
     }
 
     /**
