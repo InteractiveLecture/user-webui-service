@@ -12,17 +12,127 @@
     <!-- Right column -->
     <section class="col-sm-9">
       <ul class="nav nav-tabs">
-        <li><a ng-click="moduleEdit.currentTab = 1">Löschen</a></li>
-        <li><a ng-click="moduleEdit.currentTab = 2">Hinzufügen</a></li>
+        <li><a ng-click="moduleEdit.currentTab = 1">Exercise Löschen</a></li>
+        <li><a ng-click="moduleEdit.currentTab = 2">Exercise Hinzufügen</a></li>
+        <li><a ng-click="moduleEdit.currentTab = 3">Module Editieren</a></li>
       </ul>
       <div class="tab-content">
         <!-- Tab Löschen-->
         <div ng-show="moduleEdit.currentTab == 1">
           <h1> löschen</h1>
+          <form class="form-horizontal">
+            <fieldset>
+              <!-- Select Basic -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">Select Module</label>
+                <div class="col-md-4">
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Button -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                <div class="col-md-4">
+                  <button id="singlebutton" name="singlebutton" class="btn btn-danger">Löschen</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </div>
         <!-- Tab Hinzufügen-->
         <div ng-show="moduleEdit.currentTab == 2">
           <h1> hinzufügen</h1>
+          <form class="form-horizontal">
+            <fieldset>
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Backend</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" placeholder="placeholder" class="form-control input-md" type="text">
+                  <span class="help-block">help</span>
+                </div>
+              </div>
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Hints</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" placeholder="placeholder" class="form-control input-md" type="text">
+                  <span class="help-block">help</span>
+                </div>
+              </div>
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">Tasks hinzufügen</label>
+                <div class="col-md-4">
+                  <input id="textinput" name="textinput" placeholder="placeholder" class="form-control input-md" type="text">
+                  <span class="help-block">help</span>
+                </div>
+              </div>
+              <!-- Button -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                <div class="col-md-4">
+                  <button id="singlebutton" name="singlebutton" class="btn btn-primary">Add</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <!-- Editieren des Modules-->
+        <div ng-show="moduleEdit.currentTab == 3">
+          <h1> Editieren</h1>
+          <form class="form-horizontal">
+            <fieldset>
+              <!-- Select Basic -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">Module which edit</label>
+                <div class="col-md-4">
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Text input-->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="Description">Description</label>
+                <div class="col-md-4">
+                  <input id="Description" name="Description" placeholder="placeholder" class="form-control input-md" type="text">
+                  <span class="help-block">help</span>
+                </div>
+              </div>
+              <!-- Select Basic -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">related script</label>
+                <div class="col-md-4">
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Select Basic -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="selectbasic">related Video</label>
+                <div class="col-md-4">
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">Option one</option>
+                    <option value="2">Option two</option>
+                  </select>
+                </div>
+              </div>
+              <!-- Button -->
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                <div class="col-md-4">
+                  <button id="singlebutton" name="singlebutton" class="btn btn-primary">Ändern</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
         </div>
       </div>
     </section>

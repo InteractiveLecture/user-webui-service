@@ -68,11 +68,11 @@ module CallBackend {
      * @param  {any}    callback [Das Egebnis des Post's wird dem Aufrufer gezeigt]
      */
     postUserData(userData: any, callback: any) {
-      var username = userData.kennung;
-      var passwort = userData.passwort;
-      var clientId = "user-web-client";
+      var username = userData.kennung
+      var passwort = userData.passwort
+      var clientId = "user-web-client"
       var clientSecret = "user-web-client-secret"
-      var grant_type = "password";
+      var grant_type = "password"
       var data = `username=${username}&password=${passwort}&client_id=${clientId}&client_secret=${clientSecret}&grant_type=${grant_type}`
       var req = {
         method: 'POST',

@@ -10,6 +10,7 @@ module topicEdit {
   angular
     .module('topicEdit', [
       'ngNewRouter',
-      'interactiveLectureWebFrontend'
+      'interactiveLectureWebFrontend',
+      'uuid'
     ])
 }

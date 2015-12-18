@@ -35,7 +35,6 @@ module lectureDefinitions.models {
     topic_id: string
     kind: string
   }
-
   /**
    * Die Module, also Themen der Interactive Lecture
    */
@@ -56,7 +55,7 @@ module lectureDefinitions.models {
     module_id: string
     backend: string
     version: number
-    task: string
+    task: string[]
   }
 
   /**
@@ -238,7 +237,7 @@ module lectureDefinitions.models {
      * @param  {string} path  [Pfad im ModuleTree]
      * @param  {string} value [Wert der in der angegebenen Stelle hinzugefügt werdenn soll]
      */
-    addOperation(path: string, value: string) {
+    addOperation(path: string, value: any) {
       this.operations.push(new Operation(OperationsType[OperationsType.ADD], path, null, value))
       this.trash = new Array()
     }
@@ -248,7 +247,7 @@ module lectureDefinitions.models {
      * @param  {string} path  [Pfad im ModuleTree]
      * @param  {string} value [Wert der eingefügt wird]
      */
-    replaceOperation(path: string, value: string) {
+    replaceOperation(path: string, value: any) {
       this.operations.push(new Operation(OperationsType[OperationsType.REPLACE], path, null, value))
       this.trash = new Array()
     }

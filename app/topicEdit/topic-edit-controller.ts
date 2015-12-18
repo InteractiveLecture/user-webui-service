@@ -14,9 +14,10 @@ module TopicEditCtrl {
     deleteId: string
     addId: string
     moveId: string
-    textId: any
-    videoId: any
+    scriptId: string
+    videoId: string
     currentTab: number
+    rfc4122: any
 
 
     // $inject annotation.
@@ -26,14 +27,16 @@ module TopicEditCtrl {
     public static $inject: any = [
       'CallBackendService',
       'CachingService',
-      '$routeParams'
+      '$routeParams',
+      'rfc4122'
     ]
 
     // dependencies are injected via AngularJS $injector
-    constructor(callBackendService: CallBackend.CallBackendService, $routeParams: any, cachingService: Caching.CachingService) {
+    constructor(callBackendService: CallBackend.CallBackendService, $routeParams: any, cachingService: Caching.CachingService, rfc4122: any) {
       var vm = this
       vm.currentTab = 1
       vm.callBackendService = callBackendService
+      vm.rfc4122 = rfc4122
       vm.patch = new lectureDefinitions.models.LecturePatch()
       //vm.workingTopic = <lectureDefinitions.models.Topic>cachingService.load($routeParams.id)
       vm.workingTopic = new lectureDefinitions.models.Topic(JSON.parse(lectureDefinitions.models.testdata))
@@ -54,9 +57,15 @@ module TopicEditCtrl {
      * @param  {string} addId       [Id des neuen Modules]
      * @param  {string} description [Modulebeschreibung]
      */
-    generateAddModulePatch(addId: string, description: string) {
-      var path = "/modules/" + addId
-      this.patch.addOperation(path, description)
+    generateAddModulePatch(description: string, video_id: string, script_id: string) {
+      var path = "/modules/"
+      var value = {
+        id: this.rfc4122.v4(),
+        description: description,
+        video_id: video_id,
+        script_id: script_id
+      }
+      this.patch.addOperation(path, value)
     }
 
     /**
@@ -65,9 +74,16 @@ module TopicEditCtrl {
      * @param  {any[]}  parents [Die neuen Eltern des Modules um den neuen Platz zu erkennen]
      * @return {[type]}         [description]
      */
-    generateMoveModulePatch(moveId: string, parents: any[]) {
-      var from = "modules/"
-      var path = "modules/"
+    generateMoveModulePatch(moveId: string, parents: string[]) {
+      var path = "/modules/parents" + moveId
+      var value = parents
+      this.patch.replaceOperation(path, value)
+    }
+
+    generateChangeTopicPatch(topic_id: string, description: string){
+      var path = "/description" + topic_id
+      var value = description
+      this.patch.replaceOperation(path, value)
     }
 
   }
