@@ -7,12 +7,13 @@ module user {
     .config(config)
 
   function config($stateProvider: ng.ui.IStateProvider) {
+    console.log('setze alias')
     $stateProvider
-      .state('login', {
-        url: '/login',
-        templateUrl: 'user/login/login.tpl.html',
-        controller: 'LoginCtrl',
-        controllerAs: 'login'
-      });
+      .state('loginScreen', {
+      url: '/login',
+      templateUrl: 'user/login/login.tpl.html',
+      controller: 'LoginCtrl',
+      controllerAs: 'login'
+    });
   }
 }

@@ -7,6 +7,6 @@ module webUiService {
     .config(config);
 
   function config($urlRouterProvider: ng.ui.IUrlRouterProvider) {
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/login');
   }
 }

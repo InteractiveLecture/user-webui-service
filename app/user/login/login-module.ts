@@ -9,6 +9,8 @@ module user {
   */
   angular
     .module('user.login', [
-      'ui.router'
-    ]);
+    'ui.router',
+    'angular-jwt',
+    'webUiService'
+  ]);
 }
