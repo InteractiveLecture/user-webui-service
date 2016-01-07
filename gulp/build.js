@@ -3,6 +3,7 @@
 var _ = require('underscore.string')
   , fs = require('fs')
   , path = require('path')
+  , del = require('del')
 
   , bowerDir = JSON.parse(fs.readFileSync('.bowerrc')).directory + path.sep;
 
@@ -262,5 +263,19 @@ module.exports = function (gulp, $, config) {
       });
   });
 
-  gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'favicon', 'fonts']);
+  /**
+   * Eigene Tasks
+   */
+
+  gulp.task('copyAce', ['bowerAssets', 'cleanAce'], function() {
+    return gulp
+      .src(['bower_components/ace-builds/src-noconflict/**/*.js', '!bower_components/ace-builds/src-noconflict/ace.js'])
+      .pipe(gulp.dest('build/app/vendor/ace-builds/src-noconflict'));
+  });
+
+  gulp.task('cleanAce', function() {
+    return del['build/app/vendor/ace-builds/*'];
+  });
+
+  gulp.task('build', ['deleteTemplates', 'bowerAssets', 'images', 'fonts', 'copyAce']);
 };

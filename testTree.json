@@ -1,0 +1,55 @@
+[{
+  "id": "98bf99f7-3fed-3fd0-b43e-0b0f376b3607",
+  "level": 0,
+  "paths": ["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607"],
+  "description": "foo",
+  "topic_id": "b8c98f3e-bb7c-39e7-a3ce-e479c7892882",
+  "video_id": "62a69684-d4f0-3cbe-9016-58d1bf67b42a",
+  "script_id": "3d6cf4b2-37e1-3d38-9251-3636bab8bb9e",
+  "children": ["a9a0ad45-2d48-3f7b-bb7e-93340887a3ed"]
+}, {
+  "id": "a9a0ad45-2d48-3f7b-bb7e-93340887a3ed",
+  "level": 1,
+  "paths": ["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed"],
+  "description": "bar",
+  "topic_id": "b8c98f3e-bb7c-39e7-a3ce-e479c7892882",
+  "video_id": "62a69684-d4f0-3cbe-9016-58d1bf67b42a",
+  "script_id": "3d6cf4b2-37e1-3d38-9251-3636bab8bb9e",
+  "children": ["6d22f47b-5627-3b6b-b110-b1c7b65ec51f"]
+}, {
+  "id": "6d22f47b-5627-3b6b-b110-b1c7b65ec51f",
+  "level": 2,
+  "paths": ["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f"],
+  "description": "bli",
+  "topic_id": "b8c98f3e-bb7c-39e7-a3ce-e479c7892882",
+  "video_id": "62a69684-d4f0-3cbe-9016-58d1bf67b42a",
+  "script_id": "3d6cf4b2-37e1-3d38-9251-3636bab8bb9e",
+  "children": ["921f23fb-de2a-32cf-855b-8d57ac12f7d1", "76ca2474-f18f-39e7-9a11-21f5981685d6"]
+}, {
+  "id": "76ca2474-f18f-39e7-9a11-21f5981685d6",
+  "level": 3,
+  "paths": ["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/76ca2474-f18f-39e7-9a11-21f5981685d6"],
+  "description": "blubb",
+  "topic_id": "b8c98f3e-bb7c-39e7-a3ce-e479c7892882",
+  "video_id": "62a69684-d4f0-3cbe-9016-58d1bf67b42a",
+  "script_id": "3d6cf4b2-37e1-3d38-9251-3636bab8bb9e",
+  "children": ["834e4592-5a04-32ed-8b44-6c5d2d187c55"]
+}, {
+  "id": "921f23fb-de2a-32cf-855b-8d57ac12f7d1",
+  "level": 3,
+  "paths": ["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/921f23fb-de2a-32cf-855b-8d57ac12f7d1"],
+  "description": "bla",
+  "topic_id": "b8c98f3e-bb7c-39e7-a3ce-e479c7892882",
+  "video_id": "62a69684-d4f0-3cbe-9016-58d1bf67b42a",
+  "script_id": "3d6cf4b2-37e1-3d38-9251-3636bab8bb9e",
+  "children": ["834e4592-5a04-32ed-8b44-6c5d2d187c55"]
+}, {
+  "id": "834e4592-5a04-32ed-8b44-6c5d2d187c55",
+  "level": 4,
+  "paths": ["/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/76ca2474-f18f-39e7-9a11-21f5981685d6/834e4592-5a04-32ed-8b44-6c5d2d187c55", "/98bf99f7-3fed-3fd0-b43e-0b0f376b3607/a9a0ad45-2d48-3f7b-bb7e-93340887a3ed/6d22f47b-5627-3b6b-b110-b1c7b65ec51f/921f23fb-de2a-32cf-855b-8d57ac12f7d1/834e4592-5a04-32ed-8b44-6c5d2d187c55"],
+  "description": "bazz",
+  "topic_id": "b8c98f3e-bb7c-39e7-a3ce-e479c7892882",
+  "video_id": "62a69684-d4f0-3cbe-9016-58d1bf67b42a",
+  "script_id": "3d6cf4b2-37e1-3d38-9251-3636bab8bb9e",
+  "children": [null]
+}]

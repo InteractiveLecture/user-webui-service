@@ -8,11 +8,11 @@ module overview {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('overview', {
-        url: '/overview',
+      .state('topicOverview', {
+        url: '/topics',
         templateUrl: 'topics/overview/overview.tpl.html',
         controller: 'OverviewCtrl',
-        controllerAs: 'overview'
+        controllerAs: 'topicOverview'
       });
   }
 }

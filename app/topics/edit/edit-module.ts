@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module edit {
+module topics {
   'use strict';
 
   /* @ngdoc object

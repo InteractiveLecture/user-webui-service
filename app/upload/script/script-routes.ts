@@ -8,11 +8,11 @@ module script {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('script', {
-        url: '/script',
+      .state('uploadScript', {
+        url: '/modules/:id/script/upload',
         templateUrl: 'upload/script/script.tpl.html',
         controller: 'ScriptCtrl',
-        controllerAs: 'script'
+        controllerAs: 'uploadScript'
       });
   }
 }

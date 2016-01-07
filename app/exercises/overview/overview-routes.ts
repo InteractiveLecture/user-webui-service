@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module overview {
+module exercises {
   'use strict';
 
   angular
@@ -8,11 +8,11 @@ module overview {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('overview', {
-        url: '/overview',
+      .state('exerciseOverview', {
+        url: '/modules/:id/exercises',
         templateUrl: 'exercises/overview/overview.tpl.html',
         controller: 'OverviewCtrl',
-        controllerAs: 'overview'
+        controllerAs: 'exercisesOverview'
       });
   }
 }

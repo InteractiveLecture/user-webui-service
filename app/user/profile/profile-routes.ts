@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module profile {
+module user {
   'use strict';
 
   angular

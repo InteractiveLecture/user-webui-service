@@ -9,7 +9,7 @@ module admin {
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
       .state('admin', {
-        url: '/admin',
+        url: '/users',
         templateUrl: 'user/admin/admin.tpl.html',
         controller: 'AdminCtrl',
         controllerAs: 'admin'

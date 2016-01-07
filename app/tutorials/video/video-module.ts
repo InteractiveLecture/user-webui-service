@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module video {
+module tutorials {
   'use strict';
 
   /* @ngdoc object

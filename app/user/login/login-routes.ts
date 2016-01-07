@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module login {
+module user {
   'use strict';
 
   angular

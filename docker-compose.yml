@@ -1,0 +1,126 @@
+app:
+  image: openservice/lecture-user-webui
+  links:
+    - "discovery:discovery"
+  ports:
+    - "80:8080"
+  command: "/main"
+
+nats:
+  image: nats
+  expose: 
+    - "4222"
+
+discovery:
+  image: progrium/consul
+  expose:
+    - "8500"
+    - "8400"
+    - "53/udp"
+  hostname: "node1"
+  command: "-server -bootstrap"
+
+registrator:
+  image: gliderlabs/registrator
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock"
+  links:
+    - "discovery:discovery"
+  command: "-internal consul://discovery:8500"
+
+authentication:
+  image: openservice/authentication-service
+  links:
+    - "authdatabase:postgres"
+    - "discovery:discovery"
+    - "nats:nats"
+  expose:
+    - "8080"
+  environment:
+    - "SERVICE_NAME=authentication-service"
+
+authdatabase:
+  image: postgres
+  expose:
+    - "5432"  
+  environment:
+    - "SERVICE_IGNORE=1"
+    - "POSTGRES_PASSWORD=users"
+    - "POSTGRES_USER=users"
+
+lecture:
+  image: openservice/lecture-service
+  links:
+    - "lecturedatabase:postgres"
+    - "discovery:discovery"
+    - "nats:nats"
+  expose:
+    - "8080"
+  environment:
+    - "SERVICE_NAME=lecture-service"
+  command: "/main -dbhost=postgres"
+
+lecturedatabase:
+  image: openservice/lecture-testdatabase
+  environment:
+    - "SERVICE_IGNORE=1"
+  expose:
+    - "5432"
+
+acl:
+  image: openservice/acl-service
+  links: 
+    - "acldatabase:postgres"
+    - "nats:nats"
+    - "discovery:discovery"
+  environment:
+    - "SERVICE_NAME=acl-service"
+  expose:
+    - "8080"
+
+  links:
+    - "acldatabase:postgres"
+    - "discovery:discovery"
+
+acldatabase:
+  image: openservice/acl-database
+  environment:
+    - "SERVICE_IGNORE=1"
+  expose:
+    - "5432"  
+
+java:
+  image: openservice/java-evaluation-service
+  expose:
+    - "8080"
+  environment:
+    - "SERVICE_NAME=java-evaluation-service"
+  links:
+    - "javamongo:mongo"
+    - "discovery:discovery"
+    - "nats:nats"
+
+javamongo:
+  image: mongo
+  expose:
+    - "27017"
+  environment:
+    - "SERVICE_IGNORE=1"
+
+media:
+  image: openservice/media-service
+  expose:
+    - "8080"
+  links:
+    - "mediadatabase:mongo"
+    - "discovery:discovery"
+    - "nats:nats"
+  environment:
+    - "SERVICE_NAME=media-service"
+
+mediadatabase:
+  image: mongo 
+  expose:
+    - "27017"
+  environment:
+    - "SERVICE_IGNORE=1"

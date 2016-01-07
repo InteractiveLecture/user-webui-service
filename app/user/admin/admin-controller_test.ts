@@ -4,11 +4,11 @@
 'use strict';
 
 describe('AdminCtrl', function () {
-  var ctrl;
+  var ctrl: any;
 
   beforeEach(angular.mock.module('user.admin'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function ($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
     ctrl = $controller('AdminCtrl');
   }));
 

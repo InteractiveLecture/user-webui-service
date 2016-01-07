@@ -3,16 +3,16 @@
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
-describe('EditCtrl', function () {
-  var ctrl;
+describe('EditCtrl', function() {
+  var ctrl: any;
 
   beforeEach(angular.mock.module('modules.edit'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
     ctrl = $controller('EditCtrl');
   }));
 
-  it('should have ctrlName as EditCtrl', function () {
+  it('should have ctrlName as EditCtrl', function() {
     expect(ctrl.ctrlName).toEqual('EditCtrl');
   });
 

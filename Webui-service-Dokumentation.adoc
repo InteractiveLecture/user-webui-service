@@ -1,0 +1,292 @@
+= Prokektdokumentation des User-Webui-service
+Michael Cremer <cremerm@hochschule-trier.de>
+
+
+== Ziel des Projekts
+Es soll eine GUI für die Interactive Lecture geschaffen werden. Ziel ist eine
+Implementierung als Website, genauer als Single Page Application. Verwendet werden
+dabei meist bekannte Größen für Frontend-entwicklung, zum Beispiel bower oder npm.
+
+Zur besseren Strukturierung wird Typescript an der Stelle von Javascript verwendet.
+Als Single-Page-Application (SPA) Framework wurde AngularJS gewählt.
+
+== Projektstruktur
+Durch Yeoman ist das Projekt vorstrukturiert. Diese Struktur vereinfacht
+das Hinzufügen neuer Komponenten.
+
+[source, bash]
+----
+
+.
+├── app
+│   ├── app-module.ts
+│   ├── home                        <----- Die Komponenten
+|   ...
+│   ├── fonts
+│   ├── images
+│   ├── index.html
+│   ├── route-controller_test.ts    <--- Die Routen
+│   └── route-controller.ts
+├── bower_components                <----- Abhängigkeiten der bower.json
+│   ├── angular
+│   ├── ...
+├── bower.json
+├── build                           <---- Build der Website
+│   └── app
+├── build.config.js
+├── e2e                             <--- End 2 End test
+│   ├── home
+│   ├── ...
+├── gulp                            <--- Gulp Einstellungen
+│   ├── analyze.js
+│   ├── ...
+├── Gulpfile.js                     <--- Gulp Einstellungen
+├── karma.config.js
+├── node_modules                    <-- Alle Abhängigkeiten aus der package.json
+├── package.json
+├── tsconfig.json                   <--- Die Einstellungsdatei für Intellisense
+├── tsd.json
+└── typings
+    ├── angularjs                   <---- Typings der Framworks
+    ├── jasmine
+    ├── jquery
+    ├── karma-jasmine
+    ├── lodash
+    ├── sinon
+    └── tsd.d.ts                   <---- Sammelung aller Typings
+    + Doku
+    + Backend speziell für den WebUi service
+
+
+----
+
+
+== Installation der Arbeitsumgebung
+
+Um am Projekt mitzuwirken sind Grundkenntnisse mit *npm, git, gulp und yeoman* nötig.
+
+[source, bash]
+----
+// Installation der Werkzeuge
+npm install -g yo gulp bower
+
+// Clonen des Git Repository
+git clone https://github.com/InteractiveLecture/user-webui-service.git
+
+// In das Projektverzeichnis wechseln
+cd path/to/Projekt
+
+// Node module lokal nachinstallieren
+npm install
+
+// Bower Components nachladen
+bower install
+
+----
+
+Da die Arbeiten am *New Router* für AngularJS noch nicht abgeschlossen sind, muss
+die *.bower.json* um einen main-eintrag ergänzt werden. Gleiches gilt für die Pakete
+des Ace-editor.
+
+[source, json]
+----
+{
+  "name": "angular-new-router",
+  "homepage": "https://github.com/angular/router",
+  "main": "./dist/router.es5.js",  <------ Wichtig, bitte nachtragen
+  "version": "0.5.3",
+  "_release": "0.5.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.5.3",
+    "commit": "c7b6b498c551754cc07d4b56a74fd951cbe2a483"
+  },
+  "_source": "git://github.com/angular/router.git",
+  "_target": "~0.5.3",
+  "_originalSource": "angular-new-router"
+}
+----
+
+=== Informationen zu den Werkzeugen bzw Sprachen/Frameworks
+
+* git - https://git-scm.com/documentation
+* diff-match-patch - https://code.google.com/p/google-diff-match-patch/wiki/API
+* npm - https://docs.npmjs.com/
+* gulp - https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+* bower - http://bower.io/#getting-started
+* yeoman - http://yeoman.io/
+* cytoscapeJS - http://js.cytoscape.org/
+* angularJS - https://angular.io/
+* typescript - http://www.typescriptlang.org/Tutorial
+* jwt - http://jwt.io/
+* jsonPatch - http://jsonpatch.com/
+
+=== Arbeiten mit dem Yeoman-Genrator
+
+Der verwendete Generator für dieses Projekt heißt *ng-poly* zu finden unter:
+[source, bash]
+----
+https://github.com/dustinspecker/generator-ng-poly
+----
+Die einzelnen Task des Taskrunners Gulp sind ebenfalls von Generator erstellt und
+in der Dokumentation nachzulesen.
+
+TIP: Die Ordner im Projekt heißen nicht komform zum *ng-poly* Generator. Jeder Camel-Case muss mit Bindestrich getrennt werden um vom Generator erkannt zu werden. Bsp. uiComponents = ui-components
+
+
+=== Test mit Jasmine
+Die Tests des Projektes werden mit dem Testingframework Jasmine durchgeführt. Ziel
+ist es jede Logik im Projekt auf ihre korrekte Funktionalität zu testen.
+
+WARNING: Die Directiven des Projekts sind nicht getestet, da Directiven mit dem Scope vom Angular 1.X zusammenhängen. Lösungsvorschläge für das Problem sind willkommen.
+
+=== Warum Angular 1.4.5 ?
+Da Angular 2.0 noch nicht für den produktiven Einsatz gedacht ist fiel die Entscheidung
+auf die zum Start der Entwicklung aktuellsten Version des SPA-Frameworks.
+Eine Portierung auf 2.0 ist vorgesehen.
+
+
+== Die Komponenten des Webui-Service
+
+=== Das WebUi-Backend
+
+Da die Kommunikation mit Micro-services nicht durch hartcodierte URL's Fehlerfrei
+erfolgen kann, braucht es eine Vermittlung. Das Backend wird zum betreiben des
+Webui-Service zwingend benötigt. Es ist in GO geschrieben und arbeitet anhand eines
+Proxy-Servers so ähnlich wie ein Mapper.
+
+Die Routen werden fast 1:1 auf die Routen des Lecture-Service gemappt. Allerdings
+agiert der Proxy intelligenter als eine einfache Anfrage. Zum Beispiel wird eine
+Instanz des Service gesucht und Loadbalacing betrieben.
+
+=== UI Components
+
+Dieses Modul soll alle (sichtbaren) Komponenten des Frontends verfügbar und
+*wiederverwendbar* machen. Deshalb sind
+
+* die Navigationsbar
+* das Dash
+* der Ace-Editor
+* die Cytoscape Graphen (Diretive + Faktory)
+
+als Directive in diesem Modul integriert.
+
+=== Lecture Definitions
+
+Dieser Ordner sammelt alle Models und Interfaces die für den Webui-service definiert
+wurden. (die Tests der Models fallen auch darunter)
+
+Bisherige Interfaces
+
+
+* Modelservice - Definiert ob eine Klasse dazu eignet ist mit dem Backend zu kommunizieren
+
+Bisherige Models
+
+* BaseModel - Oberklasse der Models. Definiert alle Eigenschaften die Modelle des Webui-service gemeinsam haben.
+* Topic - Topic des Backends abbilden
+* Module - Module des Backends abbilden- Topic des Backends abbilden- Topic des Backends abbilden
+* Exercise - Exercise des Backends abbilden- Topic des Backends abbilden
+* Tutorial- Topic des Backends abbilden
+* Hint- Hint des Backends abbilden
+* LecturePatch - Stellt die Patches dar, welche zur Serverkommunikation benötigt werden. Die Patches sparen Bandbreite und vereinfachen die Kommunikation
+* Operation - Die Operationen, die summiert den TopicPatch ergeben (Hierbei handelt es sich um JsonPatches. Es wird nach Konvention ein JSON Object verschickt, welches eine Transaktion beschreibt)
+* OperationType - Ein Enum für die möglichen Operationsarten einer 'Operation'
+
+
+=== CallBackend-Service
+Der CallBackend-Service implementiert das Interface Modelservice. Bisher bietet er
+folgende Funktionalität.
+
+postUserData(userData: any, callback: any)::
+beschreibt den Login-Versuch. Dabei wird nach dem oauth Verfahren authentifiziert.
+Dabei werden Json Web Token verwendet um die User zu identifizieren. Ebenso wird sichergestellt,
+dass der Client der Webui-service ist.
+
+TIP: Siehe http://jwt.io/ für weitere Information zu oauth und JWT
+
+extractId(idName: string, url: string): number::
+extrahiert eine Id aus einer URL. Dafür wird der Name bzw der UrlPath vor der mitgegeben.
+Zum Beisiel "topic, /topic/1 " findet die 1.
+
+WARNING: extractId wird bald entfernt da sich die Struktur der Interactive-lecture verändert hat
+
+loadModel(linkUrl: string, callback: any)::
+sendet den HTTP-Request für die Modeldaten der aktuellen View zu laden. Durch den
+Callback kann der Konsument selber bestimmen wie das Ergebnis der Anfrage zu verwenden ist.
+
+
+=== Login
+
+Dem User stehen 2 Felder zur Verfügung. Einmal seine Kennung und einmal sein Passwort
+werden verlangt. Diese Daten werden durch den Backend-service verschickt. Die Auswertung
+entscheidet, ob es zu einem Redirect kommt oder nicht.
+
+WARNING: Die Nachrichten "Server nicht verfügbar" oder  "Eingabe falsch" können nicht mit angular-messages implementiert werden. Da ngMessages das Formular prüft, aber das Ergebnis einer HTTP Request ausgewertet wird
+
+=== Profile
+
+Im Profil werden die Profildaten dagestellt. Dazu können die Daten des JWT Token
+verwendet werden oder ein Service des Backends wird angefragt. Die Darstellung
+erfolgt angular-typisch durch databinding.
+
+=== Topic Overview
+
+Die Übersicht aller Topics. Topics entsprechen im groben einer Vorlesung in einer
+Hochschule oder Uni.
+
+=== TopicEdit
+
+Zum jetzigen Zeitpunkt nur ein Mock an Formularen.
+Um die Controller einfacher schreiben zu können.
+
+=== Topic Detail
+
+Genauere Informationen zu einem Topic lassen hier finden.
+
+=== Module Overview
+
+Alle Module eines Topics sind hier zu finden. Ein Modul ist ein Thema eines Topics.
+Da die Module des Projekts wie Bäume aufgebaut sind, benötigt man eine entsprechende Visualisierung.
+Das Cytoscpae.JS Framework bietet genau das.
+
+TIP: Cytoscape unter Angular hat einige Tücken. https://gist.github.com/maxkfranz/a1aea574f0e248b2b38e zeigt ein einfaches Beispiel
+
+=== Home
+
+Hier werden aggregierte Informationen für den User dagestellt. Dafür muss der
+Rest des Projektes stehen.
+
+=== Tutorial (text)
+
+Ein Text-Tutorial zum Modul kann bereitgestellt werden.
+
+=== Tutorial (video)
+
+Ein Video-Tutorial zum Modul kann bereitgestellt werden.
+Videos werden durch das Videogular Projekt dargestellt.
+
+TIP: Weitere Infos zu Videogular: http://www.videogular.com/tutorials/how-to-start/
+
+=== Tutorial (video & text) Upload
+
+Als Teil der administrativen Oberfläche muss es möglich sein Medien bzw Lehrmaterial
+hochzuladen. Genau das sollen die Seiten/Module tutorialTextUpload und tutorialVideoUpload
+ermöglichen.
+
+=== Exercise Overview
+
+Hier werden alle Übungen zu einem Modul dargestellt.
+
+=== Exercise Worksheet
+
+Um dem User eine IDE ähnliche Arbeitsumgebung zu schaffen arbeitet dieses Module
+mit dem Ace-Editor bzw mit der für den Ace-Editor definierten Directive. Die API
+des Editors ist gut dokumentiert, allerdings ist die *.bower.json* unvollständig.
+
+TIP: Weitere Infos zu Ace: https://ace.c9.io/#nav=embedding
+
+Damit die Übungen ausgewertet werden können, müssen die Änderungen der User an den
+Server geschickt werden. Dafür werden ebenfalls Patches verwendet. Die Library *diff-match-patch*
+besitzt eine einheitliche API und erstellt die Patches aus den Eingaben der User heraus.
+Die Patches werden als Text an den auswertenden Microservices geschickt.

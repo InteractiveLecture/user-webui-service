@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module video {
+module tutorials {
   'use strict';
 
   angular
@@ -8,11 +8,11 @@ module video {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('video', {
-        url: '/video',
+      .state('tutorialsVideo', {
+        url: '/modules/:id/video',
         templateUrl: 'tutorials/video/video.tpl.html',
         controller: 'VideoCtrl',
-        controllerAs: 'video'
+        controllerAs: 'tutorialsVideo'
       });
   }
 }

@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module details {
+module topics {
   'use strict';
 
   angular
@@ -8,11 +8,11 @@ module details {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('details', {
-        url: '/details',
+      .state('topicDetails', {
+        url: '/topics/:id',
         templateUrl: 'topics/details/details.tpl.html',
         controller: 'DetailsCtrl',
-        controllerAs: 'details'
+        controllerAs: 'topicDetails'
       });
   }
 }

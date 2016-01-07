@@ -5,6 +5,9 @@
 Thumbs.db
 ehthumbs.db
 
+# GoBackend Compiled
+userwebbackendservice
+
 #IntelliJ
 .idea
 

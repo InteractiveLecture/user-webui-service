@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module edit {
+module modules {
   'use strict';
 
   angular
@@ -8,11 +8,11 @@ module edit {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('edit', {
-        url: '/edit',
+      .state('moduleEdit', {
+        url: '/modules/:id/edit',
         templateUrl: 'modules/edit/edit.tpl.html',
         controller: 'EditCtrl',
-        controllerAs: 'edit'
+        controllerAs: 'moduleEdit'
       });
   }
 }

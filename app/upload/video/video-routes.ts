@@ -8,11 +8,11 @@ module video {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('video', {
-        url: '/video',
+      .state('uploadVideo', {
+        url: '/modules/:id/video/upload',
         templateUrl: 'upload/video/video.tpl.html',
         controller: 'VideoCtrl',
-        controllerAs: 'video'
+        controllerAs: 'uploadVideo'
       });
   }
 }
