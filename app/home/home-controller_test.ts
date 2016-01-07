@@ -3,13 +3,17 @@
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
-describe('HomeCtrl', function() {
-  var ctrl: any;
+describe('HomeCtrl', function () {
+  var ctrl;
 
-  beforeEach(module('home'));
+  beforeEach(angular.mock.module('home'));
 
-  beforeEach(inject(function($rootScope: any, $controller: any) {
+  beforeEach(inject(function ($rootScope, $controller) {
     ctrl = $controller('HomeCtrl');
   }));
+
+  it('should have ctrlName as HomeCtrl', function () {
+    expect(ctrl.ctrlName).toEqual('HomeCtrl');
+  });
 
 });

@@ -6,7 +6,6 @@ var _ = require('lodash')
   , gulp = require('gulp')
   , gulpFiles = require('require-dir')('./gulp')
   , path = require('path')
-  , shell = require('gulp-shell')
   , $, key;
 
 $ = require('gulp-load-plugins')({
@@ -68,7 +67,3 @@ gulp.task('dev', ['build'], function () {
 });
 
 gulp.task('default', ['dev']);
-
-gulp.task('upload',['build'], function() {
-  shell.task('docker-machine scp -r build dev:/home/docker/') 
-});
