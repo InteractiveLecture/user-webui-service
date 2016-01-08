@@ -30,8 +30,8 @@ module modules {
       //   vm.moduleTree = treeData
       // })
       //
-      // vm.nodes = vm.getNodesFrom(vm.moduleTree)
-      // vm.edges = vm.getEdgesFrom(vm.moduleTree)
+      vm.nodes = vm.getNodesFrom(lectureDefinitions.models.testTree)
+      vm.edges = vm.getEdgesFrom(lectureDefinitions.models.testTree)
     }
 
     getNodesFrom(data: lectureDefinitions.interfaces.treeData[]) {

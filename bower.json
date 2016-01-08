@@ -33,6 +33,9 @@
       "dependencies": {
         "jquery": "*"
       }
+    },
+    "ace-builds": {
+      "main": "src-noconflict/ace.js"
     }
   }
 }

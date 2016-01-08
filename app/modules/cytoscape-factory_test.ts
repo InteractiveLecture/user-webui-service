@@ -4,11 +4,11 @@
 'use strict';
 
 describe('Cytoscape', function() {
-  var factory;
+  var factory: any;
 
   beforeEach(angular.mock.module('modules'));
 
-  beforeEach(inject(function(Cytoscape) {
+  beforeEach(inject(function(Cytoscape: any) {
     factory = Cytoscape;
   }));
 

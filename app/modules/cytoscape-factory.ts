@@ -11,17 +11,17 @@ module Cytoscape {
   */
   angular
     .module('modules')
-    .factory('Cytoscape', CytoscapeFactory);
+    .factory('CytoscapeFactory', CytoscapeFactory);
 
 
   export interface CytoscapeInterface {
     renderCyto?: Function
   }
-  function CytoscapeFactory($q: any, $location: ng.ILocationService, $rootScope: ng.IRootScopeService) {
+  function CytoscapeFactory($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService) {
     var CytoscapeBase: CytoscapeInterface = {};
-    CytoscapeBase.renderCyto = function(nodes: any, edges: any, clickCallback: Function) {
-      var deferred = $q.defer();
-      var location = $location;
+    CytoscapeBase.renderCyto = function(nodes: any, edges: any) {
+      var deferred = $q.defer()
+      var location = $location
       var root = $rootScope
       console.log("go in factory");
       angular.element(document).ready(() => { // On DOM Ready

@@ -29,13 +29,13 @@ module Cytoscape {
         nodes: '=',
         edges: '='
       },
-      templateUrl: 'module-overview/cytoscape-directive.tpl.html',
+      templateUrl: 'modules/cytoscape-directive.tpl.html',
       replace: false,
       controllerAs: 'cytoscape',
       controller: function($scope: any) {
-        var vm = this;
-        vm.name = 'cytoscape';
-        var cy: Cy.Instance;
+        var vm = this
+        vm.name = 'cytoscape'
+        var cy: Cy.Instance
         CytoscapeFactory.renderCyto($scope.nodes, $scope.edges, $scope.onNodeClick).then((result: any) => {
           cy = result;
         },

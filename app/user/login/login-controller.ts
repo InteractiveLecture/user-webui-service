@@ -62,7 +62,6 @@ module user {
   * @description
   *
   */
-  console.log('registere controller')
   angular
     .module('user.login')
     .controller('LoginCtrl', LoginCtrl);
