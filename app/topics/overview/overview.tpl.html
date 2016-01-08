@@ -1,2 +1,21 @@
-<h2>overview</h2>
-<p>{{overview.ctrlName}}</p>
+<div class="col-xs-3" ng-repeat="topic in topicOverview.topicList">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>{{topic.name}}</h4>
+    </div>
+    <article class="panel-body">
+      <div class="list-group">
+        <a class="list-group-item" nglink="topicDetails({id: topic.id})">
+                Mehr Informationen
+              </a>
+        <a class="list-group-item" ng-link="moduleOverview({id: topic.id})" >
+                Modulübersicht
+              </a>
+        <!-- Welches Module hier gezeigt wird muss ermittelt werden aus den JSON Daten -->
+        <a class="list-group-item" ng-link="exerciseOverview({id: topic.id})">
+                Start
+              </a>
+      </div>
+    </article>
+  </div>
+</div>

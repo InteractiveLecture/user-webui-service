@@ -5,18 +5,38 @@ module OverviewCtrl {
   class OverviewCtrl {
 
     ctrlName: string
+    topicList: lectureDefinitions.models.Topic[]
+    cachingService: Caching.CachingService
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
-    public static $inject = [
+    public static $inject: string[] = [
+      'CachingService',
+      'CallBackendService'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor() {
-      var vm = this;
-      vm.ctrlName = 'OverviewCtrl';
+    constructor(cachingService: Caching.CachingService, callBackendService: CallBackend.CallBackendService) {
+      var vm = this
+      vm.ctrlName = 'OverviewCtrl'
+
+      vm.cachingService = cachingService
+
+      //TODO: Echtdaten anfordern
+
+      //Mockdaten
+
+      /*vm.topicList = [{ uuid: "a", name: "programmierung", description: "blablabala", version: null, module: null, authorities: null },
+        { uuid: "v", name: "mathe", description: "blubb", version: null, module: null, authorities: null },
+        { uuid: "dfdksljfkl", name: "ebusiness", description: "bdjbasjkfdhsjkal", version: null, module: null, authorities: null },
+        { uuid: "asd", name: "datenbanken", description: "dnksdhflsahlf", version: null, module: null, authorities: null }]*/
+      vm.topicList = []
+
+      callBackendService.loadTopicsPage(0, 100, (result: any) => {
+        vm.topicList = result
+      })
     }
   }
 

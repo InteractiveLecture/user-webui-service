@@ -9,6 +9,7 @@ module overview {
   */
   angular
     .module('topics.overview', [
-      'ui.router'
-    ]);
+    'ui.router',
+    'webUiService'
+  ]);
 }

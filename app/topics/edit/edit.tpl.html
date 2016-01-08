@@ -1,2 +1,174 @@
-<h2>edit</h2>
-<p>{{edit.ctrlName}}</p>
+<section class="row">
+  <div class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          Module bewegen
+        </h4>
+      </div>
+      <article class="panel-body">
+        <!-- Tab Bewegen-->
+        <form action="javascript:void(0);" class="form-horizontal">
+          <fieldset>
+            <br>
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectbasic">Move module</label>
+              <div class="col-md-8">
+                <select class="form-control" id="selectbasic" name="selectbasic">
+                  <option ng-repeat="module in topicEdit.workingTopic.modules" value="{{module.id}}">{{module.id}}
+                    {{module.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <!-- Select Multiple -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectmultiple">Parent Modules</label>
+              <div class="col-md-8">
+                <select class="form-control" id="selectmultiple" multiple="multiple" name="selectmultiple">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select>
+              </div>
+            </div>
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton">Fertig?</label>
+              <div class="col-md-8">
+                <input id="checkbox" name="checkboxes" type="checkbox" value="1">
+                <button class="btn btn-primary" id="singlebutton" name="singlebutton">Senden</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </article>
+    </div>
+  </div>
+
+  <div class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          Module löschen
+        </h4>
+      </div>
+      <article class="panel-body">
+        <!-- Tab Löschen-->
+        <form action="javascript:void(0);" class="form-horizontal">
+          <fieldset>
+            <br>
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectbasic">Löschen:</label>
+              <div class="col-md-8">
+                <select class="form-control" id="selectbasic" name="selectbasic" ng-model="topicEdit.deleteId">
+                  <option ng-repeat="module in topicEdit.workingTopic.modules" value="{{module.id}}">{{module.id}}
+                    {{module.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton">Fertig?</label>
+              <div class="col-md-8">
+                <button class="btn btn-danger" id="singlebutton" name="singlebutton" ng-click="topicEdit.generateDeleteModulePatch(topicEdit.deleteId)">Senden</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </article>
+    </div>
+  </div>
+
+  <div class="col-xs-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          Module hinzufügen
+        </h4>
+      </div>
+      <article class="panel-body">
+        <!-- Tab Hinzufügen-->
+        <form action="javascript:void(0);" class="form-horizontal">
+          <fieldset>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectbasic">Module</label>
+              <div class="col-md-8">
+                <select class="form-control" id="selectbasic" name="selectbasic">
+                  <option ng-repeat="module in topicEdit.workingTopic.modules" value="{{module.id}}">{{module.id}}
+                    {{module.description}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectbasic">related Text Tutorial</label>
+              <div class="col-md-8">
+                <select class="form-control" id="selectbasic" name="selectbasic">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="selectbasic">related Video</label>
+              <div class="col-md-8">
+                <select class="form-control" id="selectbasic" name="selectbasic">
+                  <option value="1">Option one</option>
+                  <option value="2">Option two</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="textinput">Beschreibung</label>
+              <div class="col-md-8">
+                <input class="form-control input-md" id="textinput" name="textinput" placeholder="placeholder" type="text">
+                <span class="help-block">help</span>
+              </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="singlebutton">Fertig?</label>
+              <div class="col-md-8">
+                <button class="btn btn-danger" id="singlebutton" name="singlebutton" ng-click="topicEdit.generateDeleteModulePatch(topicEdit.deleteId)">Senden</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          Topic Beschreibung ändern
+        </h4>
+      </div>
+      <article class="panel-body">
+        <div ui-ace="{
+          mode: 'plain_text',
+          theme: 'eclipse'
+        }"></div>
+
+        <!-- Button -->
+        <button class="btn btn-danger pull-right" id="singlebutton" name="singlebutton" ng-click="topicEdit.generateDeleteModulePatch(topicEdit.deleteId)">Senden</button>
+      </article>
+    </div>
+  </div>
+</section>

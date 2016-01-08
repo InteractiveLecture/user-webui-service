@@ -9,6 +9,8 @@ module topics {
   */
   angular
     .module('topics.edit', [
-      'ui.router'
-    ]);
+    'ui.router',
+    'webUiService',
+    'uuid'
+  ]);
 }

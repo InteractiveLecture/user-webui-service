@@ -9,6 +9,7 @@ module topics {
   */
   angular
     .module('topics.details', [
-      'ui.router'
+      'ui.router',
+      'webUiService'
     ]);
 }
