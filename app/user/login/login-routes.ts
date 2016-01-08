@@ -7,7 +7,6 @@ module user {
     .config(config)
 
   function config($stateProvider: ng.ui.IStateProvider) {
-    console.log('setze alias')
     $stateProvider
       .state('loginScreen', {
       url: '/login',

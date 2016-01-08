@@ -9,6 +9,7 @@ module user {
   */
   angular
     .module('user.profile', [
-      'ui.router'
+      'ui.router',
+      'webUiService'
     ]);
 }

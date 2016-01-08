@@ -1,2 +1,51 @@
-<h2>admin</h2>
-<p>{{admin.ctrlName}}</p>
+<section class="col-md-offset-2 col-md-8">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>Nutzerverwaltung</h4>
+    </div>
+    <article class="panel-body">
+      <form class="form-horizontal">
+        <fieldset>
+
+          <!-- Multiple Radios (inline) -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="nutzertyp">Nutzertyp</label>
+            <div class="col-md-4">
+              <label class="radio-inline" for="nutzertyp-0">
+                <input checked="checked" id="nutzertyp-0" name="nutzertyp" type="radio" value="User">
+                Student
+              </label>
+              <label class="radio-inline" for="nutzertyp-1">
+                <input id="nutzertyp-1" name="nutzertyp" type="radio" value="Dozent">
+                Dozent
+              </label>
+              <label class="radio-inline" for="nutzertyp-2">
+                <input id="nutzertyp-2" name="nutzertyp" type="radio" value="Administrator">
+                Administrator
+              </label>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Benutzername</label>
+            <div class="col-md-5">
+              <input class="form-control input-md" id="textinput" name="textinput" placeholder="Username" required="" type="text">
+              <span class="help-block">Name des neuen Benutzers</span>
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="senden">Fertig?</label>
+            <div class="col-md-4">
+              <button class="btn btn-primary" id="senden" name="senden">senden</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+
+    </article>
+  </div>
+</section>

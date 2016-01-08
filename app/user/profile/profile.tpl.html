@@ -1,2 +1,18 @@
-<h2>profile</h2>
-<p>{{profile.ctrlName}}</p>
+<section class="col-md-offset-3 col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>{{profile.user.username}}</h4>
+    </div>
+    <article class="panel-body">
+      Passwort ändern:
+      <div class="form-group">
+        <label for="passwordChange"></label>
+        <input class="form-control" id="passwordChange" ng-model="profile.newPassword" placeholder="new Password" type="text">
+        <p class="help-block">Bitte gebe dein neues Passwort ein</p>
+      </div>
+      <button class="btn btn-default" ng-click="profile.changePassword(profile.newPassword)" type="button">
+        Änderung speichern
+      </button>
+    </article>
+  </div>
+</section>

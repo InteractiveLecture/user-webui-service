@@ -26,12 +26,10 @@ module user {
       vm.ctrlName = 'LoginCtrl'
       vm.callBackendService = callBackendService
       vm.$location = $location
-      console.log('controller is working')
     }
 
     public attemptLogin(userData: lectureDefinitions.interfaces.loginable) {
       // CallBackend Service nutzen
-      console.log('reagiert')
       this.userData = userData
       if (userData !== null && userData !== undefined) {
         this.callBackendService.postUserData(userData, (err: any, token: any) => {
@@ -64,7 +62,7 @@ module user {
   * @description
   *
   */
- console.log('registere controller')
+  console.log('registere controller')
   angular
     .module('user.login')
     .controller('LoginCtrl', LoginCtrl);
