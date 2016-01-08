@@ -9,6 +9,8 @@ module modules {
   */
   angular
     .module('modules.edit', [
-      'ui.router'
+      'ui.router',
+      'webUiService',
+      'uuid'
     ]);
 }
