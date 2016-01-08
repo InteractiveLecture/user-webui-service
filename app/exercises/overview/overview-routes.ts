@@ -12,7 +12,7 @@ module exercises {
         url: '/modules/:id/exercises',
         templateUrl: 'exercises/overview/overview.tpl.html',
         controller: 'OverviewCtrl',
-        controllerAs: 'exercisesOverview'
+        controllerAs: 'exerciseOverview'
       });
   }
 }

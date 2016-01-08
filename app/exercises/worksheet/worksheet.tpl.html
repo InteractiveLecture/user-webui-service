@@ -1,2 +1,61 @@
-<h2>worksheet</h2>
-<p>{{worksheet.ctrlName}}</p>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <!-- Ace Editor siehe uiComponents-->
+    <section class="col-sm-9">
+
+      <ul class="nav nav-tabs">
+        <li class="{{tab.active}}" ng-repeat="tab in exerciseWorksheet.aceTabs">
+          <a ng-click="exerciseWorksheet.selectOne($index)">{{tab.title}}
+            <span class="glyphicon glyphicon-remove" ng-click="exerciseWorksheet.deleteTab($index)"></span>
+          </a>
+        </li>
+        <li>
+          <a ng-click="exerciseWorksheet.addTab()">
+            <span class="glyphicon-plus"></span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade in active" ng-repeat="tab in exerciseWorksheet.aceTabs" ng-show="tab.visible">
+          <div ng-change="exerciseWorksheet.acechange($index)" ng-model="exerciseWorksheet.aceTabs[$index].content" ui-ace="{
+              mode: 'java',
+              theme: 'eclipse'
+            }">{{tab.content}}</div>
+        </div>
+      </div>
+
+    </section>
+
+    <aside class="col-sm-3">
+      <!-- Aufgabenstellung + Hints + Output + Navigation -->
+      <nav class="row">
+        <button class=" btn btn-primary " name="weiter" type="button">
+          weiter
+        </button>
+        <button class="btn pull-right" name="zurück" type="button">
+          zurück
+        </button>
+      </nav>
+      <hr>
+      <section class="row">
+        <h4>
+          Aufgabenstellung</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+        </section>
+        <hr>
+        <section class="row">
+          <h4>Hints</h4>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </section>
+          <hr>
+          <footer class="row">
+            <h4>Output</h4>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            </footer>
+          </aside>
+        </div>
+      </div>

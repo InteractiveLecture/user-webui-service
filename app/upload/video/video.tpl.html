@@ -1,2 +1,33 @@
-<h2>video</h2>
-<p>{{video.ctrlName}}</p>
+<!-- Video Tutorial -->
+<section class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>
+        Video zu {Module} uploaden</h4>
+    </div>
+    <article class="panel-body">
+      <form class="form-horizontal" enctype="multipart/form-data" method="post" target="{{uploadVideo.videoEndpoint}}">
+        <fieldset>
+
+          <!-- File Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="Videoupload">Video uploaden</label>
+            <div class="col-md-8">
+              <input class="input-file" id="data" name="data" type="file">
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="senden">Fertig?</label>
+            <div class="col-md-8">
+              <button class="btn btn-primary" id="senden" name="senden">senden</button>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+
+    </article>
+  </div>
+</section>

@@ -5,6 +5,7 @@ module exercises {
   class OverviewCtrl {
 
     ctrlName: string
+    exercise: any
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -15,10 +16,14 @@ module exercises {
 
     // dependencies are injected via AngularJS $injector
     constructor() {
-      var vm = this;
-      vm.ctrlName = 'OverviewCtrl';
+      var vm = this
+      vm.ctrlName = 'OverviewCtrl'
+      vm.exercise = [{ "title": "Variablen", "description": "Der Umgang mit Variablen in Java" },
+        { "title": "Vererbung", "description": "Der Umgang mit Vererbung in Java" },
+        { "title": "Klassen", "description": "Was ist eine Klasse in Java" }];
     }
   }
+
 
 
   /**

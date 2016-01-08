@@ -1,2 +1,20 @@
-<h2>overview</h2>
-<p>{{overview.ctrlName}}</p>
+<div class="col-sm-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      Exercises für {Module}
+    </div>
+  </div>
+  <div class="panel panel-default" ng-repeat="exercise in exerciseOverview.exercises">
+    <div class="panel-body">
+      {{exercise.title}}
+    </div>
+    <div class="panel-footer clearfix">
+      <div>
+        {{exercise.description}}
+        <a class="pull-right">
+          <button class="btn btn-primary ">Start</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

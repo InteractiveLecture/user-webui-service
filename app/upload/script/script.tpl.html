@@ -1,2 +1,20 @@
-<h2>script</h2>
-<p>{{script.ctrlName}}</p>
+<!-- Text Tutorial -->
+<section class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>
+        Script zu {Module} uploaden</h4>
+    </div>
+    <article class="panel-body aceInPanel clearfix">
+      <div ng-model="uploadScript.script" ui-ace="{
+        mode: 'plain_text',
+        theme: 'eclipse'
+      }"></div ui-ace>
+
+      <!-- Button -->
+      <div class="form-group text-center">
+        <button class="btn btn-primary" id="senden" name="senden">senden</button>
+      </div>
+    </article>
+  </div>
+</section>

@@ -1,2 +1,38 @@
-<h2>video</h2>
-<p>{{video.ctrlName}}</p>
+<!-- Video Tutorial -->
+<section class="col-md-12" ng-show="tutorialsVideo.showVideo">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4>
+        <a>
+          <span class="glyphicon-step-backward"></span>
+        </a>Video zu {Module}</h4>
+    </div>
+    <article class="panel-body">
+
+      <section class="videogular-container">
+        <videogular vg-theme="tutorialsVideo.config.theme">
+          <vg-media vg-src="tutorialsVideo.config.sources" vg-tracks="tutorialsVideo.config.tracks"></vg-media>
+
+          <vg-controls>
+            <vg-play-pause-button></vg-play-pause-button>
+            <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+            <vg-scrub-bar>
+              <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            </vg-scrub-bar>
+            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+            <vg-volume>
+              <vg-mute-button></vg-mute-button>
+              <vg-volume-bar></vg-volume-bar>
+            </vg-volume>
+            <vg-fullscreen-button></vg-fullscreen-button>
+          </vg-controls>
+
+          <vg-overlay-play></vg-overlay-play>
+          <vg-poster vg-url='tutorialsVideo.config.plugins.poster'></vg-poster>
+        </videogular>
+
+      </section>
+
+    </article>
+  </div>
+</section>
