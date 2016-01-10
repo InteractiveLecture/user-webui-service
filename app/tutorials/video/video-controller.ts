@@ -53,5 +53,5 @@ module tutorials {
   */
   angular
     .module('tutorials.video')
-    .controller('VideoCtrl', VideoCtrl);
+    .controller('TutorialsVideoCtrl', VideoCtrl);
 }

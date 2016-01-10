@@ -32,5 +32,5 @@ module VideoCtrl {
   */
   angular
     .module('upload.video')
-    .controller('VideoCtrl', VideoCtrl);
+    .controller('UploadVideoCtrl', VideoCtrl);
 }

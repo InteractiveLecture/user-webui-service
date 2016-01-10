@@ -93,5 +93,5 @@ module modules {
   */
   angular
     .module('modules.overview')
-    .controller('OverviewCtrl', OverviewCtrl);
+    .controller('ModuleOverviewCtrl', OverviewCtrl);
 }

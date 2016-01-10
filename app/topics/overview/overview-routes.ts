@@ -11,7 +11,7 @@ module topics {
       .state('topic', {
         url: '/topics',
         templateUrl: 'topics/overview/overview.tpl.html',
-        controller: 'OverviewCtrl',
+        controller: 'TopicOverviewCtrl',
         controllerAs: 'topicOverview'
       });
   }

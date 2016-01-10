@@ -9,7 +9,7 @@ describe('OverviewCtrl', function() {
   beforeEach(angular.mock.module('exercises.overview'));
 
   beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
-    ctrl = $controller('OverviewCtrl');
+    ctrl = $controller('ExerciseOverviewCtrl');
   }));
 
   it('should have ctrlName as OverviewCtrl', function() {

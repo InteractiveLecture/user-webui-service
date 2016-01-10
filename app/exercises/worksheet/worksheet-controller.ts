@@ -152,5 +152,5 @@ module exercises {
   */
   angular
     .module('exercises.worksheet')
-    .controller('WorksheetCtrl', WorksheetCtrl);
+    .controller('ExerciseWorksheetCtrl', WorksheetCtrl);
 }

@@ -9,7 +9,7 @@ describe('WorksheetCtrl', function() {
   beforeEach(angular.mock.module('exercises.worksheet'));
 
   beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
-    ctrl = $controller('WorksheetCtrl');
+    ctrl = $controller('ExerciseWorksheetCtrl');
   }))
 
   it('should have ctrlName as WorksheetCtrl', function() {

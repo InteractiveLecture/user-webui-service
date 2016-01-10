@@ -11,7 +11,7 @@ module topics {
       .state('topicEdit', {
         url: '/topics/{id}/edit',
         templateUrl: 'topics/edit/edit.tpl.html',
-        controller: 'EditCtrl',
+        controller: 'TopicEditCtrl',
         controllerAs: 'topicEdit'
       });
   }

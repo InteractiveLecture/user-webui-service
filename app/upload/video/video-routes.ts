@@ -11,7 +11,7 @@ module video {
       .state('uploadVideo', {
         url: '/modules/{id}/video/upload',
         templateUrl: 'upload/video/video.tpl.html',
-        controller: 'VideoCtrl',
+        controller: 'UploadVideoCtrl',
         controllerAs: 'uploadVideo'
       });
   }

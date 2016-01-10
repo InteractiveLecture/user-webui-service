@@ -32,5 +32,5 @@ module exercises {
   */
   angular
     .module('exercises.edit')
-    .controller('EditCtrl', EditCtrl);
+    .controller('ExerciseEditCtrl', EditCtrl);
 }

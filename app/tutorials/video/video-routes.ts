@@ -11,7 +11,7 @@ module tutorials {
       .state('video', {
         url: '/modules/{id}/video',
         templateUrl: 'tutorials/video/video.tpl.html',
-        controller: 'VideoCtrl',
+        controller: 'TutorialsVideoCtrl',
         controllerAs: 'tutorialsVideo'
       });
   }

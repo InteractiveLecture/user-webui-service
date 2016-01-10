@@ -11,7 +11,7 @@ module modules {
       .state('moduleEdit', {
         url: '/modules/{id}/edit',
         templateUrl: 'modules/edit/edit.tpl.html',
-        controller: 'EditCtrl',
+        controller: 'ModuleEditCtrl',
         controllerAs: 'moduleEdit'
       });
   }

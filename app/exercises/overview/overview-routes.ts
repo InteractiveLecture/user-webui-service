@@ -11,7 +11,7 @@ module exercises {
       .state('exerciseOverview', {
         url: '/modules/{id}/exercises',
         templateUrl: 'exercises/overview/overview.tpl.html',
-        controller: 'OverviewCtrl',
+        controller: 'ExerciseOverviewCtrl',
         controllerAs: 'exerciseOverview'
       });
   }

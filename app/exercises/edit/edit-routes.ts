@@ -11,7 +11,7 @@ module exercises {
       .state('exerciseEdit', {
       url: '/modules/{id}/exercises/{eId}/edit',
       templateUrl: 'exercises/edit/edit.tpl.html',
-      controller: 'EditCtrl',
+      controller: 'ExerciseEditCtrl',
       controllerAs: 'exerciseEdit'
     });
   }

@@ -11,7 +11,7 @@ module tutorials {
       .state('scripte', {
         url: '/modules/{id}/script',
         templateUrl: 'tutorials/script/script.tpl.html',
-        controller: 'ScriptCtrl',
+        controller: 'TutorialsScriptCtrl',
         controllerAs: 'tutorialsScript'
       });
   }

@@ -9,7 +9,7 @@ describe('ScriptCtrl', function() {
   beforeEach(angular.mock.module('tutorials.script'));
 
   beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
-    ctrl = $controller('ScriptCtrl');
+    ctrl = $controller('TutorialsScriptCtrl');
   }));
 
   it('should have ctrlName as ScriptCtrl', function() {

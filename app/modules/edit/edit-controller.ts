@@ -74,5 +74,5 @@ module modules {
   */
   angular
     .module('modules.edit')
-    .controller('EditCtrl', EditCtrl);
+    .controller('ModuleEditCtrl', EditCtrl);
 }

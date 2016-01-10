@@ -25,7 +25,7 @@ module topics {
       vm.cachingService = cachingService
 
       //TODO: Echtdaten anfordern
-      $log.debug('controller ' + vm.ctrlName + ' is working')
+      $log.debug('controller ' + vm.ctrlName + ' is working!')
       //Mockdaten
 
       vm.topicList = [{ uuid: "a", name: "programmierung", description: "blablabala", version: null, module: null, authorities: null },
@@ -52,6 +52,6 @@ module topics {
 
   angular
     .module('topics.overview')
-    .controller('OverviewCtrl', OverviewCtrl);
+    .controller('TopicOverviewCtrl', OverviewCtrl);
 
 }

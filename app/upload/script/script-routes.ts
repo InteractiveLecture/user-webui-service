@@ -11,7 +11,7 @@ module script {
       .state('uploadScript', {
         url: '/modules/{id}/script/upload',
         templateUrl: 'upload/script/script.tpl.html',
-        controller: 'ScriptCtrl',
+        controller: 'UploadScriptCtrl',
         controllerAs: 'uploadScript'
       });
   }

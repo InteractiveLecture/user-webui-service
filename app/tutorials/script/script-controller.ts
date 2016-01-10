@@ -32,5 +32,5 @@ module tutorials {
   */
   angular
     .module('tutorials.script')
-    .controller('ScriptCtrl', ScriptCtrl);
+    .controller('TutorialsScriptCtrl', ScriptCtrl);
 }

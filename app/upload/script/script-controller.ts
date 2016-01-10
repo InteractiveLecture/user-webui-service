@@ -32,5 +32,5 @@ module ScriptCtrl {
   */
   angular
     .module('upload.script')
-    .controller('ScriptCtrl', ScriptCtrl);
+    .controller('UploadScriptCtrl', ScriptCtrl);
 }

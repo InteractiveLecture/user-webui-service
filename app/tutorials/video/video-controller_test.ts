@@ -9,7 +9,7 @@ describe('VideoCtrl', function() {
   beforeEach(angular.mock.module('tutorials.video'));
 
   beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
-    ctrl = $controller('VideoCtrl');
+    ctrl = $controller('TutorialsVideoCtrl');
   }));
 
   it('should have ctrlName as VideoCtrl', function() {

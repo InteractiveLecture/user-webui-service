@@ -11,7 +11,7 @@ module modules {
       .state('moduleOverview', {
         url: '/topics/{id}/modules',
         templateUrl: 'modules/overview/overview.tpl.html',
-        controller: 'OverviewCtrl',
+        controller: 'ModuleOverviewCtrl',
         controllerAs: 'moduleOverview'
       });
   }

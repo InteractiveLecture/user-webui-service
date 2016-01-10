@@ -37,5 +37,5 @@ module exercises {
   */
   angular
     .module('exercises.overview')
-    .controller('OverviewCtrl', OverviewCtrl);
+    .controller('ExerciseOverviewCtrl', OverviewCtrl);
 }

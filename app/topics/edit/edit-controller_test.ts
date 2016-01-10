@@ -9,7 +9,7 @@ describe('EditCtrl', function() {
   beforeEach(angular.mock.module('topics.edit'));
 
   beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
-    ctrl = $controller('EditCtrl');
+    ctrl = $controller('TopicEditCtrl');
   }));
 
   it('should have ctrlName as EditCtrl', function() {

@@ -11,7 +11,7 @@ module exercises {
       .state('exerciseWorksheet', {
         url: '/modules/{id}/exercises/{eId}',
         templateUrl: 'exercises/worksheet/worksheet.tpl.html',
-        controller: 'WorksheetCtrl',
+        controller: 'ExerciseWorksheetCtrl',
         controllerAs: 'exerciseWorksheet'
       });
   }
