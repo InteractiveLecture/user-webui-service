@@ -6,18 +6,21 @@ module tutorials {
 
     ctrlName: string
     config: any
-    module: string
+    moduleId: string
+
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
-      '$sce'
+      '$sce',
+      '$stateParams'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($sce: ng.ISCEService, $stateParams: ng.ui.IStateParamsService) {
+    constructor($sce: ng.ISCEService, $stateParams: any) {
       var vm = this
+      vm.moduleId = $stateParams.id
       vm.ctrlName = 'VideoCtrl'
       vm.config = {
         sources: [

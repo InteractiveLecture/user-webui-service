@@ -3,7 +3,9 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4>
-        <span class="glyphicon glyphicon-arrow-left"></span>
+        <a >
+          <span class="glyphicon glyphicon-arrow-left" ui-sref="moduleOverview({id: tutorialsVideo.moduleId})"></span>
+        </a>
         Video zu {Module}</h4>
     </div>
     <article class="panel-body">
@@ -33,5 +35,12 @@
       </section>
 
     </article>
+    <div class="text-center">
+      <a ui-sref="exerciseOverview({id: tutorialsVideo.moduleId})">
+        <button class="btn btn-primary" type="button">
+          Exercises
+        </button>
+      </a>
+    </div>
   </div>
 </section>

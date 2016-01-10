@@ -8,7 +8,7 @@ module topics {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('topic', {
+      .state('topics', {
         url: '/topics',
         templateUrl: 'topics/overview/overview.tpl.html',
         controller: 'TopicOverviewCtrl',

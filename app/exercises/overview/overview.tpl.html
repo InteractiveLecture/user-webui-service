@@ -1,18 +1,23 @@
 <div class="col-sm-12">
   <div class="panel panel-default">
     <div class="panel-body">
+      <a >
+        <span class="glyphicon glyphicon-arrow-left" ui-sref="moduleOverview({id: exerciseOverview.moduleId})"></span>
+      </a>
       Exercises für {Module}
     </div>
   </div>
-  <div class="panel panel-default" ng-repeat="exercise in exerciseOverview.exercises">
+  <div class="panel panel-default" ng-repeat="exercise in exerciseOverview.exercise">
     <div class="panel-body">
       {{exercise.title}}
     </div>
     <div class="panel-footer clearfix">
       <div>
         {{exercise.description}}
-        <a class="pull-right">
-          <button class="btn btn-primary">Start</button>
+        <a class="pull-right" ui-sref="exerciseWorksheet({id: exerciseOverview.moduleId, eId: exercise.eId})">
+          <button class="btn btn-primary">
+            Start
+          </button>
         </a>
       </div>
     </div>

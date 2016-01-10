@@ -8,7 +8,7 @@ module tutorials {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('scripte', {
+      .state('script', {
         url: '/modules/{id}/script',
         templateUrl: 'tutorials/script/script.tpl.html',
         controller: 'TutorialsScriptCtrl',
