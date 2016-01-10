@@ -10,8 +10,6 @@ module modules {
     moduleTree: lectureDefinitions.interfaces.treeData[]
     callBackendService: CallBackend.CallBackendService
 
-    $location: ng.ILocationService
-
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
     // it is better to have it close to the constructor, because the parameters must match in count and type.
@@ -21,7 +19,7 @@ module modules {
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($location: ng.ILocationService, callBackendService: CallBackend.CallBackendService) {
+    constructor(callBackendService: CallBackend.CallBackendService) {
       var vm = this
       vm.ctrlName = 'OverviewCtrl'
       vm.callBackendService = callBackendService
@@ -32,12 +30,22 @@ module modules {
       //
       vm.nodes = vm.getNodesFrom(lectureDefinitions.models.testTree)
       vm.edges = vm.getEdgesFrom(lectureDefinitions.models.testTree)
+      vm.initFirstNode()
     }
 
     getNodesFrom(data: lectureDefinitions.interfaces.treeData[]) {
       var result: any[] = []
       data.forEach((node) => {
-        result.push({ data: { id: node.id, name: node.description } })
+        result.push({
+          data:
+          {
+            id: node.id,
+            name: node.description,
+            visible: false,
+            video_id: node.video_id,
+            scipt: node.script_id
+          }
+        })
       })
       return result
     }
@@ -52,6 +60,25 @@ module modules {
       return result
     }
 
+    initFirstNode() {
+      this.nodes[0].data.visible = true
+    }
+
+    haveVideo(node: lectureDefinitions.interfaces.treeData): boolean {
+      if (node.video_id != null) {
+        return false
+      } else {
+        return true
+      }
+    }
+
+    haveScript(node: lectureDefinitions.interfaces.treeData): boolean {
+      if (node.script_id != null) {
+        return false
+      } else {
+        return false
+      }
+    }
   }
 
 

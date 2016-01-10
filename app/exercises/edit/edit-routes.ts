@@ -9,10 +9,10 @@ module exercises {
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
       .state('exerciseEdit', {
-        url: '/modules/:id/exercises/:eId/edit',
-        templateUrl: 'exercises/edit/edit.tpl.html',
-        controller: 'EditCtrl',
-        controllerAs: 'exerciseEdit'
-      });
+      url: '/modules/{id}/exercises/{eId}/edit',
+      templateUrl: 'exercises/edit/edit.tpl.html',
+      controller: 'EditCtrl',
+      controllerAs: 'exerciseEdit'
+    });
   }
 }

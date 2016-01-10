@@ -11,18 +11,19 @@ module Cytoscape {
   */
   angular
     .module('modules')
-    .factory('CytoscapeFactory', CytoscapeFactory);
+    .factory('CytoscapeFactory', CytoscapeFactory)
 
 
   export interface CytoscapeInterface {
     renderCyto?: Function
   }
+
   function CytoscapeFactory($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService) {
     var CytoscapeBase: CytoscapeInterface = {};
     CytoscapeBase.renderCyto = function(nodes: any, edges: any) {
       var deferred = $q.defer()
       var location = $location
-      var root = $rootScope
+      var rootScope = $rootScope
       console.log("go in factory");
       angular.element(document).ready(() => { // On DOM Ready
         var cy = cytoscape({
@@ -68,13 +69,19 @@ module Cytoscape {
           ready: () => {
             // Promise soll das Cytoscape.js Objekt übergeben sobald es fertig initialisiert ist
             deferred.resolve(this);
-            cy.on('click', 'node', (event: any) => {
-              var node = event.cyTarget
-              var route = '/modules/' + node.id() + '/tutorials'
-              console.log(route)
-              location.path(route).state()
-              root.$apply()
+            cy.on('tap', 'node', (event: any) => {
+              var selected = event.cyTarget
+              cy.elements().forEach((element: any) => {
+                if (element.data().id != selected.data().id) {
+                  element.data({ visible: false })
+                } else {
+                  selected.data({ visible: true })
+                }
+              })
+              $rootScope.$apply()
+
             })
+
           }
         });
         cy.zoomingEnabled(false);

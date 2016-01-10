@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module overview {
+module topics {
   'use strict';
 
   /* @ngdoc object
@@ -11,5 +11,5 @@ module overview {
     .module('topics.overview', [
     'ui.router',
     'webUiService'
-  ]);
+  ])
 }

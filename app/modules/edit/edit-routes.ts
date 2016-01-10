@@ -9,7 +9,7 @@ module modules {
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
       .state('moduleEdit', {
-        url: '/modules/:id/edit',
+        url: '/modules/{id}/edit',
         templateUrl: 'modules/edit/edit.tpl.html',
         controller: 'EditCtrl',
         controllerAs: 'moduleEdit'

@@ -9,10 +9,6 @@ module tutorials {
   */
   angular
     .module('tutorials.video', [
-    'ui.router',
-    "com.2fdevs.videogular",
-    "com.2fdevs.videogular.plugins.controls",
-    "com.2fdevs.videogular.plugins.overlayplay",
-    "com.2fdevs.videogular.plugins.poster",
+    'ui.router'
   ]);
 }

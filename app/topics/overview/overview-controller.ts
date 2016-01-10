@@ -1,5 +1,5 @@
 ///<reference path='../../../typings/tsd.d.ts' />
-module OverviewCtrl {
+module topics {
   'use strict';
 
   class OverviewCtrl {
@@ -21,22 +21,22 @@ module OverviewCtrl {
     constructor(cachingService: Caching.CachingService, callBackendService: CallBackend.CallBackendService) {
       var vm = this
       vm.ctrlName = 'OverviewCtrl'
-
       vm.cachingService = cachingService
 
       //TODO: Echtdaten anfordern
-
+      console.log('controller is working')
       //Mockdaten
 
-      /*vm.topicList = [{ uuid: "a", name: "programmierung", description: "blablabala", version: null, module: null, authorities: null },
+      vm.topicList = [{ uuid: "a", name: "programmierung", description: "blablabala", version: null, module: null, authorities: null },
         { uuid: "v", name: "mathe", description: "blubb", version: null, module: null, authorities: null },
         { uuid: "dfdksljfkl", name: "ebusiness", description: "bdjbasjkfdhsjkal", version: null, module: null, authorities: null },
-        { uuid: "asd", name: "datenbanken", description: "dnksdhflsahlf", version: null, module: null, authorities: null }]*/
-      vm.topicList = []
+        { uuid: "asd", name: "datenbanken", description: "dnksdhflsahlf", version: null, module: null, authorities: null }]
 
-      callBackendService.loadTopicsPage(0, 100, (result: any) => {
-        vm.topicList = result
-      })
+
+
+      // callBackendService.loadTopicsPage(0, 100, (result: any) => {
+      //   vm.topicList = result
+      // })
     }
   }
 
@@ -48,7 +48,10 @@ module OverviewCtrl {
   * @description
   *
   */
+
   angular
     .module('topics.overview')
     .controller('OverviewCtrl', OverviewCtrl);
+
+  
 }

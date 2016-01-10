@@ -9,7 +9,7 @@ module video {
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
       .state('uploadVideo', {
-        url: '/modules/:id/video/upload',
+        url: '/modules/{id}/video/upload',
         templateUrl: 'upload/video/video.tpl.html',
         controller: 'VideoCtrl',
         controllerAs: 'uploadVideo'

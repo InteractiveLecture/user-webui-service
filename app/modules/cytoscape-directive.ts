@@ -27,7 +27,7 @@ module Cytoscape {
       restrict: 'EA',
       scope: {
         nodes: '=',
-        edges: '='
+        edges: '=',
       },
       templateUrl: 'modules/cytoscape-directive.tpl.html',
       replace: false,
@@ -36,7 +36,7 @@ module Cytoscape {
         var vm = this
         vm.name = 'cytoscape'
         var cy: Cy.Instance
-        CytoscapeFactory.renderCyto($scope.nodes, $scope.edges, $scope.onNodeClick).then((result: any) => {
+        CytoscapeFactory.renderCyto($scope.nodes, $scope.edges).then((result: any) => {
           cy = result;
         },
           () => { console.log("Cytoscape.js isn't working") });

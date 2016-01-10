@@ -8,8 +8,8 @@ module tutorials {
 
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
-      .state('tutorialsVideo', {
-        url: '/modules/:id/video',
+      .state('video', {
+        url: '/modules/{id}/video',
         templateUrl: 'tutorials/video/video.tpl.html',
         controller: 'VideoCtrl',
         controllerAs: 'tutorialsVideo'

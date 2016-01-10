@@ -2,13 +2,20 @@
   <h1>Moduleübersicht des {Topic}s</h1>
   <cytoscape edges="moduleOverview.edges" nodes="moduleOverview.nodes"></cytoscape>
 </section>
-<section class="col-md-6">
+<section class="col-md-6" ng-repeat="node in moduleOverview.nodes" ng-show="node.data.visible">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4>
-        Module
+        {{node.data.name}}
       </h4>
     </div>
-    <article class="panel-body"></article>
+    <article class="panel-body">
+      <button class="btn btn primary" ng-disabled="moduleOverview.haveVideo(node.data)" ui-sref="tutorialsVideo({id: node.data.id})" type="button">
+        Tutorial Video
+      </button>
+      <button class="btn btn primary" ng-disabled="moduleOverview.haveScript(node.data)" ui-sref="tutorialsScript({id: node.data.id})"  type="button">
+        Tutorial Script
+      </button>
+    </article>
   </div>
 </section>

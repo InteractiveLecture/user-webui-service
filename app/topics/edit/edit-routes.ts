@@ -9,7 +9,7 @@ module topics {
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
       .state('topicEdit', {
-        url: '/topics/:id/edit',
+        url: '/topics/{id}/edit',
         templateUrl: 'topics/edit/edit.tpl.html',
         controller: 'EditCtrl',
         controllerAs: 'topicEdit'

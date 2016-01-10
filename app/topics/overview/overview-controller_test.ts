@@ -3,16 +3,16 @@
 /* global describe, beforeEach, it, expect, inject, module */
 'use strict';
 
-describe('OverviewCtrl', function () {
-  var ctrl;
+describe('OverviewCtrl', function() {
+  var ctrl: any;
 
   beforeEach(angular.mock.module('topics.overview'));
 
-  beforeEach(inject(function ($rootScope, $controller) {
+  beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
     ctrl = $controller('OverviewCtrl');
   }));
 
-  it('should have ctrlName as OverviewCtrl', function () {
+  it('should have ctrlName as OverviewCtrl', function() {
     expect(ctrl.ctrlName).toEqual('OverviewCtrl');
   });
 

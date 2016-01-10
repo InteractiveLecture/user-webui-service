@@ -9,7 +9,7 @@ module exercises {
   function config($stateProvider: ng.ui.IStateProvider) {
     $stateProvider
       .state('exerciseWorksheet', {
-        url: '/modules/:id/exercises/:eId',
+        url: '/modules/{id}/exercises/{eId}',
         templateUrl: 'exercises/worksheet/worksheet.tpl.html',
         controller: 'WorksheetCtrl',
         controllerAs: 'exerciseWorksheet'

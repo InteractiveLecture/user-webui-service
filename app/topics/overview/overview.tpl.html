@@ -5,14 +5,14 @@
     </div>
     <article class="panel-body">
       <div class="list-group">
-        <a class="list-group-item" nglink="topicDetails({id: topic.id})">
+        <a class="list-group-item" ui-sref="topicDetails({id: topic.id})">
                 Mehr Informationen
               </a>
-        <a class="list-group-item" ng-link="moduleOverview({id: topic.id})" >
+        <a class="list-group-item" ui-sref="moduleOverview({id: topic.id})" >
                 Modulübersicht
               </a>
         <!-- Welches Module hier gezeigt wird muss ermittelt werden aus den JSON Daten -->
-        <a class="list-group-item" ng-link="exerciseOverview({id: topic.id})">
+        <a class="list-group-item" ui-sref="exerciseOverview({id: topic.id})">
                 Start
               </a>
       </div>

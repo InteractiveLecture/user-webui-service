@@ -15,8 +15,8 @@ module tutorials {
 
     // dependencies are injected via AngularJS $injector
     constructor() {
-      var vm = this;
-      vm.ctrlName = 'ScriptCtrl';
+      var vm = this
+      vm.ctrlName = 'ScriptCtrl'
     }
   }
 
