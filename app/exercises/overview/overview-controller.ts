@@ -12,12 +12,14 @@ module exercises {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor() {
+    constructor($log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'OverviewCtrl'
+      $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.exercise = [{ "title": "Variablen", "description": "Der Umgang mit Variablen in Java" },
         { "title": "Vererbung", "description": "Der Umgang mit Vererbung in Java" },
         { "title": "Klassen", "description": "Was ist eine Klasse in Java" }];

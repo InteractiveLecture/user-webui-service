@@ -18,14 +18,16 @@ module user {
     public static $inject: string[] = [
       'CallBackendService',
       '$location',
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(callBackendService: lectureDefinitions.interfaces.backendable, $location: ng.ILocationService) {
+    constructor(callBackendService: lectureDefinitions.interfaces.backendable, $location: ng.ILocationService, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'LoginCtrl'
       vm.callBackendService = callBackendService
       vm.$location = $location
+      $log.debug('controller ' + vm.ctrlName + ' is working')
     }
 
     public attemptLogin(userData: lectureDefinitions.interfaces.loginable) {

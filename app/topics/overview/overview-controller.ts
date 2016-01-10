@@ -14,17 +14,18 @@ module topics {
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
       'CachingService',
-      'CallBackendService'
+      'CallBackendService',
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(cachingService: Caching.CachingService, callBackendService: CallBackend.CallBackendService) {
+    constructor(cachingService: Caching.CachingService, callBackendService: CallBackend.CallBackendService, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'OverviewCtrl'
       vm.cachingService = cachingService
 
       //TODO: Echtdaten anfordern
-      console.log('controller is working')
+      $log.debug('controller ' + vm.ctrlName + ' is working')
       //Mockdaten
 
       vm.topicList = [{ uuid: "a", name: "programmierung", description: "blablabala", version: null, module: null, authorities: null },
@@ -53,5 +54,4 @@ module topics {
     .module('topics.overview')
     .controller('OverviewCtrl', OverviewCtrl);
 
-  
 }

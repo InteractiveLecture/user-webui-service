@@ -18,7 +18,6 @@ module tutorials {
     // dependencies are injected via AngularJS $injector
     constructor($sce: ng.ISCEService, $stateParams: ng.ui.IStateParamsService) {
       var vm = this
-      
       vm.ctrlName = 'VideoCtrl'
       vm.config = {
         sources: [

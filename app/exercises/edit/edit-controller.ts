@@ -11,12 +11,14 @@ module exercises {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor() {
-      var vm = this;
-      vm.ctrlName = 'EditCtrl';
+    constructor($log: ng.ILogService) {
+      var vm = this
+      vm.ctrlName = 'EditCtrl'
+      $log.debug('controller ' + vm.ctrlName + ' is working')
     }
   }
 

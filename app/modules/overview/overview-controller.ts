@@ -15,13 +15,15 @@ module modules {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
-      'CallBackendService'
+      'CallBackendService',
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(callBackendService: CallBackend.CallBackendService) {
+    constructor(callBackendService: CallBackend.CallBackendService, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'OverviewCtrl'
+      $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.callBackendService = callBackendService
       vm.moduleTree = []
       // vm.callBackendService.loadModuleTree('abc', 0, -1, -1, (treeData: lectureDefinitions.interfaces.treeData[]) => {

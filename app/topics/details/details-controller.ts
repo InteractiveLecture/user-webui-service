@@ -13,14 +13,17 @@ module topics {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
-      'CachingService'
+      'CachingService',
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(cachningService: Caching.CachingService) {
+    constructor(cachningService: Caching.CachingService, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'DetailsCtrl'
+      $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.cachingService = cachningService
+
     }
   }
 

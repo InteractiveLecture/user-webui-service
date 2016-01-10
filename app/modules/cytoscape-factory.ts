@@ -18,13 +18,13 @@ module Cytoscape {
     renderCyto?: Function
   }
 
-  function CytoscapeFactory($q: ng.IQService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService) {
+  function CytoscapeFactory($q: ng.IQService, $log: ng.ILogService, $location: ng.ILocationService, $rootScope: ng.IRootScopeService) {
     var CytoscapeBase: CytoscapeInterface = {};
     CytoscapeBase.renderCyto = function(nodes: any, edges: any) {
       var deferred = $q.defer()
       var location = $location
       var rootScope = $rootScope
-      console.log("go in factory");
+      $log.debug("go in factory");
       angular.element(document).ready(() => { // On DOM Ready
         var cy = cytoscape({
           // Container zum rendern des Graphen festlegen
@@ -70,6 +70,7 @@ module Cytoscape {
             // Promise soll das Cytoscape.js Objekt übergeben sobald es fertig initialisiert ist
             deferred.resolve(this);
             cy.on('tap', 'node', (event: any) => {
+              $log.debug('Click on node')
               var selected = event.cyTarget
               cy.elements().forEach((element: any) => {
                 if (element.data().id != selected.data().id) {

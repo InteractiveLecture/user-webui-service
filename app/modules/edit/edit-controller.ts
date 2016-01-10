@@ -21,13 +21,15 @@ module modules {
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
       'CachingService',
-      'rfc4122'
+      'rfc4122',
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(cache: Caching.CachingService, rfc4122: any) {
+    constructor(cache: Caching.CachingService, rfc4122: any, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'EditCtrl'
+      $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.cachingService = cache
       vm.rfc4122 = rfc4122
       vm.patch = new lectureDefinitions.models.LecturePatch()

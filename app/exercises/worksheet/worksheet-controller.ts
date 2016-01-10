@@ -17,13 +17,15 @@ module exercises {
     // it is better to have it close to the constructor, because the parameters must match in count and type.
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
-      '$timeout'
+      '$timeout',
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($timeout: ng.ITimeoutService) {
+    constructor($timeout: ng.ITimeoutService, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'WorksheetCtrl'
+      $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.$timeout = $timeout
       vm.patcher = new diff_match_patch()
       vm.aceTabs = []

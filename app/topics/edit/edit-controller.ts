@@ -25,13 +25,15 @@ module topics {
     public static $inject: string[] = [
       'CallBackendService',
       'CachingService',
-      'rfc4122'
+      'rfc4122',
+      '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(cachingService: Caching.CachingService, rfc4122: any) {
+    constructor(cachingService: Caching.CachingService, rfc4122: any, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'EditCtrl'
+      $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.rfc4122 = rfc4122
       vm.patch = new lectureDefinitions.models.LecturePatch()
       //vm.workingTopic = <lectureDefinitions.models.Topic>cachingService.load($routeParams.id)
