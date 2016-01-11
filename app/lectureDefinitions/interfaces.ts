@@ -10,6 +10,7 @@ module lectureDefinitions.interfaces {
   export interface backendable {
     get(): string
     loadModel(id: string, callback: any): any
+    loadModule(moduleId: string, callback: any): any
     postUserData(userData: lectureDefinitions.interfaces.loginable, callback: any): any
   }
 

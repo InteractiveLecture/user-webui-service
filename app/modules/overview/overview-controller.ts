@@ -7,8 +7,10 @@ module modules {
     ctrlName: string
     nodes: any[]
     edges: any[]
+    module: lectureDefinitions.models.Module
     moduleTree: lectureDefinitions.interfaces.treeData[]
     callBackendService: CallBackend.CallBackendService
+    cachingService: Caching.CachingService
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -16,16 +18,28 @@ module modules {
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
       'CallBackendService',
+      'CachingService',
+      '$scope',
       '$log'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(callBackendService: CallBackend.CallBackendService, $log: ng.ILogService) {
+    constructor(callBackendService: CallBackend.CallBackendService, cachingService: Caching.CachingService, $scope: ng.IScope, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'OverviewCtrl'
       $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.callBackendService = callBackendService
+      vm.cachingService = cachingService
       vm.moduleTree = []
+
+      $scope.$on('loadModule', (event: ng.IAngularEvent, moduleId: string) => {
+        callBackendService.loadModule(moduleId, (module: lectureDefinitions.models.Module) => {
+          vm.module = module
+          console.log('es lädt')
+          cachingService.save(module.id, module)
+        })
+      })
+
       // vm.callBackendService.loadModuleTree('abc', 0, -1, -1, (treeData: lectureDefinitions.interfaces.treeData[]) => {
       //   vm.moduleTree = treeData
       // })

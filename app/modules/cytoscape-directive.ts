@@ -27,7 +27,7 @@ module Cytoscape {
       restrict: 'EA',
       scope: {
         nodes: '=',
-        edges: '=',
+        edges: '='
       },
       templateUrl: 'modules/cytoscape-directive.tpl.html',
       replace: false,
