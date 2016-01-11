@@ -64,7 +64,7 @@ module lectureDefinitions.models {
    * Basismodel der Daten für dieses Projekt
    */
   export class BaseModel {
-    uuid: string
+    id: string
     //
     constructor(object: any) {
       for (var prop in object) {
@@ -139,7 +139,7 @@ module lectureDefinitions.models {
   /**
    * Definiert alles was History Klassen gemeinsam haben
    */
-  export class BaseHistory {
+  export class BaseHistoryEntry {
     user_id: string
     amount: number
     time: Date
@@ -149,21 +149,21 @@ module lectureDefinitions.models {
   /**
    * Angefangen und Abgeschlossene Module
    */
-  export class ModuleProgressHistory extends models.BaseHistory {
+  export class ModuleProgressHistoryEntry extends models.BaseHistoryEntry {
     module_id: string
   }
 
   /**
    * Angefangen und Abgeschlossene Exercises
    */
-  export class ExerciseProgressHistory extends models.BaseHistory {
+  export class ExerciseProgressHistoryEntry extends models.BaseHistoryEntry {
     exercise_id: string
   }
 
   /**
    * Welche Hints hat der User benutzt
    */
-  export class HintPurchaseHistory {
+  export class HintPurchaseHistoryEntry {
     user_id: string
     amount: number
     time: Date

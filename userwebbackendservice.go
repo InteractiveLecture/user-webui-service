@@ -118,6 +118,18 @@ func main() {
 		"lecture-service",
 		"/users", resolver), *auth))
 
+	r.Methods("GET").
+		Path("/users/{id}/balances").
+		Handler(jwtWrapper(createProxy(
+		"lecture-service",
+		"/users/{id}/balances", resolver), *auth))
+
+	r.Methods("GET").
+		Path("/users/{id}/exercises").
+		Handler(jwtWrapper(createProxy(
+		"lecture-service",
+		"/users/{id}/exercises", resolver), *auth))
+
 	// Exercises Pfade
 	//----------------------------
 

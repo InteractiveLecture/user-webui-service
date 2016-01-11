@@ -9,7 +9,6 @@ module exercises {
   */
   angular
     .module('exercises', [
-      'exercises.overview',
       'exercises.worksheet',
       'exercises.edit'
     ]);
