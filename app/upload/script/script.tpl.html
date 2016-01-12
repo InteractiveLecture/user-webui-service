@@ -1,5 +1,5 @@
 <!-- Text Tutorial -->
-<section class="col-md-6">
+<section class="col-md-12">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4>
@@ -13,8 +13,26 @@
 
       <!-- Button -->
       <div class="form-group text-center">
-        <button class="btn btn-primary" id="senden" name="senden">senden</button>
+        <button class="btn btn-primary" id="senden" name="senden" ng-click="uploadScript.postScriptContent(uploadScript.script)">senden</button>
       </div>
     </article>
   </div>
 </section>
+
+<div class="col-md-offset-4 col-md-4">
+  <div class="row">
+    <!-- Messages anhand der logik-->
+    <div class="alert alert-danger text-center" ng-show="uploadScript.error == 401">
+      Falsche Eingabe -</br>
+    bitte nochmal versuchen
+  </div>
+  <div class="alert alert-danger text-center" ng-show="uploadScript.error == 404">
+    Server antwortet nicht -</br>
+  bitte versuche es später noch einmal
+</div>
+<div class="alert alert-danger text-center" ng-show="uploadScript.error == 'noContent' ">
+  Kein Script Inhalt gefunden</br>
+bitte Content einfügen
+</div>
+</div>
+</div>

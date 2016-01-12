@@ -18,6 +18,7 @@ module lectureDefinitions.interfaces {
     loadExercise(exerciseId: string, callback: any): any
     getReasonableExercise(userId: string, moduleId: string, callback: any): any
     loadModule(moduleId: string, callback: any): any
+    postScript(sciptContent: string, callback: any): any
     postUser(newUser: any, callback: any): any
     postNewPassword(newPassword: string, userId: string, callback: any): any
     postUserData(userData: lectureDefinitions.interfaces.loginable, callback: any): any

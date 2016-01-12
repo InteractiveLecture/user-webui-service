@@ -5,6 +5,7 @@ module VideoCtrl {
   class VideoCtrl {
 
     ctrlName: string
+    videoEndpoint: string
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -18,6 +19,7 @@ module VideoCtrl {
     constructor($log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'VideoCtrl'
+      vm.videoEndpoint = '/videos'
       $log.debug('controller ' + vm.ctrlName + ' is working')
     }
   }

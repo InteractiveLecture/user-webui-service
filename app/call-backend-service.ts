@@ -160,6 +160,17 @@ module CallBackend {
         })
     }
 
+    postScript(sciptContent: string, callback: any) {
+      this.$http({
+        method: 'POST',
+        url: '/scripte'
+      }).then((result: any) => {
+        callback(result.data)
+      }, (err: any) => {
+          callback(err)
+        })
+    }
+
     postUser(newUser: any, callback: any) {
       this.$http({
         method: 'POST',

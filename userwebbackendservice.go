@@ -185,6 +185,8 @@ func main() {
 		"lecture-service",
 		"/modules/{id}/exercises", resolver), *auth))
 
+		//TODO: Routen für Scripte festlegen. Dummy: /scripte
+
 	r.Methods("POST").
 		Path("/videos").
 		Handler(jwtWrapper(createProxy(

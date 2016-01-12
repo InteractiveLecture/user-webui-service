@@ -9,7 +9,8 @@ module script {
   */
   angular
     .module('upload.script', [
-      'ui.router',
-      'ui.ace'
-    ]);
+    'ui.router',
+    'ui.ace',
+    'webUiService'
+  ]);
 }
