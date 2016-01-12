@@ -82,15 +82,15 @@ module modules {
 
     haveVideo(node: lectureDefinitions.interfaces.treeData): boolean {
       if (node.video_id != null) {
-        return false
-      } else {
         return true
+      } else {
+        return false
       }
     }
 
     haveScript(node: lectureDefinitions.interfaces.treeData): boolean {
       if (node.script_id != null) {
-        return false
+        return true
       } else {
         return false
       }

@@ -6,8 +6,10 @@ module user {
 
     ctrlName: string
     callBackendService: lectureDefinitions.interfaces.backendable
+    $log: ng.ILogService
     user: lectureDefinitions.models.User
     newPassword: string
+    error: any
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -22,15 +24,18 @@ module user {
     constructor(callBackendService: lectureDefinitions.interfaces.backendable, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'ProfileCtrl'
+      vm.$log = $log
       $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.callBackendService = callBackendService
       // Mockdaten
-      vm.user = new lectureDefinitions.models.User({ username: "muellerm" })
+      vm.user = new lectureDefinitions.models.User({ username: "muellerm", id: 12 })
     }
 
     changePassword(newPassword: string) {
-      // TODO: changePassword implementieren
-      console.log(newPassword)
+      this.callBackendService.postNewPassword(newPassword, this.user.id, (result: any) => {
+        this.$log.debug(result.status)
+        this.error = result.status
+      })
     }
   }
 

@@ -10,7 +10,15 @@ module lectureDefinitions.interfaces {
   export interface backendable {
     get(): string
     loadModel(id: string, callback: any): any
+    loadTopicsPage(pageNumber: number, pageSize: number, callback: any): any
+    loadOneTopic(topicId: string, callback: any): any
+    loadModuleTree(topic_id: string, layer: number, ancestors: number, descedants: number, callback: any): any
+    loadBalance(userId: string, callback: any): any
+    loadExerciseHistory(userId: string, moduleId: string, callback: any): any
+    loadExercise(exerciseId: string, callback: any): any
+    getReasonableExercise(userId: string, moduleId: string, callback: any): any
     loadModule(moduleId: string, callback: any): any
+    postNewPassword(newPassword: string, userId: string, callback: any): any
     postUserData(userData: lectureDefinitions.interfaces.loginable, callback: any): any
   }
 

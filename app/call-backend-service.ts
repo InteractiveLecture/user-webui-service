@@ -160,6 +160,17 @@ module CallBackend {
         })
     }
 
+    postNewPassword(newPassword: string, userId: string, callback: any) {
+      this.$http({
+        method: 'PUT',
+        url: '/users/' + userId
+      }).then((result: any) => {
+        callback(result.data)
+      }, (err: any) => {
+          callback(err)
+        })
+    }
+
     /**
      * Gibt die eingetippten Daten ans Backend weiter. Das Resultat wird im Cache
      * gespeichert und zurückgegeben
