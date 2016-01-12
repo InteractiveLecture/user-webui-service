@@ -5,11 +5,13 @@
 
 describe('OverviewCtrl', function() {
   var ctrl: any;
+  var scope: any;
 
   beforeEach(angular.mock.module('modules.overview'));
 
   beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
-    ctrl = $controller('ModuleOverviewCtrl');
+    scope = $rootScope.$new()
+    ctrl = $controller('ModuleOverviewCtrl', { '$scope': scope });
   }));
 
   it('should have ctrlName as OverviewCtrl', function() {
