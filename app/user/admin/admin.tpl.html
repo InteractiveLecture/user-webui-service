@@ -12,15 +12,15 @@
             <label class="col-md-4 control-label" for="nutzertyp">Nutzertyp</label>
             <div class="col-md-4">
               <label class="radio-inline" for="nutzertyp-0">
-                <input checked="checked" id="nutzertyp-0" name="nutzertyp" type="radio" value="User">
+                <input checked="checked" id="nutzertyp-0" name="nutzertyp" ng-model="admin.newUser.role" type="radio" value="USER">
                 Student
               </label>
               <label class="radio-inline" for="nutzertyp-1">
-                <input id="nutzertyp-1" name="nutzertyp" type="radio" value="Dozent">
+                <input id="nutzertyp-1" name="nutzertyp" ng-model="admin.newUser.role" type="radio" value="DOZENT">
                 Dozent
               </label>
               <label class="radio-inline" for="nutzertyp-2">
-                <input id="nutzertyp-2" name="nutzertyp" type="radio" value="Administrator">
+                <input id="nutzertyp-2" name="nutzertyp" ng-model="admin.newUser.role" type="radio" value="ADMINISTRATOR">
                 Administrator
               </label>
             </div>
@@ -30,7 +30,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="textinput">Benutzername</label>
             <div class="col-md-5">
-              <input class="form-control input-md" id="textinput" name="textinput" placeholder="Username" required="" type="text">
+              <input class="form-control input-md" ng-model="admin.newUser.username" id="textinput" name="textinput" placeholder="Username" required="" type="text">
               <span class="help-block">Name des neuen Benutzers</span>
             </div>
           </div>
@@ -39,7 +39,7 @@
           <div class="form-group">
             <label class="col-md-4 control-label" for="senden">Fertig?</label>
             <div class="col-md-4">
-              <button class="btn btn-primary" id="senden" name="senden">senden</button>
+              <button class="btn btn-primary" id="senden" name="senden" ng-click="admin.postNewUser(admin.newUser)">senden</button>
             </div>
           </div>
 
@@ -49,3 +49,17 @@
     </article>
   </div>
 </section>
+
+<div class="col-md-offset-4 col-md-4">
+  <div class="row">
+    <!-- Messages anhand der logik-->
+    <div class="alert alert-danger text-center" ng-show="admin.error == 401">
+      Falsche Eingabe -</br>
+    bitte nochmal versuchen
+  </div>
+  <div class="alert alert-danger text-center" ng-show="admin.error !== undefined && login.errorStatus !== 401">
+    Server antwortet nicht -</br>
+  bitte versuche es später noch einmal
+</div>
+</div>
+</div>

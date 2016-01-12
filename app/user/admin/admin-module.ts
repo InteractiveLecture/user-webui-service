@@ -9,6 +9,8 @@ module user {
   */
   angular
     .module('user.admin', [
-      'ui.router'
-    ]);
+    'ui.router',
+    'uuid',
+    'webUiService'
+  ]);
 }

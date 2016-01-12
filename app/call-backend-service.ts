@@ -160,6 +160,17 @@ module CallBackend {
         })
     }
 
+    postUser(newUser: any, callback: any) {
+      this.$http({
+        method: 'POST',
+        url: '/users/' + newUser.id
+      }).then((result: any) => {
+        callback(result.data)
+      }, (err: any) => {
+          callback(err)
+        })
+    }
+
     postNewPassword(newPassword: string, userId: string, callback: any) {
       this.$http({
         method: 'PUT',
