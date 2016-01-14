@@ -2,15 +2,27 @@
 module exercises {
   'use strict';
 
+  interface uiTab {
+    title: string
+    visible: boolean
+    active: string
+    session: AceAjax.IEditSession
+  }
+
   class WorksheetCtrl {
 
     ctrlName: string
     aceTabs: any[]
     patcher: any
     timerActiv: any
+    aceOptions: any
+    lastSelected: number
+    testResults: string
     websocket: WebSocket
+    compileReport: lectureDefinitions.models.CompilationReport
 
     $timeout: ng.ITimeoutService
+    $log: ng.ILogService
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -25,16 +37,54 @@ module exercises {
     constructor($timeout: ng.ITimeoutService, $log: ng.ILogService) {
       var vm = this
       vm.ctrlName = 'WorksheetCtrl'
-      $log.debug('controller ' + vm.ctrlName + ' is working')
+      vm.$log = $log
+      vm.aceTabs = []
+      vm.lastSelected = 0
+      vm.initTab()
       vm.$timeout = $timeout
       vm.patcher = new diff_match_patch()
-      vm.aceTabs = []
-      vm.initTab()
+      vm.websocket = new WebSocket('ws://java')
+      vm.websocket.onmessage = (event: MessageEvent) => { vm.javaEvaluationListener(event.data) }
+      vm.aceOptions = {
+        mode: 'java',
+        theme: 'eclipse',
+        onLoad: (_editor: AceAjax.Editor) => {
+          console.log('ace tab ready')
+          this.aceTabs[this.aceTabs.length - 1].session = _editor.getSession()
+        }
+      }
+      $log.debug('controller ' + vm.ctrlName + ' is working')
     }
 
+    javaEvaluationListener(report: lectureDefinitions.models.CompilationReport) {
+      this.compileReport = report
+      if (!report.hasErrors) {
+        this.compileReport.errors.forEach((error: lectureDefinitions.models.CompilationDiagnostic) => {
+          if (error.noPosition) {
+            this.testResults == 'Die Datei ' + error.classname + ' konnte nicht kompiliert werden'
+          } else {
+            this.aceTabs.forEach((tab: uiTab) => {
+              if (tab.title == error.classname) {
+                var tabnumber = this.aceTabs.indexOf(tab)
+                this.highlightError(error.code, error.lineNumber, error.colNumber, tab)
+              }
+            })
+          }
+        })
+      }
+    }
+
+    private highlightError(code: any, lineNumber: number, colNumber: number, tab: uiTab) {
+      tab.session.setAnnotations([{
+        row: lineNumber,
+        column: colNumber,
+        text: code,
+        type: "error"
+      }])
+    }
 
     initTab() {
-      this.aceTabs.push({ title: "New Class", visible: true, active: 'active', content: '', lastShot: '' })
+      this.aceTabs.push({ title: "New Class", visible: true, active: 'active', content: '', session: null, lastShot: '' })
     }
 
     /**
@@ -59,8 +109,10 @@ module exercises {
      */
     selectOne(index: number) {
       this.deselectAll()
+      this.lastSelected = index
       this.aceTabs[index].visible = true
       this.aceTabs[index].active = 'active'
+      this.$log.debug(this.aceTabs[index])
     }
 
     /**
@@ -118,6 +170,9 @@ module exercises {
       var className = /[a-z\W\d_]/.test(matches[0][0]) ? "unbekannte Klasse" : matches[0] + ".java"
       this.aceTabs[index].title = className
 
+      // Mock Highlight
+      this.highlightError('Da steht was falsches', 1, 2, this.aceTabs[index])
+
       // Wenn noch nicht getippt würde, braucht der Timer nicht gecancelt werden
       if (this.timerActiv != null) {
         // Timeout abbrechen, falls erneut getippt wird
@@ -136,6 +191,7 @@ module exercises {
       this.timerActiv = this.$timeout(() => {
         var patch = this.generatePatch()
         console.log(patch)
+        console.log(this.aceTabs)
         //  this.websocket.send(this.patcher.patch_toText(patch))
       }, 1500)
     }

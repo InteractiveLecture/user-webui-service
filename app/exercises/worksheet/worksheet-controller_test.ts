@@ -5,11 +5,14 @@
 
 describe('WorksheetCtrl', function() {
   var ctrl: any;
+  var backend: ng.IHttpBackendService
 
   beforeEach(angular.mock.module('exercises.worksheet'));
 
-  beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService) {
+  beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService, $httpBackend: ng.IHttpBackendService) {
     ctrl = $controller('ExerciseWorksheetCtrl');
+    backend = $httpBackend
+    
   }))
 
   it('should have ctrlName as WorksheetCtrl', function() {
@@ -28,6 +31,10 @@ describe('WorksheetCtrl', function() {
     ctrl.aceTabs[1].content = 'test2'
     var patch2 = ctrl.generatePatch()
     expect(patch2.length).toBe(0)
+  })
+
+  it('should highlight Errors in Classes', function() {
+
   })
 
 });

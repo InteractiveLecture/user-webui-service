@@ -18,10 +18,7 @@
 
       <div class="tab-content">
         <div class="tab-pane fade in active" ng-repeat="tab in exerciseWorksheet.aceTabs" ng-show="tab.visible">
-          <div ng-change="exerciseWorksheet.acechange($index)" ng-model="exerciseWorksheet.aceTabs[$index].content" ui-ace="{
-              mode: 'java',
-              theme: 'eclipse'
-            }">{{tab.content}}</div>
+          <div ng-change="exerciseWorksheet.acechange($index)" ng-model="exerciseWorksheet.aceTabs[$index].content" ui-ace="exerciseWorksheet.aceOptions">{{tab.content}}</div>
         </div>
       </div>
 
