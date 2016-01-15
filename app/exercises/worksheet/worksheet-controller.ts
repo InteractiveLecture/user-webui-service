@@ -18,6 +18,8 @@ module exercises {
     aceOptions: any
     lastSelected: number
     testResults: string
+    markerMap: any[]
+    deleteError: number[]
     websocket: WebSocket
     compileReport: lectureDefinitions.models.CompilationReport
 
@@ -39,6 +41,8 @@ module exercises {
       vm.ctrlName = 'WorksheetCtrl'
       vm.$log = $log
       vm.aceTabs = []
+      vm.markerMap = []
+      vm.deleteError = []
       vm.lastSelected = 0
       vm.initTab()
       vm.$timeout = $timeout
@@ -58,29 +62,61 @@ module exercises {
 
     javaEvaluationListener(report: lectureDefinitions.models.CompilationReport) {
       this.compileReport = report
-      if (!report.hasErrors) {
+      if (!this.compileReport.hasErrors()) {
         this.compileReport.errors.forEach((error: lectureDefinitions.models.CompilationDiagnostic) => {
           if (error.noPosition) {
-            this.testResults == 'Die Datei ' + error.classname + ' konnte nicht kompiliert werden'
+            this.testResults = 'Die Datei ' + error.classname + ' konnte nicht kompiliert werden'
           } else {
+            this.testResults = ''
             this.aceTabs.forEach((tab: uiTab) => {
               if (tab.title == error.classname) {
-                var tabnumber = this.aceTabs.indexOf(tab)
-                this.highlightError(error.code, error.lineNumber, error.colNumber, tab)
+                this.gutterError(error.code, error.lineNumber, error.colNumber, tab)
+                this.inlineError(error.lineNumber, error.startPosition, error.endPosition, tab)
+                this.deleteError.forEach((id) => {
+                  tab.session.removeMarker(id)
+                })
               }
             })
           }
         })
       }
+
     }
 
-    private highlightError(code: any, lineNumber: number, colNumber: number, tab: uiTab) {
+    private gutterError(code: any, lineNumber: number, colNumber: number, tab: uiTab) {
       tab.session.setAnnotations([{
         row: lineNumber,
         column: colNumber,
         text: code,
         type: "error"
       }])
+    }
+
+    private inlineError(lineNumber: number, startPosition: number, endPosition: number, tab: uiTab) {
+      var sameError: boolean
+      this.markerMap.forEach((tabname) => {
+        if (tabname != tab.title) {
+          this.markerMap[tab.title] = []
+        }
+        else {
+          this.markerMap[tab.title].forEach((marker: any) => {
+            sameError = marker.lineNumber == lineNumber && marker.startPosition == startPosition && marker.endPosition == endPosition
+          })
+          if (sameError) {
+            return
+          } else {
+            this.deleteError.push[this.markerMap[tabname].markerId]
+            var range = ace.require("ace/range")
+            var markerId = tab.session.addMarker(new range.Range(lineNumber, startPosition, lineNumber, endPosition), "aceWarning", "line", true)
+            this.markerMap[tab.title].push({
+              id: markerId,
+              lineNumber: lineNumber,
+              startPosition: startPosition,
+              endPosition: endPosition
+            })
+          }
+        }
+      })
     }
 
     initTab() {
@@ -171,7 +207,8 @@ module exercises {
       this.aceTabs[index].title = className
 
       // Mock Highlight
-      this.highlightError('Da steht was falsches', 1, 2, this.aceTabs[index])
+      this.gutterError('Da steht was falsches', 1, 2, this.aceTabs[index])
+      this.inlineError(1, 1, 12, this.aceTabs[index])
 
       // Wenn noch nicht getippt würde, braucht der Timer nicht gecancelt werden
       if (this.timerActiv != null) {

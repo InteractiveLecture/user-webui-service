@@ -7,6 +7,12 @@
   right: 0;
   height: 600px;
 }
+.aceWarning {
+  border-bottom: 1px solid red;
+  position: absolute;
+  cursor: pointer !important;
+  pointer-events: auto;
+}
 body {
   overflow: hidden;
 }
