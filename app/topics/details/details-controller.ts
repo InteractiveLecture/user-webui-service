@@ -5,8 +5,9 @@ module topics {
   class DetailsCtrl {
 
     ctrlName: string
-    topicList: lectureDefinitions.models.Topic[]
+    topic: lectureDefinitions.models.Topic
     cachingService: Caching.CachingService
+
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -14,16 +15,17 @@ module topics {
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
       'CachingService',
-      '$log'
+      '$log',
+      '$stateParams'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(cachningService: Caching.CachingService, $log: ng.ILogService) {
+    constructor(cachningService: Caching.CachingService, $log: ng.ILogService, $stateParams: any) {
       var vm = this
       vm.ctrlName = 'DetailsCtrl'
       $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.cachingService = cachningService
-
+      vm.topic = cachningService.loadTopic($stateParams.id)
     }
   }
 
