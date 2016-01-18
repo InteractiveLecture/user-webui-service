@@ -9,6 +9,7 @@ module tutorials {
   */
   angular
     .module('tutorials.video', [
-    'ui.router'
+    'ui.router',
+    'webUiService'
   ]);
 }

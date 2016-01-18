@@ -10,6 +10,7 @@ module exercises {
   angular
     .module('exercises.worksheet', [
     'ui.router',
-    'ui.ace'
+    'ui.ace',
+    'webUiService'
   ]);
 }

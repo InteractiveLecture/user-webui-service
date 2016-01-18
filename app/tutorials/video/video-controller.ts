@@ -23,13 +23,17 @@ module tutorials {
       var vm = this
       vm.ctrlName = 'VideoCtrl'
       vm.lectureModule = cachingService.loadModule($stateParams.id)
+      // Fallback für offline testing
+      if (vm.lectureModule == undefined) {
+        vm.lectureModule = new lectureDefinitions.models.Module({})
+      }
       vm.config = {
         sources: [
-          { src: $sce.trustAsResourceUrl('/videos/'), type: "video/mp4" }
+          { src: $sce.trustAsResourceUrl('/videos/' + vm.lectureModule.video_id), type: "video/mp4" }
         ],
         theme: "vendor/videogular-themes-default/videogular.css",
         plugins: {
-          poster: "app/images/fb_wirtschaft.jpg"
+          poster: "images/fb_wirtschaft.jpg"
         }
       }
 
