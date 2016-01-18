@@ -13,6 +13,7 @@ import (
 	"github.com/InteractiveLecture/middlewares/jwtware"
 	"github.com/InteractiveLecture/serviceclient"
 	"github.com/gorilla/mux"
+	"github.com/koding/websocketproxy"
 	"golang.org/x/net/websocket"
 )
 
@@ -185,7 +186,7 @@ func main() {
 		"lecture-service",
 		"/modules/{id}/exercises", resolver), *auth))
 
-		//TODO: Routen für Scripte festlegen. Dummy: /scripte
+	//TODO: Routen für Scripte festlegen. Dummy: /scripte
 
 	r.Methods("POST").
 		Path("/videos").
@@ -198,7 +199,17 @@ func main() {
 		"media-service",
 		"/{id}", resolver), *auth))
 
-	r.Handle("/java-backend", jwtWrapper(websocket.Handler(websocketHandler), *auth))
+	u, _ := url.Parse("http://example.com")
+	wsp := websocketproxy.NewProxy(u)
+
+	wsp.Dialer.Proxy = func(r *http.Request) (*url.URL, error) {
+		address, err := resolver.Resolve("java-evaluation-service")
+		if err != nil {
+			return nil, err
+		}
+		return url.Parse(fmt.Sprintf("ws://%s/user-compiler", address))
+	}
+	r.Handle("/java-backend", jwtWrapper(wsp, *auth))
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("/app")))
 	log.Println("listening on 8080")
 	// Bind to a port and pass our router in
