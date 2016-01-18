@@ -18,10 +18,8 @@ module exercises {
     aceOptions: any
     lastSelected: number
     testResults: string
-    markerMap: any[]
-    deleteError: number[]
+    markerCache: any[]
     websocket: WebSocket
-    compileReport: lectureDefinitions.models.CompilationReport
 
     $timeout: ng.ITimeoutService
     $log: ng.ILogService
@@ -41,8 +39,7 @@ module exercises {
       vm.ctrlName = 'WorksheetCtrl'
       vm.$log = $log
       vm.aceTabs = []
-      vm.markerMap = []
-      vm.deleteError = []
+      vm.markerCache = []
       vm.lastSelected = 0
       vm.initTab()
       vm.$timeout = $timeout
@@ -61,20 +58,21 @@ module exercises {
     }
 
     javaEvaluationListener(report: lectureDefinitions.models.CompilationReport) {
-      this.compileReport = report
-      if (!this.compileReport.hasErrors()) {
-        this.compileReport.errors.forEach((error: lectureDefinitions.models.CompilationDiagnostic) => {
+      this.$log.debug('Entferne alte Errors')
+      this.removeErrors()
+      if (!report.hasErrors()) {
+        this.$log.debug('Gehe die Errors des Reports durch')
+        report.errors.forEach((error: lectureDefinitions.models.CompilationDiagnostic) => {
           if (error.noPosition) {
+            this.$log.debug('Error ohne Position markieren')
             this.testResults = 'Die Datei ' + error.classname + ' konnte nicht kompiliert werden'
           } else {
             this.testResults = ''
             this.aceTabs.forEach((tab: uiTab) => {
+              this.$log.debug('Error mit Position im Editor anzeigen')
               if (tab.title == error.classname) {
                 this.gutterError(error.code, error.lineNumber, error.colNumber, tab)
                 this.inlineError(error.lineNumber, error.startPosition, error.endPosition, tab)
-                this.deleteError.forEach((id) => {
-                  tab.session.removeMarker(id)
-                })
               }
             })
           }
@@ -93,29 +91,22 @@ module exercises {
     }
 
     private inlineError(lineNumber: number, startPosition: number, endPosition: number, tab: uiTab) {
-      var sameError: boolean
-      this.markerMap.forEach((tabname) => {
-        if (tabname != tab.title) {
-          this.markerMap[tab.title] = []
-        }
-        else {
-          this.markerMap[tab.title].forEach((marker: any) => {
-            sameError = marker.lineNumber == lineNumber && marker.startPosition == startPosition && marker.endPosition == endPosition
+      if (this.markerCache[tab.title] == null) {
+        this.markerCache[tab.title] = []
+      }
+      var range = ace.require("ace/range")
+      var markerId = tab.session.addMarker(new range.Range(lineNumber, startPosition, lineNumber, endPosition), "aceWarning", "line", true)
+      this.markerCache[tab.title].push(markerId)
+    }
+
+    private removeErrors() {
+      this.aceTabs.forEach((tab: uiTab) => {
+        tab.session.clearAnnotations
+        this.markerCache.forEach((marker) => {
+          this.markerCache[tab.title].forEach((id: number) => {
+            tab.session.removeMarker(id)
           })
-          if (sameError) {
-            return
-          } else {
-            this.deleteError.push[this.markerMap[tabname].markerId]
-            var range = ace.require("ace/range")
-            var markerId = tab.session.addMarker(new range.Range(lineNumber, startPosition, lineNumber, endPosition), "aceWarning", "line", true)
-            this.markerMap[tab.title].push({
-              id: markerId,
-              lineNumber: lineNumber,
-              startPosition: startPosition,
-              endPosition: endPosition
-            })
-          }
-        }
+        })
       })
     }
 

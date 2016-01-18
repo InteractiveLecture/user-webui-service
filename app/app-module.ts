@@ -11,8 +11,10 @@ module webUiService {
     .module('webUiService', [
     'ngAria',
     'ngSanitize',
+    'ngAnimate',
     'ui.router',
     'ui.bootstrap',
+    'ngFx',
     "com.2fdevs.videogular",
     "com.2fdevs.videogular.plugins.controls",
     "com.2fdevs.videogular.plugins.overlayplay",
@@ -26,6 +28,29 @@ module webUiService {
     'modules',
     'upload'
   ]);
+
+  app.animation('.container', function($log: ng.ILogService) {
+    $log.debug('def. .container animationen');
+    return {
+      enter: function(element: any, done: any) {
+        $log.debug('enter');
+        element.css({
+          opacity: 0.5,
+          position: 'relative',
+          left: '500px'
+        }).animate({
+          left: 0,
+          opacity: 1
+        }, 350, done);
+
+        return function(cancelled: any) {
+          if (cancelled)
+            element.stop();
+        }
+
+      }
+    }
+  })
 
 
   app.config(['$httpProvider', 'jwtInterceptorProvider',
