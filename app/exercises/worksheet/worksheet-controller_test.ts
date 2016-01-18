@@ -12,7 +12,7 @@ describe('WorksheetCtrl', function() {
   beforeEach(inject(function($rootScope: ng.IRootScopeService, $controller: ng.IControllerService, $httpBackend: ng.IHttpBackendService) {
     ctrl = $controller('ExerciseWorksheetCtrl');
     backend = $httpBackend
-    
+
   }))
 
   it('should have ctrlName as WorksheetCtrl', function() {
@@ -33,8 +33,37 @@ describe('WorksheetCtrl', function() {
     expect(patch2.length).toBe(0)
   })
 
-  it('should highlight Errors in Classes', function() {
-
+  it('should init one Tab', function() {
+    expect(ctrl.aceTabs.length).toBe(1)
+    ctrl.initTab()
+    expect(ctrl.aceTabs.length).toBe(2)
   })
+
+  it('should deselect all tabs', function() {
+    ctrl.deselectAll()
+    expect(ctrl.aceTabs[0].visible).toBe(false)
+  })
+
+  it('should select one tab', function() {
+    ctrl.initTab()
+    ctrl.initTab()
+    expect(ctrl.aceTabs.length).toBe(3)
+    ctrl.selectOne(0)
+    expect(ctrl.aceTabs[0].visible).toBe(true)
+    expect(ctrl.aceTabs[1].visible).toBe(false)
+    expect(ctrl.aceTabs[2].visible).toBe(false)
+  })
+
+  it('should delete the selected Tab', function() {
+    ctrl.deleteTab(0)
+    expect(ctrl.aceTabs.length).toBe(1)
+    ctrl.addTab()
+    expect(ctrl.aceTabs.length).toBe(2)
+    ctrl.deleteTab(1)
+    expect(ctrl.aceTabs.length).toBe(1)
+  })
+
+  
+
 
 });

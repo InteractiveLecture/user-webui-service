@@ -19,6 +19,7 @@ module exercises {
     lastSelected: number
     testResults: string
     markerCache: any[]
+    exercise: lectureDefinitions.models.Exercise
     websocket: WebSocket
 
     $timeout: ng.ITimeoutService
@@ -30,14 +31,17 @@ module exercises {
     // See http://docs.angularjs.org/guide/di
     public static $inject: string[] = [
       '$timeout',
-      '$log'
+      '$log',
+      'CachingService',
+      '$stateParams'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($timeout: ng.ITimeoutService, $log: ng.ILogService) {
+    constructor($timeout: ng.ITimeoutService, $log: ng.ILogService, cachingService: Caching.CachingService, $stateParams: any) {
       var vm = this
       vm.ctrlName = 'WorksheetCtrl'
       vm.$log = $log
+      vm.exercise = cachingService.loadExercise($stateParams.eId)
       vm.aceTabs = []
       vm.markerCache = []
       vm.lastSelected = 0
@@ -78,7 +82,6 @@ module exercises {
           }
         })
       }
-
     }
 
     private gutterError(code: any, lineNumber: number, colNumber: number, tab: uiTab) {
@@ -119,7 +122,6 @@ module exercises {
      */
     deleteTab(index: number) {
       if (this.aceTabs.length > 1) {
-        this.aceTabs.splice(index, 1)
         if (this.aceTabs[index].active == '') {
           if ((index - 1) > -1) {
             this.selectOne(index - 1)
@@ -127,7 +129,9 @@ module exercises {
             this.selectOne(0)
           }
         }
+        this.aceTabs.splice(index, 1)
       }
+
     }
 
     /**
