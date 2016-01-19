@@ -3,18 +3,18 @@ package main
 import (
 	"flag"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"strings"
 
 	"github.com/InteractiveLecture/middlewares/groupware"
 	"github.com/InteractiveLecture/middlewares/jwtware"
 	"github.com/InteractiveLecture/serviceclient"
+	"github.com/gorilla/context"
 	"github.com/gorilla/mux"
 	"github.com/koding/websocketproxy"
-	"golang.org/x/net/websocket"
 )
 
 func jwtWrapper(next http.Handler, auth bool) http.Handler {
@@ -67,25 +67,25 @@ func main() {
 	r.Path("/topics/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/topics/{id}", resolver), *auth))
+		"/topics/{id}", resolver, "id"), *auth))
 
 	// GET; POST
 	r.Path("/topics/{id}/modules").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/topics/{id}/modules", resolver), *auth))
+		"/topics/{id}/modules", resolver, "id"), *auth))
 
 	// POST; GET DELETE
 	r.Path("/topics/{id}/officers").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/topics/{id}/officers", resolver), *auth))
+		"/topics/{id}/officers", resolver, "id"), *auth))
 
 	// POST; GET DELETE
 	r.Path("/topics/{id}/assistants").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/topics/{id}/assistants", resolver), *auth))
+		"/topics/{id}/assistants", resolver, "id"), *auth))
 
 	// HINTS Anfragen
 	//---------------------
@@ -94,14 +94,14 @@ func main() {
 	r.Path("/hint/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/hint/{id}", resolver), *auth))
+		"/hint/{id}", resolver, "id"), *auth))
 
 	// Konsumiert den angebenen Hint
 	r.Methods("POST").
 		Path("/hint/{id}/consume").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/hint/{id}/consume", resolver), *auth))
+		"/hint/{id}/consume", resolver, "id"), *auth))
 
 	// USER Anfragen
 	//---------------------
@@ -110,7 +110,7 @@ func main() {
 	r.Path("/user/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/users/{id}", resolver), *auth))
+		"/users/{id}", resolver, "id"), *auth))
 
 	// Fügt einen weiteren User hinzu
 	r.Methods("POST").
@@ -123,13 +123,13 @@ func main() {
 		Path("/user/{id}/balances").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/users/{id}/balances", resolver), *auth))
+		"/users/{id}/balances", resolver, "id"), *auth))
 
 	r.Methods("GET").
 		Path("/user/{id}/exercises").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/users/{id}/exercises", resolver), *auth))
+		"/users/{id}/exercises", resolver, "id"), *auth))
 
 	// Exercises Pfade
 	//----------------------------
@@ -138,20 +138,20 @@ func main() {
 	r.Path("/exercise/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/exercises/{id}", resolver), *auth))
+		"/exercises/{id}", resolver, "id"), *auth))
 
 	// Erfolg einer Übung melden
 	r.Methods("POST").
 		Path("/exercise/{id}/success").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/exercises/{id}/success", resolver), *auth))
+		"/exercises/{id}/success", resolver, "id"), *auth))
 
 	// POST; GET
 	r.Path("/exercise/{id}/hints").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/exercises/{id}/hints", resolver), *auth))
+		"/exercises/{id}/hints", resolver, "id"), *auth))
 
 	// Modules Pfade
 	//----------------------------
@@ -166,25 +166,25 @@ func main() {
 	r.Path("/module/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/modules/{id}", resolver), *auth))
+		"/modules/{id}", resolver, "id"), *auth))
 
 	// GET; POST
 	r.Path("/module/{id}/recommendations").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/modules/{id}/recommendations", resolver), *auth))
+		"/modules/{id}/recommendations", resolver, "id"), *auth))
 	//DELETE
 	r.Methods("DELETE").
-		Path("/module/{Tid}/recommendations/{Rid}").
+		Path("/module/{tid}/recommendations/{rid}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/modules/{Tid}/recommendations/{Rid}", resolver), *auth))
+		"/modules/{tid}/recommendations/{rid}", resolver, "tid", "rid"), *auth))
 
 	//GET; POST
 	r.Path("/module/{id}/exercises").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
-		"/modules/{id}/exercises", resolver), *auth))
+		"/modules/{id}/exercises", resolver, "id"), *auth))
 
 	//TODO: Routen für Scripte festlegen. Dummy: /scripte
 
@@ -197,7 +197,7 @@ func main() {
 		Path("/videos/{id}").
 		Handler(jwtWrapper(createProxy(
 		"media-service",
-		"/{id}", resolver), *auth))
+		"/{id}", resolver, "id"), *auth))
 
 	u, _ := url.Parse("http://example.com")
 	wsp := websocketproxy.NewProxy(u)
@@ -220,11 +220,14 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
-func createProxy(service, servicePath string, resolver serviceclient.AddressResolver) http.Handler {
-	log.Println("creating proxy...")
+func createProxy(service, servicePath string, resolver serviceclient.AddressResolver, idFields ...string) http.Handler {
 	handler := httputil.ReverseProxy{}
 	handler.Director = func(r *http.Request) {
-		log.Println("getting address..")
+
+		for _, v := range idFields {
+			id := context.Get(r, v).(string)
+			servicePath = strings.Replace(servicePath, "{"+v+"}", id, -1)
+		}
 		address, err := resolver.Resolve(service)
 		if err != nil {
 			panic(err)
@@ -239,8 +242,4 @@ func createProxy(service, servicePath string, resolver serviceclient.AddressReso
 		r.URL = targetURL
 	}
 	return &handler
-}
-
-func websocketHandler(ws *websocket.Conn) {
-	io.Copy(ws, ws)
 }
