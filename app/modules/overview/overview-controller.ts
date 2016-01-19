@@ -20,11 +20,12 @@ module modules {
       'CallBackendService',
       'CachingService',
       '$scope',
-      '$log'
+      '$log',
+      '$stateParams'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor(callBackendService: CallBackend.CallBackendService, cachingService: Caching.CachingService, $scope: ng.IScope, $log: ng.ILogService) {
+    constructor(callBackendService: CallBackend.CallBackendService, cachingService: Caching.CachingService, $scope: ng.IScope, $log: ng.ILogService, $stateParams: any) {
       var vm = this
       vm.ctrlName = 'OverviewCtrl'
       $log.debug('controller ' + vm.ctrlName + ' is working')
@@ -44,8 +45,10 @@ module modules {
       //   vm.moduleTree = treeData
       // })
       //
-      vm.nodes = vm.getNodesFrom(lectureDefinitions.models.testTree)
-      vm.edges = vm.getEdgesFrom(lectureDefinitions.models.testTree)
+      callBackendService.loadModuleTree($stateParams.id, 0, 2, 2, (tree: lectureDefinitions.interfaces.treeData[]) => {
+        vm.nodes = vm.getNodesFrom(tree)
+        vm.edges = vm.getEdgesFrom(tree)
+      })
       vm.initFirstNode()
     }
 

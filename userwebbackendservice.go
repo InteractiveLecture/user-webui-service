@@ -107,26 +107,26 @@ func main() {
 	//---------------------
 
 	// PUT; GET DELETE
-	r.Path("/users/{id}").
+	r.Path("/user/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/users/{id}", resolver), *auth))
 
 	// Fügt einen weiteren User hinzu
 	r.Methods("POST").
-		Path("/users").
+		Path("/user").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/users", resolver), *auth))
 
 	r.Methods("GET").
-		Path("/users/{id}/balances").
+		Path("/user/{id}/balances").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/users/{id}/balances", resolver), *auth))
 
 	r.Methods("GET").
-		Path("/users/{id}/exercises").
+		Path("/user/{id}/exercises").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/users/{id}/exercises", resolver), *auth))
@@ -135,20 +135,20 @@ func main() {
 	//----------------------------
 
 	// GET; DELETE; POST; PUT
-	r.Path("/exercises/{id}").
+	r.Path("/exercise/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/exercises/{id}", resolver), *auth))
 
 	// Erfolg einer Übung melden
 	r.Methods("POST").
-		Path("/exercises/{id}/success").
+		Path("/exercise/{id}/success").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/exercises/{id}/success", resolver), *auth))
 
 	// POST; GET
-	r.Path("/exercises/{id}/hints").
+	r.Path("/exercise/{id}/hints").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/exercises/{id}/hints", resolver), *auth))
@@ -157,31 +157,31 @@ func main() {
 	//----------------------------
 
 	r.Methods("POST").
-		Path("/modules").
+		Path("/module").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/modules", resolver), *auth))
 
 	//GET;DELETE;PUT
-	r.Path("/modules/{id}").
+	r.Path("/module/{id}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/modules/{id}", resolver), *auth))
 
 	// GET; POST
-	r.Path("/modules/{id}/recommendations").
+	r.Path("/module/{id}/recommendations").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/modules/{id}/recommendations", resolver), *auth))
 	//DELETE
 	r.Methods("DELETE").
-		Path("/modules/{Tid}/recommendations/{Rid}").
+		Path("/module/{Tid}/recommendations/{Rid}").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/modules/{Tid}/recommendations/{Rid}", resolver), *auth))
 
 	//GET; POST
-	r.Path("/modules/{id}/exercises").
+	r.Path("/module/{id}/exercises").
 		Handler(jwtWrapper(createProxy(
 		"lecture-service",
 		"/modules/{id}/exercises", resolver), *auth))

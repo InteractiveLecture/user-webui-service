@@ -58,8 +58,9 @@ module Caching {
         return <lectureDefinitions.models.Topic>this.cacheData[uuid]
       }
       else {
-        this.callBackendService.loadModel(uuid, (modelData: lectureDefinitions.models.BaseModel) => {
+        this.callBackendService.loadModel('/topics/' + uuid, (modelData: lectureDefinitions.models.BaseModel) => {
           if (modelData == null || modelData == undefined) {
+            console.log('no Content')
             return null
           }
           else {

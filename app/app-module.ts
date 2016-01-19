@@ -73,6 +73,11 @@ module webUiService {
           return null
         }
 
+        // Für den Login wird kein Token benötigt
+        if (config.url.startsWith('/login')) {
+          return null
+        }
+
         // localStorage abrufen
         var idToken = localStorage.getItem('id_token');
         var refreshToken = localStorage.getItem('refresh_token');
