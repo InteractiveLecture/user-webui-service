@@ -28,16 +28,9 @@ module topics {
       $log.debug('controller ' + vm.ctrlName + ' is working!')
       //Mockdaten
 
-      vm.topicList = [{ id: "adjkfhasaklhfkdslhk", name: "programmierung", description: "blablabala", version: null, module: null, authorities: null },
-        { id: "djksljfaöeioewouriowquv", name: "mathe", description: "blubb", version: null, module: null, authorities: null },
-        { id: "dfdksljfkdjklsfjksla231l", name: "ebusiness", description: "bdjbasjkfdhsjkal", version: null, module: null, authorities: null },
-        { id: "asdjiofu89eu32ijd", name: "datenbanken", description: "dnksdhflsahlf", version: null, module: null, authorities: null }]
-
-
-
-      // callBackendService.loadTopicsPage(0, 100, (result: any) => {
-      //   vm.topicList = result
-      // })
+      callBackendService.loadTopicsPage(0, 100, (result: any) => {
+        vm.topicList = result
+      })
     }
   }
 
