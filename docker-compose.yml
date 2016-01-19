@@ -3,7 +3,7 @@ app:
   links:
     - "discovery:discovery"
   ports:
-    - "80:8080"
+    - "8080:80"
   command: "/main"
 
 nats:

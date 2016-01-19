@@ -201,13 +201,17 @@ func main() {
 
 	u, _ := url.Parse("http://example.com")
 	wsp := websocketproxy.NewProxy(u)
-
-	wsp.Dialer.Proxy = func(r *http.Request) (*url.URL, error) {
+	log.Println(wsp)
+	wsp.Backend = func(r *http.Request) *url.URL {
 		address, err := resolver.Resolve("java-evaluation-service")
 		if err != nil {
-			return nil, err
+			panic(err)
 		}
-		return url.Parse(fmt.Sprintf("ws://%s/user-compiler", address))
+		u, err := url.Parse(fmt.Sprintf("ws://%s/user-compiler", address))
+		if err != nil {
+			panic(err)
+		}
+		return u
 	}
 	r.Handle("/java-backend", jwtWrapper(wsp, *auth))
 	r.PathPrefix("/").Handler(http.FileServer(http.Dir("/app")))
