@@ -3,9 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
-	"net/http/httputil"
 	"net/url"
 	"strings"
 
@@ -220,25 +220,69 @@ func main() {
 }
 
 func createProxy(service, servicePath string, resolver serviceclient.AddressResolver, idFields ...string) http.Handler {
-	handler := httputil.ReverseProxy{}
-	handler.Director = func(r *http.Request) {
+	result := func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		for _, v := range idFields {
+			log.Println("id field is: ", v)
 			id := vars[v]
+			log.Printf("id is %s", id)
 			servicePath = strings.Replace(servicePath, "{"+v+"}", id, -1)
 		}
 		address, err := resolver.Resolve(service)
 		if err != nil {
-			panic(err)
+			log.Println(err)
+			w.WriteHeader(500)
+			return
 		}
 		address = address + ":8080"
 		targetURL, err := url.Parse(fmt.Sprintf("http://%s%s", address, servicePath))
 		if err != nil {
-			panic(err)
+			log.Println(err)
+			w.WriteHeader(500)
+			return
 		}
 		log.Printf("forwarding from :%s  to: %s", r.Host, targetURL.String())
-		r.Host = address
+		var resp *http.Response
+		c := http.Client{}
 		r.URL = targetURL
+		r.RequestURI = ""
+		resp, err = c.Do(r)
+		if err != nil {
+			log.Println(err)
+			w.WriteHeader(500)
+			return
+		}
+		defer resp.Body.Close()
+		for k, v := range resp.Header {
+			w.Header().Set(k, v[0])
+		}
+		io.Copy(w, resp.Body)
+
+		/*handler := httputil.ReverseProxy{}
+		handler.Director = func(r *http.Request) {
+			log.Println("source url is: ", r.URL)
+			vars := mux.Vars(r)
+			log.Println("vars are: ", vars)
+			for _, v := range idFields {
+				log.Println("id field is: ", v)
+				id := vars[v]
+				log.Printf("id is %s", id)
+				servicePath = strings.Replace(servicePath, "{"+v+"}", id, -1)
+			}
+			address, err := resolver.Resolve(service)
+			if err != nil {
+				panic(err)
+			}
+			address = address + ":8080"
+			targetURL, err := url.Parse(fmt.Sprintf("http://%s%s", address, servicePath))
+			if err != nil {
+				panic(err)
+			}
+			log.Printf("forwarding from :%s  to: %s", r.Host, targetURL.String())
+			r.Host = address
+			r.URL = targetURL
+		}*/
 	}
-	return &handler
+
+	return http.Handler(http.HandlerFunc(result))
 }
