@@ -221,6 +221,7 @@ func main() {
 
 func createProxy(service, servicePath string, resolver serviceclient.AddressResolver, idFields ...string) http.Handler {
 	result := func(w http.ResponseWriter, r *http.Request) {
+		log.Println("incoming request for: ", r.URL)
 		vars := mux.Vars(r)
 		for _, v := range idFields {
 			log.Println("id field is: ", v)

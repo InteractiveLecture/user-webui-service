@@ -33,9 +33,11 @@ module modules {
       vm.callBackendService = callBackendService
       vm.cachingService = cachingService
       vm.moduleTree = []
+
       vm.topic = cachingService.loadTopic($stateParams.id)
 
       $scope.$on('loadModule', (event: ng.IAngularEvent, moduleId: string) => {
+        console.log("im callback")
         callBackendService.loadModule(moduleId, (module: lectureDefinitions.models.Module) => {
           vm.module = module
           console.log('es lädt')
@@ -47,11 +49,12 @@ module modules {
       //   vm.moduleTree = treeData
       // })
       //
+      console.log($stateParams.id)
       callBackendService.loadModuleTree($stateParams.id, 0, 2, 2, (tree: lectureDefinitions.interfaces.treeData[]) => {
         vm.nodes = vm.getNodesFrom(tree)
         vm.edges = vm.getEdgesFrom(tree)
+        vm.initFirstNode()
       })
-      vm.initFirstNode()
     }
 
     getNodesFrom(data: lectureDefinitions.interfaces.treeData[]) {

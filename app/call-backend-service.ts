@@ -80,9 +80,12 @@ module CallBackend {
     }
 
     loadModuleTree(topic_id: string, layer: number, ancestors: number, descedants: number, callback: any) {
+      console.log("topic_id is: "+topic_id)
+      var target_url = `/topics/${topic_id}/modules?layer=${layer}&ancestors=${ancestors}&descedants=${descedants}`
+      console.log(target_url)
       this.$http({
         method: 'GET',
-        url: `/topics/${topic_id}/modules?layer=${layer}&ancestors=${ancestors}&descedants=${descedants}`
+        url: target_url
       }).then((result: any) => {
         callback(result.data)
       }, (err: any) => {
