@@ -21,8 +21,10 @@ module exercises {
     markerCache: any[]
     exercise: lectureDefinitions.models.Exercise
     websocket: WebSocket
+    callBackendService: CallBackend.CallBackendService
     error: boolean
 
+    hints: lectureDefinitions.models.Hint[]
     task: lectureDefinitions.models.Task
 
     $timeout: ng.ITimeoutService
@@ -45,6 +47,7 @@ module exercises {
       var vm = this
       vm.ctrlName = 'WorksheetCtrl'
       vm.$log = $log
+      vm.callBackendService = callBackendService
 
       vm.exercise = cachingService.loadExercise($stateParams.eId)
       callBackendService.beginExercise($stateParams, 1, (responds: any) => {
@@ -53,6 +56,9 @@ module exercises {
         } else {
           vm.error = false
           vm.task = cachingService.loadTask(vm.exercise.task[1])
+          vm.task.hints.forEach((hintId) => {
+            vm.hints[hintId] = null
+          })
         }
       })
       vm.aceTabs = []
@@ -73,6 +79,12 @@ module exercises {
       }
 
       $log.debug('controller ' + vm.ctrlName + ' is working')
+    }
+
+    consumeHintRequest(hintId: string) {
+      this.callBackendService.consumeHint(hintId, (hint: lectureDefinitions.models.Hint) => {
+        this.hints[hintId] = hint
+      })
     }
 
     javaEvaluationListener(report: lectureDefinitions.models.CompilationReport) {

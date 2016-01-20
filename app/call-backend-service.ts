@@ -169,6 +169,17 @@ module CallBackend {
         })
     }
 
+    consumeHint(hintId: string, callback: any) {
+      this.$http({
+        method: 'POST',
+        url: '/hint/' + hintId + '/consume'
+      }).then((result: any) => {
+        callback(result.data)
+      }, (err: any) => {
+          callback(err)
+        })
+    }
+
     postScript(sciptContent: string, callback: any) {
       this.$http({
         method: 'POST',

@@ -46,7 +46,17 @@
           <h4>Hints</h4>
           <section>
             <ul>
-              <li ng-repeat="hint in worksheet.task.hints">{{hint}}</li>
+              <li ng-repeat="hint in worksheet.hints">
+                <p ng-show="worksheet.hints[$index] == null">
+                  ?
+                </p>
+                <p ng-show="worksheet.hints[$index] != null">
+                  {{hint.content}}
+                </p>
+                <button type="button" class="btn btn-default" ng-disabled="worksheet.hints[$index] != null">
+                  consume
+                </button>
+              </li>
             </ul>
           </section>
           <hr>
