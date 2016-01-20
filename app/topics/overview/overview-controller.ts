@@ -2,7 +2,7 @@
 module topics {
   'use strict';
 
-  class OverviewCtrl {
+  class TopicOverviewCtrl {
 
     ctrlName: string
     topicList: lectureDefinitions.models.Topic[]
@@ -21,7 +21,7 @@ module topics {
     // dependencies are injected via AngularJS $injector
     constructor(cachingService: Caching.CachingService, callBackendService: CallBackend.CallBackendService, $log: ng.ILogService) {
       var vm = this
-      vm.ctrlName = 'OverviewCtrl'
+      vm.ctrlName = 'TopicOverviewCtrl'
       vm.cachingService = cachingService
 
       //TODO: Echtdaten anfordern
@@ -30,7 +30,7 @@ module topics {
 
       callBackendService.loadTopicsPage(0, 100, (result: lectureDefinitions.models.Topic[]) => {
         vm.topicList = result
-        result.forEach((topic: lectureDefinitions.models.Topic)=>{
+        result.forEach((topic: lectureDefinitions.models.Topic) => {
           cachingService.save(topic.id, topic)
           $log.debug('schreibe ' + topic.name + ' in den Cache')
         })
@@ -49,6 +49,6 @@ module topics {
 
   angular
     .module('topics.overview')
-    .controller('TopicOverviewCtrl', OverviewCtrl);
+    .controller('TopicOverviewCtrl', TopicOverviewCtrl);
 
 }

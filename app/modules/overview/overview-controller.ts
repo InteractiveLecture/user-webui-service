@@ -2,7 +2,7 @@
 module modules {
   'use strict';
 
-  class OverviewCtrl {
+  class ModuleOverviewCtrl {
 
     ctrlName: string
     nodes: any[]
@@ -12,6 +12,7 @@ module modules {
     moduleTree: lectureDefinitions.interfaces.treeData[]
     callBackendService: CallBackend.CallBackendService
     cachingService: Caching.CachingService
+    $log: ng.ILogService
 
     // $inject annotation.
     // It provides $injector with information about dependencies to be injected into constructor
@@ -28,7 +29,8 @@ module modules {
     // dependencies are injected via AngularJS $injector
     constructor(callBackendService: CallBackend.CallBackendService, cachingService: Caching.CachingService, $scope: ng.IScope, $log: ng.ILogService, $stateParams: any) {
       var vm = this
-      vm.ctrlName = 'OverviewCtrl'
+      vm.ctrlName = 'ModuleOverviewCtrl'
+      vm.$log = $log
       $log.debug('controller ' + vm.ctrlName + ' is working')
       vm.callBackendService = callBackendService
       vm.cachingService = cachingService
@@ -40,7 +42,7 @@ module modules {
         console.log("im callback")
         callBackendService.loadModule(moduleId, (module: lectureDefinitions.models.Module) => {
           vm.module = module
-          console.log('es lädt')
+          $log.debug('es lädt')
           cachingService.save(module.id, module)
         })
       })
@@ -51,6 +53,8 @@ module modules {
       //
       console.log($stateParams.id)
       callBackendService.loadModuleTree($stateParams.id, 0, 2, 2, (tree: lectureDefinitions.interfaces.treeData[]) => {
+        vm.$log.debug('treeData:  ')
+        vm.$log.debug(tree)
         vm.nodes = vm.getNodesFrom(tree)
         vm.edges = vm.getEdgesFrom(tree)
         vm.initFirstNode()
@@ -60,6 +64,8 @@ module modules {
     getNodesFrom(data: lectureDefinitions.interfaces.treeData[]) {
       var result: any[] = []
       data.forEach((node) => {
+        this.$log.debug('schreibe für Cytoscape Node:')
+        this.$log.debug(node)
         result.push({
           data:
           {
@@ -115,5 +121,5 @@ module modules {
   */
   angular
     .module('modules.overview')
-    .controller('ModuleOverviewCtrl', OverviewCtrl);
+    .controller('ModuleOverviewCtrl', ModuleOverviewCtrl);
 }

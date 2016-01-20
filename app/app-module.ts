@@ -30,7 +30,7 @@ module webUiService {
   ]);
 
   app.animation('.container', function($log: ng.ILogService) {
-    $log.debug('def. .container animationen');
+
     return {
       enter: function(element: any, done: any) {
         $log.debug('enter');
