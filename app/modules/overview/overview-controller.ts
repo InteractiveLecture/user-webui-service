@@ -53,10 +53,9 @@ module modules {
       //
       console.log($stateParams.id)
       callBackendService.loadModuleTree($stateParams.id, 0, 2, 2, (tree: lectureDefinitions.interfaces.treeData[]) => {
-        vm.$log.debug('treeData:  ')
-        vm.$log.debug(tree)
         vm.nodes = vm.getNodesFrom(tree)
         vm.edges = vm.getEdgesFrom(tree)
+        $scope.$emit('dataComplete')
         vm.initFirstNode()
       })
     }
@@ -77,6 +76,7 @@ module modules {
           }
         })
       })
+      this.$log.debug('Nodes: ' + result)
       return result
     }
 
@@ -87,6 +87,7 @@ module modules {
           result.push({ data: { source: node.id, target: child } })
         })
       })
+      this.$log.debug('Edges: ' + result)
       return result
     }
 

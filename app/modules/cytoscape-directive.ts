@@ -36,10 +36,10 @@ module Cytoscape {
         var vm = this
         vm.name = 'cytoscape'
         var cy: Cy.Instance
-        CytoscapeFactory.renderCyto($scope.nodes, $scope.edges).then((result: any) => {
+        $scope.$on('dataComplete', CytoscapeFactory.renderCyto($scope.nodes, $scope.edges).then((result: any) => {
           cy = result;
         },
-          () => { console.log("Cytoscape.js isn't working") });
+          () => { console.log("Cytoscape.js isn't working") }))
       },
       link: function(scope: ng.IScope, element: JQuery, attrs: any) {
         /*jshint unused:false */
