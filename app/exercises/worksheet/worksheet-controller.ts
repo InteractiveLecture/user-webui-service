@@ -23,6 +23,8 @@ module exercises {
     websocket: WebSocket
     error: boolean
 
+    task: lectureDefinitions.models.Task
+
     $timeout: ng.ITimeoutService
     $log: ng.ILogService
 
@@ -43,12 +45,14 @@ module exercises {
       var vm = this
       vm.ctrlName = 'WorksheetCtrl'
       vm.$log = $log
+
       vm.exercise = cachingService.loadExercise($stateParams.eId)
       callBackendService.beginExercise($stateParams, 1, (responds: any) => {
         if (responds.status > 299) {
           vm.error = true
         } else {
           vm.error = false
+          vm.task = cachingService.loadTask(vm.exercise.task[1])
         }
       })
       vm.aceTabs = []

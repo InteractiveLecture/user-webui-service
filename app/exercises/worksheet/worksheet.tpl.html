@@ -38,30 +38,27 @@
       <section class="row">
         <h4>
           Aufgabenstellung</h4>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+        <section>
+          {{worksheet.task.content}}
         </section>
         <hr>
         <section class="row">
           <h4>Hints</h4>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <section>
+            <ul>
+              <li ng-repeat="hint in worksheet.task.hints">{{hint}}</li>
+            </ul>
           </section>
           <hr>
-          <footer class="row">
-            <h4>Output</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            </footer>
-          </aside>
-        </div>
-      </div>
-
-      <div class="col-md-offset-4 col-md-4">
-        <div class="row">
-          <!-- Messages anhand der logik-->
-          <div class="alert alert-danger text-center fx-fade-up" ng-show="worksheet.error">
-            Server antwortet nicht -</br>
-          bitte versuche es später noch einmal</div>
+        </aside>
       </div>
     </div>
+
+    <div class="col-md-offset-4 col-md-4">
+      <div class="row">
+        <!-- Messages anhand der logik-->
+        <div class="alert alert-danger text-center fx-fade-up" ng-show="worksheet.error">
+          Server antwortet nicht -</br>
+        bitte versuche es später noch einmal</div>
+    </div>
+  </div>
