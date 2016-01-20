@@ -8,6 +8,7 @@ module modules {
     nodes: any[]
     edges: any[]
     module: lectureDefinitions.models.Module
+    topic: lectureDefinitions.models.Topic
     moduleTree: lectureDefinitions.interfaces.treeData[]
     callBackendService: CallBackend.CallBackendService
     cachingService: Caching.CachingService
@@ -32,6 +33,7 @@ module modules {
       vm.callBackendService = callBackendService
       vm.cachingService = cachingService
       vm.moduleTree = []
+      vm.topic = cachingService.loadTopic($stateParams.id)
 
       $scope.$on('loadModule', (event: ng.IAngularEvent, moduleId: string) => {
         callBackendService.loadModule(moduleId, (module: lectureDefinitions.models.Module) => {

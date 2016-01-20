@@ -28,8 +28,12 @@ module topics {
       $log.debug('controller ' + vm.ctrlName + ' is working!')
       //Mockdaten
 
-      callBackendService.loadTopicsPage(0, 100, (result: any) => {
+      callBackendService.loadTopicsPage(0, 100, (result: lectureDefinitions.models.Topic[]) => {
         vm.topicList = result
+        result.forEach((topic: lectureDefinitions.models.Topic)=>{
+          cachingService.save(topic.id, topic)
+          $log.debug('schreibe ' + topic.name + ' in den Cache')
+        })
       })
     }
   }
