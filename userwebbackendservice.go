@@ -12,7 +12,6 @@ import (
 	"github.com/InteractiveLecture/middlewares/groupware"
 	"github.com/InteractiveLecture/middlewares/jwtware"
 	"github.com/InteractiveLecture/serviceclient"
-	"github.com/gorilla/context"
 	"github.com/gorilla/mux"
 	"github.com/koding/websocketproxy"
 )
@@ -223,9 +222,9 @@ func main() {
 func createProxy(service, servicePath string, resolver serviceclient.AddressResolver, idFields ...string) http.Handler {
 	handler := httputil.ReverseProxy{}
 	handler.Director = func(r *http.Request) {
-
+		vars := mux.Vars(r)
 		for _, v := range idFields {
-			id := context.Get(r, v).(string)
+			id := vars[v].(string)
 			servicePath = strings.Replace(servicePath, "{"+v+"}", id, -1)
 		}
 		address, err := resolver.Resolve(service)
