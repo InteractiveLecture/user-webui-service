@@ -224,7 +224,7 @@ func createProxy(service, servicePath string, resolver serviceclient.AddressReso
 	handler.Director = func(r *http.Request) {
 		vars := mux.Vars(r)
 		for _, v := range idFields {
-			id := vars[v].(string)
+			id := vars[v]
 			servicePath = strings.Replace(servicePath, "{"+v+"}", id, -1)
 		}
 		address, err := resolver.Resolve(service)
