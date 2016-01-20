@@ -21,6 +21,7 @@ module exercises {
     markerCache: any[]
     exercise: lectureDefinitions.models.Exercise
     websocket: WebSocket
+    error: boolean
 
     $timeout: ng.ITimeoutService
     $log: ng.ILogService
@@ -33,15 +34,23 @@ module exercises {
       '$timeout',
       '$log',
       'CachingService',
-      '$stateParams'
+      '$stateParams',
+      'CallBackendService'
     ];
 
     // dependencies are injected via AngularJS $injector
-    constructor($timeout: ng.ITimeoutService, $log: ng.ILogService, cachingService: Caching.CachingService, $stateParams: any) {
+    constructor($timeout: ng.ITimeoutService, $log: ng.ILogService, cachingService: Caching.CachingService, $stateParams: any, callBackendService: CallBackend.CallBackendService) {
       var vm = this
       vm.ctrlName = 'WorksheetCtrl'
       vm.$log = $log
       vm.exercise = cachingService.loadExercise($stateParams.eId)
+      callBackendService.beginExercise($stateParams, 1, (responds: any) => {
+        if (responds.status > 299) {
+          vm.error = true
+        } else {
+          vm.error = false
+        }
+      })
       vm.aceTabs = []
       vm.markerCache = []
       vm.lastSelected = 0
@@ -58,6 +67,7 @@ module exercises {
           this.aceTabs[this.aceTabs.length - 1].session = _editor.getSession()
         }
       }
+
       $log.debug('controller ' + vm.ctrlName + ' is working')
     }
 

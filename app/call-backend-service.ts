@@ -32,6 +32,15 @@ module CallBackend {
       return 'CallBackendService';
     }
 
+    beginExercise(exerciseId: string, taskPosition: number, callback: any) {
+      this.$http({
+        method: 'POST',
+        url: '/exercises' + exerciseId + '/task/' + taskPosition// An das Backend
+      }).then((result: any) => {
+        callback(result.data)
+      }, (err) => console.log(err))
+    }
+
     /**
      * Modeldaten anhand der übergebenen Url laden. Die Verwendung der Daten
      * bestimmt der Nutzer per Callback
